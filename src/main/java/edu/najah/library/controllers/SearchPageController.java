@@ -1,4 +1,4 @@
-package edu.najah.library;
+package edu.najah.library.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
