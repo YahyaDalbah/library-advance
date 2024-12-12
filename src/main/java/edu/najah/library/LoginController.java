@@ -1,5 +1,8 @@
-package edu.najah.library.controllers;
+package edu.najah.library;
 
+import edu.najah.library.models.services.UserDAOImp;
+import edu.najah.library.models.user.Librarian;
+import edu.najah.library.models.user.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
