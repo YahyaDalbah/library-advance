@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.BookStatusManagementController">
+   <children>
+      <Label fx:id="library7" layoutX="628.0" layoutY="20.0" prefHeight="94.0" prefWidth="226.0" style="-fx-font-size: 64;" text="Library7" />
+      <TextField fx:id="searchByTitleBookStatus" layoutX="72.0" layoutY="148.0" prefHeight="60.0" prefWidth="952.0" promptText="Search by Title" style="-fx-font-size: 20; -fx-text-fill: #636363;" />
+      <Button fx:id="addNewBook" layoutX="1197.0" layoutY="160.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: #000; -fx-text-fill: #fff; -fx-font-size: 16;" text="+" />
+      <Label layoutX="1246.0" layoutY="159.0" prefHeight="36.0" prefWidth="109.0" style="-fx-font-size: 25;" text="Add Book" />
+   </children>
+</AnchorPane>
