@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.AllBooksPageController">
+
+    <!-- Top Header Section -->
+    <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="1024.0" style="-fx-padding: 10; -fx-background-color: white;">
+        <!-- Title: LIBRARY7 aligned to the top-left -->
+        <Label style="-fx-background-color: white;" text="LIBRARY7">
+            <font>
+                <Font name="DejaVu Serif Condensed Bold" size="30.0" />
+            </font>
+        </Label>
+
+        <!-- Spacer to push the icon to the right -->
+        <Region style="-fx-background-color: white;" HBox.hgrow="ALWAYS" />
+
+        <!-- User Icon Button in Top Right -->
+        <Button style="-fx-background-color: white; -fx-border: none;">
+            <graphic>
+                <ImageView fitHeight="40.0" fitWidth="40.0" preserveRatio="true">
+                    <Image url="@../../../images/user.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+    </HBox>
+
+    <!-- Main Content Section -->
+    <VBox layoutY="60.0" prefHeight="719.0" prefWidth="1039.0" spacing="20" style="-fx-padding: 20;">
+
+
+        <!-- Header with Title and Controls -->
+        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 10;">
+            <!-- Page Title Section -->
+            <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="All Books" />
+
+            <!-- Spacer to push controls to the right -->
+            <Region style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS" />
+
+            <!-- Sort By ComboBox -->
+            <ComboBox fx:id="SortedByComboBox" prefHeight="35.0" prefWidth="103.0" promptText="Sort by" style="-fx-font-size: 15px; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 20px; -fx-background-color: white;" />
+
+            <!-- Filter ComboBox -->
+            <ComboBox fx:id="FilterComboBox" prefHeight="35.0" prefWidth="92.0" promptText="Filter" style="-fx-font-size: 15px; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 20px; -fx-background-color: white;" />
+
+            <!-- Search Button -->
+            <Button fx:id="SearchButton" prefHeight="33.0" prefWidth="74.0" style="-fx-font-size: 15px; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 20px; -fx-background-color: white;" text="Search" />
+        </HBox>
+
+
+        <!-- Books Display Section -->
+        <ScrollPane fitToWidth="true" style="-fx-background-color: white;">
+            <TilePane fx:id="BooksTilePane" hgap="20" prefColumns="4" style="-fx-padding: 10;-fx-background-color: white;" vgap="20">
+                <!-- Book Template -->
+                <VBox alignment="CENTER" prefWidth="150" spacing="10" style="-fx-background-color: white; -fx-padding: 10; -fx-border-color: white; -fx-border-width: 1px; -fx-border-radius: 5px;">
+                    <ImageView fitHeight="120" fitWidth="100" preserveRatio="true">
+                        <Image url="@../../../images/book.png" />
+                    </ImageView>
+                    <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Book Title" />
+                    <Label style="-fx-font-size: 14px; -fx-text-fill: gray;" text="Author Name" />
+                    <Label style="-fx-font-size: 14px; -fx-text-fill: darkorange;" text="Rating: 4.5/5" />
+                </VBox>
+
+            </TilePane>
+        </ScrollPane>
+    </VBox>
+</AnchorPane>
