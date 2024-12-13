@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+
+<?import javafx.scene.Cursor?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.DashboardViewController">
+   <children>
+      <SplitPane dividerPositions="0.29797979797979796" prefHeight="768.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #eeeeee;">
+               <children>
+                  <VBox prefHeight="766.0" prefWidth="301.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                           <center>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Library7" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="Instrument Serif Regular" size="48.0" />
+                                 </font>
+                              </Text>
+                           </center>
+                        </BorderPane>
+                        <BorderPane>
+                           <center>
+                              <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <SVGPath content="M26.9217 9.53961L17.42 1.20978C16.5489 0.430708 15.4213 0 14.2527 0C13.0841 0 11.9565 0.430708 11.0855 1.20978L1.58377 9.53961C1.08076 9.98948 0.679364 10.5413 0.406304 11.1585C0.133243 11.7756 -0.00521416 12.4438 0.000150118 13.1186V26.9594C0.000150118 28.2194 0.500686 29.4278 1.39164 30.3188C2.2826 31.2097 3.491 31.7103 4.75101 31.7103H23.7544C25.0144 31.7103 26.2228 31.2097 27.1138 30.3188C28.0048 29.4278 28.5053 28.2194 28.5053 26.9594V13.1028C28.5084 12.4306 28.3689 11.7655 28.0959 11.1512C27.8229 10.537 27.4227 9.98771 26.9217 9.53961ZM17.42 28.543H11.0855V20.6249C11.0855 20.2049 11.2523 19.8021 11.5493 19.5052C11.8463 19.2082 12.2491 19.0413 12.6691 19.0413H15.8363C16.2563 19.0413 16.6591 19.2082 16.9561 19.5052C17.2531 19.8021 17.42 20.2049 17.42 20.6249V28.543ZM25.3381 26.9594C25.3381 27.3794 25.1712 27.7822 24.8742 28.0792C24.5772 28.3762 24.1744 28.543 23.7544 28.543H20.5872V20.6249C20.5872 19.3649 20.0867 18.1565 19.1957 17.2656C18.3047 16.3746 17.0963 15.8741 15.8363 15.8741H12.6691C11.4091 15.8741 10.2007 16.3746 9.30974 17.2656C8.41878 18.1565 7.91825 19.3649 7.91825 20.6249V28.543H4.75101C4.33101 28.543 3.92821 28.3762 3.63122 28.0792C3.33423 27.7822 3.16739 27.3794 3.16739 26.9594V13.1028C3.16767 12.8779 3.21584 12.6557 3.30867 12.4509C3.40151 12.2461 3.5369 12.0634 3.70582 11.915L13.2075 3.60104C13.4965 3.34716 13.868 3.20714 14.2527 3.20714C14.6374 3.20714 15.0089 3.34716 15.2979 3.60104L24.7996 11.915C24.9685 12.0634 25.1039 12.2461 25.1968 12.4509C25.2896 12.6557 25.3378 12.8779 25.3381 13.1028V26.9594Z">
+                                       <HBox.margin>
+                                          <Insets left="24.0" right="24.0" />
+                                       </HBox.margin>
+                                    </SVGPath>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
+                                       <font>
+                                          <Font name="Inter 18pt Regular" size="20.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </center>
+                        </BorderPane>
+                        <BorderPane>
+                           <center>
+                              <HBox prefHeight="39.0" prefWidth="301.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <SVGPath content="M22.225 0H6.35C4.66587 0 3.05073 0.669016 1.85987 1.85987C0.669016 3.05073 0 4.66587 0 6.35V25.4C0 27.0841 0.669016 28.6993 1.85987 29.8901C3.05073 31.081 4.66587 31.75 6.35 31.75H22.225C23.0671 31.75 23.8746 31.4155 24.4701 30.8201C25.0655 30.2246 25.4 29.4171 25.4 28.575V3.175C25.4 2.33294 25.0655 1.52536 24.4701 0.929936C23.8746 0.334508 23.0671 0 22.225 0ZM3.175 6.35C3.175 5.50794 3.50951 4.70036 4.10494 4.10494C4.70036 3.50951 5.50794 3.175 6.35 3.175H22.225V19.05H6.35C5.23088 19.0547 4.13384 19.3619 3.175 19.939V6.35ZM6.35 28.575C5.50794 28.575 4.70036 28.2405 4.10494 27.6451C3.50951 27.0496 3.175 26.2421 3.175 25.4C3.175 24.5579 3.50951 23.7504 4.10494 23.1549C4.70036 22.5595 5.50794 22.225 6.35 22.225H22.225V28.575H6.35ZM9.525 9.525H15.875C16.296 9.525 16.6998 9.35775 16.9975 9.06003C17.2952 8.76232 17.4625 8.35853 17.4625 7.9375C17.4625 7.51647 17.2952 7.11268 16.9975 6.81497C16.6998 6.51725 16.296 6.35 15.875 6.35H9.525C9.10397 6.35 8.70018 6.51725 8.40247 6.81497C8.10475 7.11268 7.9375 7.51647 7.9375 7.9375C7.9375 8.35853 8.10475 8.76232 8.40247 9.06003C8.70018 9.35775 9.10397 9.525 9.525 9.525Z">
+                                       <HBox.margin>
+                                          <Insets left="24.0" right="24.0" />
+                                       </HBox.margin>
+                                    </SVGPath>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Books">
+                                       <font>
+                                          <Font name="Inter 18pt Regular" size="20.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </center>
+                           <bottom>
+                              <VBox prefHeight="148.0" prefWidth="301.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add new book" onMouseClicked="#handleAddNewBook">
+                                       <font>
+                                          <Font name="Inter 18pt Regular" size="16.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <VBox.margin>
+                                          <Insets left="72.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Book status management" onMouseClicked="#handleBookStatusManagement">
+                                       <font>
+                                          <Font name="Inter 18pt Regular" size="16.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <VBox.margin>
+                                          <Insets left="72.0" top="12.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Book reservation">
+                                       <font>
+                                          <Font name="Inter 18pt Regular" size="16.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <VBox.margin>
+                                          <Insets left="72.0" top="13.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Book return" onMouseClicked="#handleBookReturn">
+                                       <font>
+                                          <Font name="Inter 18pt Regular" size="16.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <VBox.margin>
+                                          <Insets left="72.0" top="13.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                 </children>
+                              </VBox>
+                           </bottom>
+                        </BorderPane>
+                        <BorderPane>
+                           <center>
+                              <HBox prefHeight="39.0" prefWidth="301.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <SVGPath content="M18 0C14.5022 0.00664568 11.0818 1.03032 8.15551 2.94633C5.22918 4.86233 2.92318 7.58799 1.51839 10.7913C0.113602 13.9946 -0.329338 17.5373 0.243521 20.9878C0.816379 24.4384 2.38031 27.6479 4.74482 30.2254C6.43359 32.056 8.48322 33.5169 10.7645 34.5161C13.0459 35.5154 15.5094 36.0312 18 36.0312C20.4906 36.0312 22.9541 35.5154 25.2355 34.5161C27.5168 33.5169 29.5664 32.056 31.2552 30.2254C33.6197 27.6479 35.1836 24.4384 35.7565 20.9878C36.3293 17.5373 35.8864 13.9946 34.4816 10.7913C33.0768 7.58799 30.7708 4.86233 27.8445 2.94633C24.9181 1.03032 21.4978 0.00664568 18 0ZM18 32.4617C14.2641 32.456 10.6761 31.0014 7.99099 28.404C8.80622 26.4193 10.193 24.7219 11.9752 23.5273C13.7574 22.3327 15.8545 21.6949 18 21.6949C20.1455 21.6949 22.2426 22.3327 24.0248 23.5273C25.807 24.7219 27.1938 26.4193 28.009 28.404C25.3239 31.0014 21.7359 32.456 18 32.4617ZM14.3931 14.4274C14.3931 13.714 14.6047 13.0167 15.001 12.4235C15.3973 11.8304 15.9607 11.3681 16.6197 11.0951C17.2788 10.8221 18.004 10.7507 18.7037 10.8899C19.4033 11.029 20.046 11.3725 20.5504 11.877C21.0549 12.3814 21.3984 13.0241 21.5375 13.7237C21.6767 14.4234 21.6053 15.1486 21.3323 15.8077C21.0593 16.4668 20.597 17.0301 20.0039 17.4264C19.4107 17.8227 18.7134 18.0343 18 18.0343C17.0434 18.0343 16.126 17.6542 15.4496 16.9778C14.7732 16.3014 14.3931 15.384 14.3931 14.4274ZM30.4617 25.248C28.8504 22.4919 26.3704 20.3481 23.4103 19.1524C24.3285 18.1112 24.9268 16.8271 25.1334 15.4543C25.34 14.0815 25.146 12.6783 24.5748 11.413C24.0037 10.1477 23.0795 9.07404 21.9133 8.32094C20.747 7.56784 19.3883 7.16726 18 7.16726C16.6117 7.16726 15.253 7.56784 14.0867 8.32094C12.9205 9.07404 11.9963 10.1477 11.4252 11.413C10.854 12.6783 10.66 14.0815 10.8666 15.4543C11.0732 16.8271 11.6715 18.1112 12.5897 19.1524C9.62958 20.3481 7.14963 22.4919 5.53833 25.248C4.25419 23.0606 3.5757 20.5707 3.5726 18.0343C3.5726 14.2079 5.09262 10.5382 7.79829 7.83254C10.5039 5.12688 14.1736 3.60685 18 3.60685C21.8264 3.60685 25.4961 5.12688 28.2017 7.83254C30.9074 10.5382 32.4274 14.2079 32.4274 18.0343C32.4243 20.5707 31.7458 23.0606 30.4617 25.248Z">
+                                       <HBox.margin>
+                                          <Insets left="24.0" right="24.0" />
+                                       </HBox.margin>
+                                    </SVGPath>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Accounts">
+                                       <font>
+                                          <Font name="Inter 18pt Regular" size="20.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </center>
+                           <bottom>
+                              <VBox prefHeight="148.0" prefWidth="301.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Manage profile">
+                                       <font>
+                                          <Font name="Inter 18pt Regular" size="16.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <VBox.margin>
+                                          <Insets left="72.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Manage students">
+                                       <font>
+                                          <Font name="Inter 18pt Regular" size="16.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <VBox.margin>
+                                          <Insets left="72.0" top="12.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <Text fill="#de2626" strokeType="OUTSIDE" strokeWidth="0.0" text="Log out">
+                                       <font>
+                                          <Font name="Inter 18pt Regular" size="18.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <VBox.margin>
+                                          <Insets left="72.0" top="48.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <HBox>
+                                       <VBox.margin>
+                                          <Insets left="72.0" top="24.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search for books" underline="true">
+                                             <font>
+                                                <Font name="Inter 18pt Regular" size="18.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </Text>
+                                          <SVGPath content="M14.2229 6.3263V1.77676C14.2223 1.42541 14.1178 1.08209 13.9224 0.790073C13.727 0.498052 13.4496 0.270394 13.1251 0.135787C12.8005 0.00118103 12.4434 -0.0343501 12.0987 0.0336726C11.754 0.101695 11.4371 0.270227 11.1881 0.51803L0 11.555L11.1881 22.5902C11.3528 22.7558 11.5486 22.8873 11.7644 22.977C11.9801 23.0667 12.2114 23.1129 12.445 23.1129C12.6786 23.1129 12.91 23.0667 13.1257 22.977C13.3414 22.8873 13.5372 22.7558 13.702 22.5902C13.8671 22.4252 13.9982 22.2292 14.0876 22.0135C14.1769 21.7979 14.2229 21.5667 14.2229 21.3332V16.9081C19.112 17.029 24.4545 17.9144 28.4458 24V22.2221C28.4458 13.9853 22.2232 7.21167 14.2229 6.3263Z">
+                                             <HBox.margin>
+                                                <Insets left="12.0" />
+                                             </HBox.margin>
+                                          </SVGPath>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </bottom>
+                        </BorderPane>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <FlowPane prefHeight="766.0" prefWidth="714.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <BorderPane prefHeight="135.0" prefWidth="715.0">
+                           <bottom>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <left>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="24.0" />
+                                       </font>
+                                       <BorderPane.margin>
+                                          <Insets left="24.0" />
+                                       </BorderPane.margin>
+                                    </Text>
+                                 </left>
+                              </BorderPane>
+                           </bottom>
+                        </BorderPane>
+                        <BorderPane>
+                           <center>
+                              <HBox prefHeight="174.0" prefWidth="669.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <FlowPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox prefHeight="77.0" prefWidth="174.0" style="-fx-background-color: #eeeeee;">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total Books">
+                                                   <VBox.margin>
+                                                      <Insets left="24.0" top="13.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="43666">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets left="24.0" top="13.0" />
+                                                   </VBox.margin>
+                                                </Text>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </FlowPane>
+                                    <FlowPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox prefHeight="77.0" prefWidth="174.0" style="-fx-background-color: #eeeeee;">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total Students">
+                                                   <VBox.margin>
+                                                      <Insets left="24.0" top="13.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="43666">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets left="24.0" top="13.0" />
+                                                   </VBox.margin>
+                                                </Text>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </FlowPane>
+                                    <FlowPane prefHeight="167.0" prefWidth="241.0">
+                                       <children>
+                                          <VBox prefHeight="77.0" prefWidth="237.0" style="-fx-background-color: #eeeeee;">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Books Added Last Month">
+                                                   <VBox.margin>
+                                                      <Insets left="24.0" top="13.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="43666">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets left="24.0" top="13.0" />
+                                                   </VBox.margin>
+                                                </Text>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </FlowPane>
+                                 </children>
+                                 <BorderPane.margin>
+                                    <Insets left="24.0" right="24.0" />
+                                 </BorderPane.margin>
+                              </HBox>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="337.0" prefWidth="717.0">
+                           <padding>
+                              <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+                           </padding>
+                           <top>
+                              <BorderPane BorderPane.alignment="CENTER">
+                                 <left>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Latest Reservations" wrappingWidth="157.77725219726562" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <BorderPane.margin>
+                                          <Insets bottom="13.0" />
+                                       </BorderPane.margin>
+                                    </Text>
+                                 </left>
+                              </BorderPane>
+                           </top>
+                           <center>
+                              <TableView BorderPane.alignment="CENTER">
+                                <columns>
+                                  <TableColumn prefWidth="333.4239501953125" text="Book name" />
+                                  <TableColumn prefWidth="334.5759582519531" text="Time stamp" />
+                                </columns>
+                              </TableView>
+                           </center>
+                        </BorderPane>
+                     </children>
+                  </FlowPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
