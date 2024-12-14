@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.LoginController">
    <children>
       <Label layoutX="19.0" layoutY="18.0" text="LIBRARY7" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="18.0">
          <font>
@@ -21,7 +21,10 @@
       </Label>
       <TextField layoutX="150.0" layoutY="187.0" prefHeight="26.0" prefWidth="300.0" promptText="Email" />
       <TextField layoutX="151.0" layoutY="225.0" prefHeight="26.0" prefWidth="300.0" promptText="Password" />
-      <Button layoutX="189.0" layoutY="317.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="226.0" style="-fx-background-color: #000;" text="login" textFill="WHITE" />
+      <Button layoutX="189.0" layoutY="317.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="226.0" style="-fx-background-color: #000;" text="login" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Label layoutX="188.0" layoutY="268.0" text="forgot password?">
          <font>
             <Font size="12.0" />
@@ -31,6 +34,9 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
       <Label layoutX="237.0" layoutY="354.0" onMouseClicked="#loginAsStudent" prefHeight="18.0" prefWidth="137.0" text="or login as a student" textAlignment="CENTER" underline="true">
          <font>
