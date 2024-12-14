@@ -6,10 +6,11 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <!-- to be changed-->
         <property name="connection.url">jdbc:mysql://localhost:3306/library</property>
         <property name="connection.username">root</property>
         <property name="connection.password">yahya123yahya2004</property>
-
+        <!---->
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
