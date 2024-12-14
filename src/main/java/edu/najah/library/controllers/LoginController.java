@@ -1,4 +1,4 @@
-package edu.najah.library;
+package edu.najah.library.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -21,7 +21,7 @@ public class LoginController {
     }
 
     private void goToHomeScene(Event event, String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/najah/library/" + fxml));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
