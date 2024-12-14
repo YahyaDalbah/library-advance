@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.ReservationBook">
    <children>
       <Label layoutX="80.0" layoutY="38.0" text="Reservation Book">
          <font>
@@ -29,14 +29,14 @@
       <TextField fx:id="Membership_ID" layoutX="558.0" layoutY="517.0" prefHeight="35.0" prefWidth="350.0" promptText="Membership ID" style="-fx-border-radius: 10px; -fx-background-radius: 10px; -fx-border-color: #636363;" />
       <TextField fx:id="Last_Name" layoutX="283.0" layoutY="517.0" prefHeight="35.0" prefWidth="170.0" promptText="Last Name" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #636363;" />
       <TextField fx:id="First_Name" layoutX="104.0" layoutY="517.0" prefHeight="35.0" prefWidth="170.0" promptText="First Name" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #636363;" />
-      <DatePicker fx:id="Pichup_Date" editable="false" layoutX="104.0" layoutY="604.0" prefHeight="35.0" prefWidth="350.0" promptText="dd/mm/yyyyy" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #636363;" />
+      <DatePicker fx:id="Pickup_Date" editable="false" layoutX="104.0" layoutY="604.0" prefHeight="35.0" prefWidth="350.0" promptText="dd/mm/yyyyy" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #636363;" />
       <DatePicker fx:id="Return_Date" editable="false" layoutX="558.0" layoutY="604.0" prefHeight="35.0" prefWidth="350.0" promptText="dd/mm/yyyy" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #636363;" />
-      <Button fx:id="Cancel_btn" layoutX="688.0" layoutY="698.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-border-radius: 10px; -fx-background-color: white; -fx-border-color: #636363;" text="Cancel">
+      <Button fx:id="Cancel_btn" layoutX="688.0" layoutY="698.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="35.0" prefWidth="100.0" style="-fx-border-radius: 10px; -fx-background-color: white; -fx-border-color: #636363;" text="Cancel">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="Reservation_btn" layoutX="813.0" layoutY="698.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-radius: 10px; -fx-background-color: black;" text="Reservation" textFill="WHITE">
+      <Button fx:id="Reservation_btn" layoutX="813.0" layoutY="698.0" mnemonicParsing="false" onAction="#handleReservation" prefHeight="35.0" prefWidth="100.0" style="-fx-background-radius: 10px; -fx-background-color: black;" text="Reservation" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
