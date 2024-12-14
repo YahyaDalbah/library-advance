@@ -103,7 +103,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>edu.najah.library/edu.najah.library.HelloApplication</mainClass>
+                            <mainClass>edu.najah.library/edu.najah.library.MainApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

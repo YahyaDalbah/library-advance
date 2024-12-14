@@ -19,4 +19,6 @@ module edu.najah.library {
     exports edu.najah.library.controllers;
     opens edu.najah.library.models to javafx.fxml;
     opens edu.najah.library.controllers to javafx.fxml;
+    exports edu.najah.library.utils;
+    opens edu.najah.library.utils to javafx.fxml;
 }
