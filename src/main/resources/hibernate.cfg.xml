@@ -8,7 +8,7 @@
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/library</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">yahya123yahya2004</property>
+        <property name="connection.password"></property>
 
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
@@ -21,3 +21,6 @@
         <property name="hbm2ddl.auto">update</property>
     </session-factory>
 </hibernate-configuration>
+
+
+

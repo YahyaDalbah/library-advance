@@ -13,6 +13,9 @@ target/
 *.iml
 *.ipr
 
+# Ignore Hibernate configuration file
+src/main/resources/hibernate.cfg.xml
+
 ### Eclipse ###
 .apt_generated
 .classpath

@@ -2,7 +2,6 @@ package edu.najah.library.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-
 import java.io.IOException;
 
 public class BookStatusManagementController {
