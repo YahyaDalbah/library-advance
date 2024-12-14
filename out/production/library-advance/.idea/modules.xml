@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/library-advance/library.iml" filepath="$PROJECT_DIR$/library-advance/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/library-advance.iml" filepath="$PROJECT_DIR$/.idea/library-advance.iml" />
+    </modules>
+  </component>
+</project>
