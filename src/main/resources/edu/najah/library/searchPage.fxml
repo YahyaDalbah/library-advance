@@ -5,11 +5,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.booksearchapp.SearchPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.SearchPageController">
 
     <!-- Top Header Section -->
     <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="1024.0" style="-fx-padding: 10; -fx-background-color: white;" AnchorPane.topAnchor="0.0">
-        <Label text="LIBRARY7">
+        <Label style="-fx-padding: 0 0 0 20;" text="LIBRARY7">
             <font>
                 <Font name="DejaVu Serif Condensed Bold" size="30.0" />
             </font>
@@ -49,8 +49,8 @@
         </HBox>
 
         <!-- Searched Books Area -->
-        <VBox fx:id="searchedBooksArea" alignment="CENTER" spacing="10" style="-fx-padding: 3;" maxWidth="800.0" prefWidth="800.0">
-            <HBox spacing="10" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 10; -fx-padding: 10; -fx-background-color: #F5F5F5;" maxWidth="780.0">
+        <VBox fx:id="searchedBooksArea" alignment="CENTER" maxWidth="800.0" prefWidth="800.0" spacing="10" style="-fx-padding: 3;">
+            <HBox maxWidth="780.0" spacing="10" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 10; -fx-padding: 10; -fx-background-color: #F5F5F5;">
                 <ImageView fitHeight="79.0" fitWidth="59.0" preserveRatio="true" />
                 <VBox spacing="5">
                     <Text style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Orlando: A Biography" />
@@ -65,6 +65,22 @@
                 </VBox>
             </HBox>
         </VBox>
-
     </VBox>
+
+    <!-- Back Button -->
+    <Button fx:id="backButton"
+            onAction="#handleBackButtonAction"
+            prefHeight="40.0"
+            prefWidth="100.0"
+            style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-background-color: white; -fx-border-color: black; -fx-font-size: 16px;"
+            AnchorPane.bottomAnchor="10.0"
+            AnchorPane.leftAnchor="10.0">
+        <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" preserveRatio="true">
+                <Image url="@../../../images/back.png" />
+            </ImageView>
+        </graphic>
+        <text>Back</text>
+    </Button>
+
 </AnchorPane>
