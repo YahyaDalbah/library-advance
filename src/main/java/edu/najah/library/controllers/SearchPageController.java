@@ -15,12 +15,6 @@ import java.io.IOException;
 public class SearchPageController {
 
     @FXML
-    private TextField searchField;
-
-    @FXML
-    private ListView<String> resultsList;
-
-    @FXML
     private void handleBackButtonAction(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/AllbooksPage.fxml"));
