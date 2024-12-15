@@ -93,7 +93,7 @@
                                           <Insets left="72.0" top="12.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Book reservation">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Book reservation" onMouseClicked="#handleBookReservation">
                                        <font>
                                           <Font name="Inter 18pt Regular" size="16.0" />
                                        </font>

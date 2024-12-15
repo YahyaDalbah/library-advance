@@ -2,11 +2,16 @@ package edu.najah.library.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class ReservationBook {
 
@@ -37,6 +42,9 @@ public class ReservationBook {
 
     @FXML
     private DatePicker Return_Date;
+
+    @FXML
+    private Button close_btn;
 
     @FXML
     private ImageView Image_Book;
@@ -75,5 +83,25 @@ public class ReservationBook {
         System.out.println("Book Title: " + Book_Title.getText());
         System.out.println("Author: " + Author.getText());
         System.out.println("Availability: " + Availability.getText());
+    }
+
+    public void handleClose(ActionEvent event) {
+        try {
+
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.close();
+
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("edu/najah/library/Dashboard.fxml"));
+            Parent root = loader.load();
+
+            Stage dashboardStage = new Stage();
+            dashboardStage.setTitle("Dashboard-view");
+            dashboardStage.setScene(new Scene(root));
+            dashboardStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
