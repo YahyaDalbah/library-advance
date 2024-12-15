@@ -14,7 +14,7 @@ public class AllBooksPageController {
     public void handleSearchButtonClick(ActionEvent event) {
         try {
             // Load the FXML for the search page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/booksearchapp/searchPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/searchPage.fxml"));
             Parent searchPage = loader.load();
 
             // Get the current stage
