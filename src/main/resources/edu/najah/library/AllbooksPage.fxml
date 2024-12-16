@@ -20,9 +20,9 @@
         <Region style="-fx-background-color: white;" HBox.hgrow="ALWAYS" />
 
         <!-- User Icon Button in Top Right -->
-        <Button style="-fx-background-color: white; -fx-border: none;">
+        <Button style="-fx-background-color: white; -fx-border: none;" onMouseClicked="#navigateToLogin">
             <graphic>
-                <ImageView fitHeight="40.0" fitWidth="40.0" preserveRatio="true">
+                <ImageView fitHeight="40.0" fitWidth="40.0" preserveRatio="true" >
                     <Image url="@../../../images/user.png" />
                 </ImageView>
             </graphic>
@@ -53,7 +53,7 @@
                     prefWidth="100.0"
                     style="-fx-font-size: 15px; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 20px; -fx-background-color: white;"
                     text="Search"
-                    onAction="#handleSearchButtonClick" />
+                    onMouseClicked="#navigateToSearch" />
           </HBox>
 
 
@@ -61,8 +61,8 @@
         <ScrollPane fitToWidth="true" style="-fx-background-color: white;">
             <TilePane fx:id="BooksTilePane" hgap="20" prefColumns="4" style="-fx-padding: 10;-fx-background-color: white;" vgap="20">
                 <!-- Book Template -->
-                <VBox alignment="CENTER" prefWidth="150" spacing="10" style="-fx-background-color: white; -fx-padding: 10; -fx-border-color: white; -fx-border-width: 1px; -fx-border-radius: 5px;">
-                    <ImageView fitHeight="120" fitWidth="100" preserveRatio="true">
+                <VBox alignment="CENTER" prefWidth="150" spacing="10" style="-fx-background-color: white; -fx-padding: 10; -fx-border-color: white; -fx-border-width: 1px; -fx-border-radius: 5px;" >
+                    <ImageView fitHeight="120" fitWidth="100" preserveRatio="true" onMouseClicked="#navigateToBookDetails" >
                         <Image url="@../../../images/book.png" />
                     </ImageView>
                     <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Book Title" />

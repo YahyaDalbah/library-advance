@@ -17,7 +17,7 @@ public class LoginController {
         goToHomeScene(event,"dashboard-view.fxml");
     }
     public void loginAsStudent(MouseEvent event) throws IOException {
-        goToHomeScene(event,"dashboard-view.fxml");
+        goToHomeScene(event,"AllbooksPage.fxml");
     }
 
     private void goToHomeScene(Event event, String fxml) throws IOException {
