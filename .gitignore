@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .idea/
+src/main/resources/hibernate.cfg.xml
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

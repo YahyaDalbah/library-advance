@@ -1,4 +1,4 @@
-package edu.najah.library;
+package edu.najah.library.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -14,14 +14,14 @@ import java.io.IOException;
 public class LoginController {
 
     public void login(ActionEvent event) throws IOException {
-        goToHomeScene(event);
+        goToHomeScene(event,"dashboard-view.fxml");
     }
     public void loginAsStudent(MouseEvent event) throws IOException {
-        goToHomeScene(event);
+        goToHomeScene(event,"dashboard-view.fxml");
     }
 
-    private void goToHomeScene(Event event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("home-clone.fxml"));
+    private void goToHomeScene(Event event, String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/najah/library/" + fxml));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
