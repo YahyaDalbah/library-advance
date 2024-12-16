@@ -101,7 +101,7 @@ public class AddBookController {
             try {
                 long timestamp = System.currentTimeMillis();
                 String newFileName = timestamp + "_" + selectedFile.getName();
-                File folder = new File("C:\\Users\\hp Lap\\Desktop\\library-advance\\library-advance\\src\\main\\resources\\images");
+                File folder = new File("src/main/resources/images/");
                 Path targetPath = Paths.get(folder.toPath().toString(), newFileName);
                 Files.copy(selectedFile.toPath(), targetPath, StandardCopyOption.REPLACE_EXISTING);
                 coverField.setText(newFileName);
