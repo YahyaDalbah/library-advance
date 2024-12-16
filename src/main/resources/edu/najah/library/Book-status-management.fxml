@@ -5,10 +5,20 @@
 
 <AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.BookStatusManagementController">
    <children>
-      <Label fx:id="library7" layoutX="420.0" layoutY="20.0" prefHeight="94.0" prefWidth="226.0" style="-fx-font-size: 64;" text="Library7" />
-      <TextField fx:id="searchByTitleBookStatus" layoutX="41.0" layoutY="148.0" prefHeight="60.0" prefWidth="700.0" promptText="Search by Title" style="-fx-font-size: 20; -fx-text-fill: #636363;" />
-      <Button fx:id="addNewBook" layoutX="824.0" layoutY="158.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: #000; -fx-text-fill: #fff; -fx-font-size: 16;" text="+" />
-      <Label layoutX="869.0" layoutY="159.0" prefHeight="36.0" prefWidth="109.0" style="-fx-font-size: 25;" text="Add Book" />
-      <TilePane fx:id="booksContainer" hgap="20" layoutX="40.0" layoutY="250.0" prefHeight="450.0" prefWidth="940.0" style="-fx-background-color: #f2f2f2; -fx-padding: 20;" vgap="20"> </TilePane>
+      <VBox spacing="20" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="40" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="40">
+         <HBox alignment="CENTER" spacing="10">
+            <Label fx:id="library7" style="-fx-font-size: 64;" text="Library7" />
+         </HBox>
+         <HBox alignment="CENTER" spacing="10">
+            <TextField fx:id="searchByTitleBookStatus" promptText="Search by Title" style="-fx-font-size: 20; -fx-text-fill: #636363;" HBox.hgrow="ALWAYS" />
+            <Region prefWidth="20" />
+            <Button fx:id="addNewBook" mnemonicParsing="false" style="-fx-background-color: #000; -fx-text-fill: #fff; -fx-font-size: 16;" text="+" />
+            <Label style="-fx-font-size: 25;" text="Add Book" />
+         </HBox>
+
+         <TilePane fx:id="booksContainer" hgap="20" vgap="20" style="-fx-background-color: #f2f2f2; -fx-padding: 20;" VBox.vgrow="ALWAYS">
+         </TilePane>
+      </VBox>
    </children>
 </AnchorPane>
+
