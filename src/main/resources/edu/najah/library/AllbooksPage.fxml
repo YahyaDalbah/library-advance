@@ -19,7 +19,7 @@
         <Region HBox.hgrow="ALWAYS" />
 
         <!-- User Icon Button -->
-        <Button style="-fx-background-color: white; -fx-border: none;">
+        <Button style="-fx-background-color: white; -fx-border: none;" onMouseClicked="#navigateToLogin">
             <graphic>
                 <ImageView fitHeight="40.0" fitWidth="40.0" preserveRatio="true">
                     <Image url="@../../../images/user.png"/>
@@ -64,7 +64,7 @@
                    -fx-border-color: black; -fx-border-width: 1px;
                    -fx-border-radius: 20px; -fx-background-color: white;"
                     text="Search"
-                    onAction="#handleSearchButtonClick" />
+                    onMouseClicked="#navigateToSearch"/>
         </HBox>
 
 
