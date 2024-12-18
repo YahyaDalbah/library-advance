@@ -5,18 +5,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.BookDetailsPageController">
+<AnchorPane prefHeight="625.0" prefWidth="856.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.BookDetailsPageController">
     <!-- Top Header Section with Title on the left and Icon on the right -->
-    <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="797.0" style="-fx-padding: 10; -fx-background-color: white;">
-         <Label style="-fx-background-color: white;" text="LIBRARY7">
+    <HBox alignment="CENTER_LEFT" prefHeight="60.0" style="-fx-padding: 10; -fx-background-color: white;" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <Label style="-fx-background-color: white;" text="LIBRARY7">
             <font>
                 <Font name="DejaVu Serif Condensed Bold" size="30.0" />
             </font>
         </Label>
 
-         <Region style="-fx-background-color: white;" HBox.hgrow="ALWAYS" />
+        <Region style="-fx-background-color: white;" HBox.hgrow="ALWAYS" /> <!-- Flexible space -->
 
-         <Button style="-fx-background-color: white; -fx-border: none;">
+        <Button style="-fx-background-color: white; -fx-border: none;">
             <graphic>
                 <ImageView fitHeight="40.0" fitWidth="40.0" preserveRatio="true">
                     <Image url="@../../../images/user.png" />
@@ -24,37 +24,61 @@
             </graphic>
         </Button>
     </HBox>
-     <HBox alignment="CENTER" layoutX="-7.0" layoutY="61.0" prefHeight="539.0" prefWidth="807.0" spacing="30" style="-fx-padding: 20; -fx-background-color: #ffffff; -fx-border-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+
+    <!-- Main Content (Book Details Layout) -->
+    <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0" prefHeight="514.0" prefWidth="850.0" spacing="30.0" style="-fx-background-color: #f4f4f4; -fx-padding: 20; -fx-border-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 0);">
 
         <!-- Left Panel (Book Image) -->
-        <VBox alignment="CENTER" prefWidth="300.0" spacing="20">
-            <ImageView fx:id="bookImage" fitHeight="500.0" fitWidth="300.0" preserveRatio="true" style="-fx-border-radius: 10; -fx-background-color: #e0e0e0;" />
+        <VBox alignment="CENTER" maxWidth="300.0" minWidth="200.0" prefWidth="300.0" spacing="20.0" VBox.vgrow="ALWAYS">
+            <ImageView fx:id="bookImage" fitHeight="300.0" fitWidth="250.0" preserveRatio="true" style="-fx-border-radius: 10; -fx-background-color: #e0e0e0;" />
         </VBox>
 
         <!-- Right Panel (Book Details) -->
-        <VBox alignment="TOP_LEFT" prefWidth="400.0" spacing="15">
+        <VBox alignment="TOP_LEFT" maxWidth="497.0" minWidth="200.0" prefHeight="476.0" prefWidth="497.0" spacing="15.0" VBox.vgrow="ALWAYS">
+
             <!-- Book Title -->
-            <Text fx:id="bookTitle" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="Book Title" />
+            <Text fx:id="bookTitle" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="Book Title" wrappingWidth="500.0" />
 
             <!-- Description Section -->
             <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="Description:" />
-            <Text fx:id="bookDescription" style="-fx-font-size: 16px; -fx-text-fill: #555555;" text="This is a placeholder description." wrappingWidth="350.0" />
+            <Text fx:id="bookDescription" style="-fx-font-size: 16px; -fx-text-fill: #555555;" text="This is a placeholder description." wrappingWidth="500.0" />
 
             <!-- Author -->
-            <Text fx:id="bookAuthor" style="-fx-font-size: 18px; -fx-text-fill: #555555;" text="Author: Author Name" />
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="Author:" />
+                <Text fx:id="bookAuthor" style="-fx-font-size: 18px; -fx-text-fill: #555555;" text="Author Name" />
+            </HBox>
 
             <!-- Genre -->
-            <Text fx:id="bookGenre" style="-fx-font-size: 18px; -fx-text-fill: #555555;" text="Genre: Fiction" />
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="Genre:" />
+                <Text fx:id="bookType" style="-fx-font-size: 18px; -fx-text-fill: #555555;" text="Genre Name" />
+            </HBox>
 
             <!-- Year -->
-            <Text fx:id="bookYear" style="-fx-font-size: 18px; -fx-text-fill: #555555;" text="Year: 2024" />
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="Year:" />
+                <Text fx:id="bookYear" style="-fx-font-size: 18px; -fx-text-fill: #555555;" text="2024" />
+            </HBox>
 
-
-            <!-- Price -->
-            <Text fx:id="bookPrice" style="-fx-font-size: 18px; -fx-text-fill: #555555;" text="Price: $19.99" />
-
-            <!-- Availability -->
-            <Text fx:id="bookAvailability" style="-fx-font-size: 18px; -fx-text-fill: #555555;" text="Available: Yes" />
+            <!-- Rating -->
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="Rating:" />
+                <Text fx:id="bookRating" style="-fx-font-size: 16px; -fx-text-fill: #555555;" text="4.5" />
+            </HBox>
         </VBox>
     </HBox>
+
+
+
+
+    <!-- Back Button -->
+    <Button fx:id="backButton" onAction="#handleBackButtonAction" prefHeight="40.0" prefWidth="100.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-background-color: white; -fx-border-color: black; -fx-font-size: 16px;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+        <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" preserveRatio="true">
+                <Image url="@../../../images/back.png" />
+            </ImageView>
+        </graphic>
+        <text>Back</text>
+    </Button>
 </AnchorPane>

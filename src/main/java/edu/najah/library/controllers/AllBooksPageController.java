@@ -2,7 +2,6 @@ package edu.najah.library.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -37,7 +36,6 @@ public class AllBooksPageController {
         ObservableList<VBox> books = FXCollections.observableArrayList();
 
         try {
-            // Establishing connection to the database
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/booklibrary", "root", "");
             String query = "SELECT * FROM Book";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -47,59 +45,81 @@ public class AllBooksPageController {
                 VBox bookVBox = new VBox(10);
                 bookVBox.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-border-color: white; -fx-border-width: 1px; -fx-border-radius: 5px;");
 
-                // Get the binary data from the database
-                byte[] imageBytes = resultSet.getBytes("image");  // Get the image as a byte array
+                // Extract book details from ResultSet
+                int bookId = resultSet.getInt("id");
+                String title = resultSet.getString("title");
+                String author = resultSet.getString("author");
+                byte[] imageBytes = resultSet.getBytes("image");
+                double rating = resultSet.getDouble("rating");
+                String description = resultSet.getString("description");
+                String type = resultSet.getString("type");
+                int year = resultSet.getInt("year");
 
-                // Check if imageBytes is not null
+                // Create UI elements
                 if (imageBytes != null) {
                     Image image = new Image(new ByteArrayInputStream(imageBytes));
                     ImageView imageView = new ImageView(image);
-                    imageView.setFitHeight(200);  // Adjust image size
+                    imageView.setFitHeight(200);
                     imageView.setPreserveRatio(true);
                     bookVBox.getChildren().add(imageView);
                 } else {
-                    // Handle missing image or provide a fallback
                     Label imageErrorLabel = new Label("Image not found");
                     bookVBox.getChildren().add(imageErrorLabel);
                 }
 
-                // Book Title
-                Label titleLabel = new Label(resultSet.getString("title"));
+                Label titleLabel = new Label(title);
                 titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
                 bookVBox.getChildren().add(titleLabel);
 
-                // Book Author
-                Label authorLabel = new Label(resultSet.getString("author"));
+                Label authorLabel = new Label(author);
                 authorLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: gray;");
                 bookVBox.getChildren().add(authorLabel);
 
-                // Book Rating
-                Label ratingLabel = new Label("Rating: " + resultSet.getDouble("rating") + "/5");
-                ratingLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: darkorange;");
-                bookVBox.getChildren().add(ratingLabel);
+                // Add click event handler
+                bookVBox.setOnMouseClicked(event -> {
+                    try {
+                        navigateToBookDetails(event, bookId, title, author, imageBytes, rating, description, type, year);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
 
                 books.add(bookVBox);
             }
 
             BooksTilePane.getChildren().setAll(books);
 
-            // Close the resources
             resultSet.close();
             preparedStatement.close();
             connection.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
+
     @FXML
     private void navigateToSearch(MouseEvent event) {
         handleSearchButtonClick(event, "searchPage.fxml");
     }
     @FXML
-    private void navigateToBookDetails(MouseEvent event) {
-        handleSearchButtonClick(event, "BookDetailsPage.fxml");
+    private void navigateToBookDetails(MouseEvent event, int bookId, String title, String author, byte[] imageBytes, double rating, String description, String type, int year) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/BookDetailsPage.fxml"));
+        Parent bookDetailsPage = loader.load();
+
+        // Get the controller of the Book Details Page
+        BookDetailsPageController controller = loader.getController();
+
+        // Pass the book details to the controller
+        controller.setBookDetails(bookId, title, author, imageBytes, rating, description,type, year );
+
+        // Navigate to the Book Details Page
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(bookDetailsPage));
+        stage.show();
     }
+
     @FXML
     private void navigateToLogin(MouseEvent event) {
         handleSearchButtonClick(event, "login.fxml");
