@@ -44,7 +44,7 @@ public class BookDetailsPageController {
     public void handleBackButtonAction(ActionEvent event) {
         try {
             // Load the AllBooksPage FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("edu/najah/library/AllBooksPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/AllbooksPage.fxml"));
             AnchorPane allBooksPage = loader.load();
 
             // Set the scene for the AllBooksPage
