@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.AllBooksPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.AllBooksPageController">
 
     <!-- Top Header Section -->
     <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="1024.0" style="-fx-padding: 10; -fx-background-color: white;">
@@ -20,9 +28,9 @@
         <Region style="-fx-background-color: white;" HBox.hgrow="ALWAYS" />
 
         <!-- User Icon Button in Top Right -->
-        <Button style="-fx-background-color: white; -fx-border: none;" onMouseClicked="#navigateToLogin">
+        <Button onMouseClicked="#navigateToLogin" style="-fx-background-color: white; -fx-border: none;">
             <graphic>
-                <ImageView fitHeight="40.0" fitWidth="40.0" preserveRatio="true" >
+                <ImageView fitHeight="40.0" fitWidth="40.0" preserveRatio="true">
                     <Image url="@../../../images/user.png" />
                 </ImageView>
             </graphic>
@@ -48,12 +56,7 @@
             <ComboBox fx:id="FilterComboBox" prefHeight="35.0" prefWidth="92.0" promptText="Filter" style="-fx-font-size: 15px; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 20px; -fx-background-color: white;" />
 
             <!-- Search Button -->
-            <Button fx:id="SearchButton"
-                    prefHeight="33.0"
-                    prefWidth="100.0"
-                    style="-fx-font-size: 15px; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 20px; -fx-background-color: white;"
-                    text="Search"
-                    onMouseClicked="#navigateToSearch" />
+            <Button fx:id="SearchButton" onMouseClicked="#navigateToSearch" prefHeight="33.0" prefWidth="100.0" style="-fx-font-size: 15px; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 20px; -fx-background-color: white;" text="Search" />
           </HBox>
 
 
@@ -61,8 +64,8 @@
         <ScrollPane fitToWidth="true" style="-fx-background-color: white;">
             <TilePane fx:id="BooksTilePane" hgap="20" prefColumns="4" style="-fx-padding: 10;-fx-background-color: white;" vgap="20">
                 <!-- Book Template -->
-                <VBox alignment="CENTER" prefWidth="150" spacing="10" style="-fx-background-color: white; -fx-padding: 10; -fx-border-color: white; -fx-border-width: 1px; -fx-border-radius: 5px;" >
-                    <ImageView fitHeight="120" fitWidth="100" preserveRatio="true" onMouseClicked="#navigateToBookDetails" >
+                <VBox alignment="CENTER" prefWidth="150" spacing="10" style="-fx-background-color: white; -fx-padding: 10; -fx-border-color: white; -fx-border-width: 1px; -fx-border-radius: 5px;">
+                    <ImageView fitHeight="120" fitWidth="100" onMouseClicked="#navigateToBookDetails" preserveRatio="true">
                         <Image url="@../../../images/book.png" />
                     </ImageView>
                     <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Book Title" />
@@ -72,5 +75,6 @@
 
             </TilePane>
         </ScrollPane>
+      <Button fx:id="goToDashboardBtn" mnemonicParsing="false" onAction="#goToDashboard" text="go to dashboard" />
     </VBox>
 </AnchorPane>
