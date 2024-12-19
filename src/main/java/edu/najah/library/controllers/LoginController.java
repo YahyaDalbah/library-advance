@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
+import static edu.najah.library.utils.utilFunctions.switchScene;
+
 public class LoginController {
     @FXML
     private TextField emailField;
@@ -48,13 +50,6 @@ public class LoginController {
         switchScene(event,"AllbooksPage.fxml");
     }
 
-    private void switchScene(Event event, String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/najah/library/" + fxml));
-        Parent root = fxmlLoader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+
 
 }
