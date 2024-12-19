@@ -1,5 +1,8 @@
 package edu.najah.library;
 
+import edu.najah.library.models.services.UserDAOImp;
+import edu.najah.library.models.user.Librarian;
+import edu.najah.library.utils.Role;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +17,9 @@ public class MainApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Library7");
         stage.setScene(scene);
+        Librarian l = new Librarian("yahya", "yahya@gmail.com", Role.librarian, "123");
+        UserDAOImp userDAO = new UserDAOImp();
+        userDAO.save(l);
         stage.show();
     }
 

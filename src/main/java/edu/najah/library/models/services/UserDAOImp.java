@@ -21,13 +21,4 @@ public class UserDAOImp implements UserDAO {
         session.getTransaction().commit();
         session.close();
     }
-
-    //needs a LibrarianDAOImp probably
-//    @Override
-//    public List<User> getAllUsers() {
-//        HibernateUtil.getInstance();
-//        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-//        Session session = sessionFactory.openSession();
-//        return session.createQuery("from Librarian", Librarian.class).getResultList();
-//    }
 }
