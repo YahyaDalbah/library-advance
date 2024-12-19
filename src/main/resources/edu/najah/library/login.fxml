@@ -3,11 +3,11 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
-
 
 <StackPane style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.LoginController">
    <children>
@@ -23,8 +23,8 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <TextField layoutX="150.0" layoutY="187.0" prefHeight="26.0" prefWidth="300.0" promptText="Email" />
-            <TextField layoutX="151.0" layoutY="225.0" prefHeight="26.0" prefWidth="300.0" promptText="Password" />
+            <TextField fx:id="emailField" layoutX="150.0" layoutY="187.0" prefHeight="26.0" prefWidth="300.0" promptText="Email" />
+            <PasswordField fx:id="passwordField" layoutX="150.0" layoutY="225.0" prefHeight="26.0" prefWidth="300.0" promptText="Password" />
             <Button layoutX="189.0" layoutY="317.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="226.0" style="-fx-background-color: #000;" text="login" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -51,6 +51,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
+            <Label fx:id="errorMessage" layoutX="197.0" layoutY="163.0" text="your email or password are wrong" textFill="#e41515" visible="false" />
          </children>
       </AnchorPane>
    </children>
