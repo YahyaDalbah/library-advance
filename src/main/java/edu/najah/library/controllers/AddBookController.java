@@ -41,12 +41,7 @@ public class AddBookController {
     @FXML
     private DatePicker publicationDatePicker;
     @FXML
-    private Button addButton;
-    @FXML
-    private Button cancelButton;
-    @FXML
-    private Button attachButton;
-
+    private TextField ratingField;
 
     @FXML
     public void initialize() {
@@ -101,7 +96,7 @@ public class AddBookController {
             try {
                 long timestamp = System.currentTimeMillis();
                 String newFileName = timestamp + "_" + selectedFile.getName();
-                File folder = new File("src/main/resources/images/");
+                File folder = new File("src/main/resources/images/BookCovers/");
                 Path targetPath = Paths.get(folder.toPath().toString(), newFileName);
                 Files.copy(selectedFile.toPath(), targetPath, StandardCopyOption.REPLACE_EXISTING);
                 coverField.setText(newFileName);
@@ -120,8 +115,10 @@ public class AddBookController {
         LocalDate publicationDate = publicationDatePicker.getValue();
         String type = (String) typeComboBox.getValue();
         String availability = availableRadio.isSelected() ? "Available" : "Unavailable";
+        String rating = ratingField.getText();
 
-        if (title.isEmpty() || author.isEmpty() || description.isEmpty() || publicationDate == null || type == null ||
+
+        if (title.isEmpty() || author.isEmpty() || description.isEmpty() || coverImageUrl.isEmpty() || publicationDate == null || type == null ||
                 (!availableRadio.isSelected() && !unavailableRadio.isSelected())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -131,15 +128,17 @@ public class AddBookController {
             return;
         }
 
-        Book newBook = new Book();
-        newBook.setTitle(title);
-        newBook.setAuthor(author);
-        newBook.setDescription(description);
         Date date = Date.valueOf(publicationDate);
-        newBook.setDate(date);
-        newBook.setType(type);
-        newBook.setAvailability(availability);
-        newBook.setImageUrl(coverImageUrl);
+        Book newBook = new Book.Builder()
+                .setTitle(title)
+                .setAuthor(author)
+                .setDescription(description)
+                .setDate(date)
+                .setType(type)
+                .setAvailability(availability)
+                .setImageUrl(coverImageUrl)
+                .setRating(rating)
+                .build();
 
         BookDAOImp addBookDAO = new BookDAOImp();
         addBookDAO.insert(newBook);
@@ -153,6 +152,7 @@ public class AddBookController {
         titleField.clear();
         authorField.clear();
         descriptionArea.clear();
+        ratingField.clear();
         coverField.clear();
         publicationDatePicker.setValue(null);
         typeComboBox.setValue(null);
