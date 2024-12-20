@@ -2,6 +2,7 @@ package edu.najah.library.controllers;
 
 import edu.najah.library.models.services.LibrarianDAOImp;
 import edu.najah.library.models.user.Librarian;
+import edu.najah.library.utils.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -32,13 +33,15 @@ public class LoginController {
         String password = passwordField.getText();
         LibrarianDAOImp librarianDAO = new LibrarianDAOImp();
         List<Librarian> librarians = librarianDAO.getAllLibrarians();
-        Librarian l = librarians.stream()
-                .filter(librarian -> librarian.getEmail().equals(email) && librarian.getPassword().equals(password))
+        Librarian librarian = librarians.stream()
+                .filter(l -> l.getEmail().equals(email) && l.getPassword().equals(password))
                 .findFirst()
                 .orElse(null);
 
-        if(l != null) {
+        if(librarian != null) {
             errorMessage.setVisible(false);
+            LoggedInUser loggedInUser = LoggedInUser.getInstance();
+            loggedInUser.setUser(librarian);
             switchScene(event,"dashboard-view.fxml");
         }
         else {

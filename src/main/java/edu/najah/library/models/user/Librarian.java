@@ -13,11 +13,14 @@ public class Librarian extends User {
     public Librarian() {
         super();
     }
-
-    public Librarian(String name, String email, Role role, String password) {
-        super(name, email, role);
+    public Librarian(String name, String email, String password) {
+        super(name, email);
         this.password = password;
 
+    }
+    @Override
+    public Role getRole() {
+        return Role.librarian;
     }
 
     public String getPassword() {
