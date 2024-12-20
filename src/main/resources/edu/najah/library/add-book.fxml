@@ -9,25 +9,26 @@
    <Text layoutX="37.0" layoutY="59.0" style="-fx-font-size: 35; -fx-fill: #000; -fx-font-weight: bold;" text="Add Book" />
    <Separator layoutY="84.0" prefHeight="2.0" prefWidth="888.0" style="-fx-background-color: #c3c3c3;" />
 
-   <VBox layoutX="34.0" layoutY="130.0" prefHeight="280.0" prefWidth="484.0" spacing="20">
-      <TextField fx:id="titleField" prefHeight="47.0" prefWidth="570.0" promptText="Title" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
-      <TextField fx:id="authorField" prefHeight="47.0" prefWidth="570.0" promptText="Author Name" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
-      <TextArea fx:id="descriptionArea" prefHeight="145.0" prefWidth="570.0" promptText="Description" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
+   <VBox layoutX="34.0" layoutY="130.0" prefHeight="400.0" prefWidth="484.0" spacing="20">
+      <TextField fx:id="titleField" prefHeight="47.0"  promptText="Title" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
+      <TextField fx:id="authorField" prefHeight="47.0" promptText="Author Name" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
+      <TextField fx:id="ratingField" prefHeight="47.0" promptText="Rating" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
+      <TextArea fx:id="descriptionArea" prefHeight="110.0"  promptText="Description" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
    </VBox>
 
    <VBox layoutX="547.0" layoutY="129.0" spacing="20">
-      <HBox spacing="10">
+      <HBox spacing="5">
          <TextField fx:id="coverField" prefHeight="47.0" prefWidth="230.0" promptText="Cover Image" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
          <Button fx:id="attachButton" onAction="#handleAttach" prefHeight="46.0" prefWidth="64.0" style="-fx-font-size: 15; -fx-background-color: #E0E0E0; -fx-text-fill: black;" text="Attach" />
       </HBox>
-      <DatePicker fx:id="publicationDatePicker" prefHeight="47.0" prefWidth="298.0" promptText="Publication Date" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
-      <ComboBox fx:id="typeComboBox" prefHeight="47.0" prefWidth="298.0" promptText="Type" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
+      <DatePicker fx:id="publicationDatePicker" prefHeight="47.0" prefWidth="300.0" promptText="Publication Date" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
+      <ComboBox fx:id="typeComboBox" prefHeight="47.0" prefWidth="300.0" promptText="Type" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
       <RadioButton fx:id="availableRadio" style="-fx-font-size: 15; -fx-text-fill: #636363;" text="Available" />
       <RadioButton fx:id="unavailableRadio" style="-fx-font-size: 15; -fx-text-fill: #636363;" text="Unavailable" />
    </VBox>
 
    <HBox layoutX="569.0" layoutY="471.0" prefHeight="31.0" prefWidth="281.0" spacing="20">
-      <Button fx:id="addButton" onAction="#onAddButtonClick" prefHeight="47.0" prefWidth="130.0" style="-fx-font-size: 20; -fx-background-color: #000; -fx-text-fill: white;" text="Add" />
       <Button fx:id="cancelButton" onAction="#handleCancel" prefHeight="47.0" prefWidth="130.0" style="-fx-font-size: 20; -fx-background-color: transparent; -fx-text-fill: #636363;" text="Cancel" />
+      <Button fx:id="addButton" onAction="#onAddButtonClick" prefHeight="47.0" prefWidth="130.0" style="-fx-font-size: 20; -fx-background-color: #000; -fx-text-fill: white;" text="Add" />
    </HBox>
 </AnchorPane>
