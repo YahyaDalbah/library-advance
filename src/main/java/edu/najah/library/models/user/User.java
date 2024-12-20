@@ -1,22 +1,35 @@
 package edu.najah.library.models.user;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import edu.najah.library.utils.Role;
+
+import javax.persistence.*;
 
 @MappedSuperclass
 public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column
     private String name;
 
-    public User(){
-        //for hibernate
+    @Column
+    private String email;
+
+    public String getEmail() {
+        return email;
     }
-    public User(String name) {
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public User(){
+        //empty constructor for hibernate
+    }
+    public User(String name, String email) {
         this.name = name;
+        this.email = email;
     }
 
     public int getId() {
@@ -34,5 +47,7 @@ public abstract class User {
     public void setName(String name) {
         this.name = name;
     }
+
+    public abstract Role getRole();
 }
 
