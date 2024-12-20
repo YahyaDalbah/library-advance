@@ -1,5 +1,8 @@
 package edu.najah.library.controllers;
 
+import edu.najah.library.utils.LoggedInUser;
+import edu.najah.library.utils.Permissions;
+import edu.najah.library.utils.Role;
 import edu.najah.library.utils.utilFunctions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,13 +60,6 @@ public class AllBooksPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String userRole = "admin";
-
-        // Show or hide the button based on the role
-        if ("admin".equals(userRole)) {
-            goToDashboardBtn.setVisible(true);
-        } else {
-            goToDashboardBtn.setVisible(false);
-        }
+        goToDashboardBtn.setVisible(Permissions.canViewDashboard());
     }
 }

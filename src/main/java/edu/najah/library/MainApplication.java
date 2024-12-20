@@ -17,9 +17,6 @@ public class MainApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Library7");
         stage.setScene(scene);
-        Librarian l = new Librarian("yahya", "yahya@gmail.com", Role.librarian, "123");
-        UserDAOImp userDAO = new UserDAOImp();
-        userDAO.save(l);
         stage.show();
     }
 

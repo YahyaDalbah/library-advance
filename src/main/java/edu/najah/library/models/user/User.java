@@ -13,11 +13,6 @@ public abstract class User {
     @Column
     private String name;
 
-    //maybe remove it
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private Role role;
-
     @Column
     private String email;
 
@@ -32,10 +27,9 @@ public abstract class User {
     public User(){
         //empty constructor for hibernate
     }
-    public User(String name, String email, Role role) {
+    public User(String name, String email) {
         this.name = name;
         this.email = email;
-        this.role = role;
     }
 
     public int getId() {
@@ -53,5 +47,7 @@ public abstract class User {
     public void setName(String name) {
         this.name = name;
     }
+
+    public abstract Role getRole();
 }
 
