@@ -18,18 +18,17 @@ public class BookDetailsPageController {
 
     @FXML private Text bookTitle;
     @FXML private Text bookAuthor;
-    @FXML private Text bookType; // Changed from genre to type
-    @FXML private Text bookYear; // Added year field
+    @FXML private Text bookType;
+    @FXML private Text bookYear;
     @FXML private Text bookDescription;
     @FXML private Text bookRating;
     @FXML private ImageView bookImage;
 
     public void setBookDetails(int bookId, String title, String author, byte[] imageBytes, double rating, String description, String type, int year) {
-        // Set the text fields with book details
-        bookTitle.setText(title);
+         bookTitle.setText(title);
         bookAuthor.setText(author);
-        bookType.setText(type); // Replacing genre with type
-        bookYear.setText(String.valueOf(year)); // Display the year
+        bookType.setText(type);
+        bookYear.setText(String.valueOf(year));
         bookDescription.setText(description);
         bookRating.setText(String.format("%.1f/5", rating));
 
