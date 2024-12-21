@@ -11,7 +11,6 @@ import edu.najah.library.models.user.Librarian;
 public class HibernateUtil {
 
     private static HibernateUtil instance = null;
-
     private static SessionFactory sessionFactory;
     private static StandardServiceRegistry serviceRegistry;
 
