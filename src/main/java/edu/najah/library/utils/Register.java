@@ -2,28 +2,28 @@ package edu.najah.library.utils;
 
 import edu.najah.library.models.user.User;
 
-public class LoggedInUser {
+public class Register {
 
-    private static LoggedInUser instance = null;
+    private static Register instance = null;
 
     private User currentUser = null;
 
     // Private constructor to prevent instantiation
-    private LoggedInUser() {}
+    private Register() {}
 
     // Method to get the singleton instance
-    public static LoggedInUser getInstance() {
+    public static Register getInstance() {
         if (instance == null) {
-            instance = new LoggedInUser();
+            instance = new Register();
         }
         return instance;
     }
 
-    public void setUser(User user) {
+    public void setCurrentUser(User user) {
         this.currentUser = user;
     }
 
-    public User getUser() {
+    public User getCurrentUser() {
         if (this.currentUser == null) {
             return null;
         }
@@ -34,7 +34,7 @@ public class LoggedInUser {
         return currentUser != null;
     }
 
-    // Clear the logged-in user (logout functionality)
+    // logout functionality
     public void clearUser() {
         this.currentUser = null;
     }

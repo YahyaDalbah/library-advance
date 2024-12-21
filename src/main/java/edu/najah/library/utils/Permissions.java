@@ -2,9 +2,9 @@ package edu.najah.library.utils;
 
 public class Permissions {
     public static boolean canViewDashboard(){
-        LoggedInUser loggedInUser = LoggedInUser.getInstance();
-        if(loggedInUser.isLoggedIn()){
-            return loggedInUser.getUser().getRole() != Role.student;
+        Register register = Register.getInstance();
+        if(register.isLoggedIn()){
+            return register.getCurrentUser().getRole() != Role.student;
         }
         return false;
 

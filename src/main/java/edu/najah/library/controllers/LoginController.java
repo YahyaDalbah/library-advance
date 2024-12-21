@@ -2,7 +2,7 @@ package edu.najah.library.controllers;
 
 import edu.najah.library.models.services.UserDAOImp;
 import edu.najah.library.models.user.User;
-import edu.najah.library.utils.LoggedInUser;
+import edu.najah.library.utils.Register;
 import edu.najah.library.utils.Role;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,8 +38,8 @@ public class LoginController {
 
         if(matchedUser != null) {
             errorMessage.setVisible(false);
-            LoggedInUser loggedInUser = LoggedInUser.getInstance();
-            loggedInUser.setUser(matchedUser);
+            Register register = Register.getInstance();
+            register.setCurrentUser(matchedUser);
             switchScene(event,"dashboard-view.fxml");
         } else {
             errorMessage.setVisible(true);
