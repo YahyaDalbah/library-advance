@@ -10,8 +10,7 @@ import java.util.List;
 public class BookDAOImp implements BookDAO {
     @Override
     public void insert(Book book) {
-        HibernateUtil.getInstance();
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.save(book);
@@ -21,8 +20,7 @@ public class BookDAOImp implements BookDAO {
 
     @Override
     public List<Object[]> getAllBooks() {
-        HibernateUtil.getInstance();
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
         Session session = sessionFactory.openSession();
         List<Object[]> results = session.createQuery("select b.id, b.title, b.author, b.imageUrl from Book b", Object[].class).list();
         return results;
