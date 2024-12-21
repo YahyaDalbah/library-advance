@@ -2,10 +2,10 @@ package edu.najah.library.models.services;
 
 import edu.najah.library.models.Book;
 import edu.najah.library.models.interfaces.BookDAO;
-import edu.najah.library.utils.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
 import java.util.List;
 
 public class BookDAOImpl implements BookDAO {
@@ -33,6 +33,15 @@ public class BookDAOImpl implements BookDAO {
     public Book getBookById(int id) {
         try (Session session = factory.openSession()) {
             return session.get(Book.class, id);
+        }
+    }
+    public void updateBook(Book book) {
+        try (Session session = factory.openSession()) {
+            Transaction tx = session.beginTransaction();
+            session.update(book);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

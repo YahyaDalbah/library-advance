@@ -6,4 +6,5 @@ import java.util.List;
 public interface BookDAO {
     List<Book> findBooksByTitle(String title);
     Book getBookById(int id);
+    void updateBook(Book book);
 }

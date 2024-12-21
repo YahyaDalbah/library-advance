@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ReservationBook {
@@ -77,21 +78,55 @@ public class ReservationBook {
         reservationDAO = new ReservationDAOImpl(factory);
 
         Search_Box.textProperty().addListener((observable, oldValue, newValue) -> searchBooks(newValue));
-        List_Search.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedItem) -> {
-            if (selectedItem != null) fetchBookDetails(selectedItem);
+
+        Search_Box.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                List_Search.setVisible(false); // إخفاء القائمة عند فقدان التركيز
+            }
         });
+
+        List_Search.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                List_Search.setVisible(false); // إخفاء القائمة عند فقدان التركيز
+            }
+        });
+
+        List_Search.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedItem) -> {
+            if (selectedItem != null) {
+                fetchBookDetails(selectedItem);
+            }
+        });
+
+        Pickup_Date.setDayCellFactory(datePicker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(empty || date.isBefore(LocalDate.now()));
+            }
+        });
+
+        Return_Date.setDayCellFactory(datePicker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(empty || date.isBefore(LocalDate.now()));
+            }
+        });
+
+        List_Search.setOnMouseClicked(event -> handleBookSelection()); // ربط القائمة بدالة النقر
+
     }
     private void searchBooks(String query) {
         List<Book> books = bookDAO.findBooksByTitle(query);
 
-        // تحديد الحد الأقصى للنتائج الظاهرة إلى 5 كتب فقط
+        // تحديد فقط اظهار خمس سكتب ك حد اقصى
         List_Search.getItems().clear();
-        int limit = Math.min(books.size(), 5);
+        int limit = Math.min(books.size(), 8);
         for (int i = 0; i < limit; i++) {
             List_Search.getItems().add(books.get(i).getTitle());
         }
 
-        // جعل الـ ListView مرئية فقط عند وجود نتائج
+        // الlist view بتكون مرئية بس يكون في نتائج
         List_Search.setVisible(!List_Search.getItems().isEmpty());
     }
     private void fetchBookDetails(String title) {
@@ -104,37 +139,69 @@ public class ReservationBook {
         }
     }
 
+
+    @FXML
+    private void handleBookSelection() {
+        String selectedBook = List_Search.getSelectionModel().getSelectedItem(); // الحصول على العنصر المحدد
+        if (selectedBook != null) {
+            Search_Box.setText(selectedBook); // وضع النص في مربع البحث
+            List_Search.setVisible(false); // إخفاء القائمة
+            List_Search.getSelectionModel().clearSelection(); // مسح التحديد
+        }
+    }
+
+
     @FXML
     void handleReservation(ActionEvent event) {
-        // التحقق من أن الحقول ليست فارغة
         if (First_Name.getText().isEmpty() || Last_Name.getText().isEmpty() || Membership_ID.getText().isEmpty() ||
                 Pickup_Date.getValue() == null || Return_Date.getValue() == null || Book_id.getText().isEmpty()) {
             showAlert("Error", "All fields are required.", Alert.AlertType.ERROR);
             return;
         }
+        if (Return_Date.getValue().isBefore(Pickup_Date.getValue())) {
+            showAlert("Error", "Return Date must be after Pickup Date.", Alert.AlertType.ERROR);
+            return;
+        }
 
-        // تخزين البيانات في الكائنات المناسبة
+        Book book = bookDAO.getBookById(Integer.parseInt(Book_id.getText()));
+        if (book == null || !book.isAvailability()) {
+            showAlert("Error", "Cannot reserve this book. It is unavailable.", Alert.AlertType.ERROR);
+            return;
+        }
+
+
+        book.setQuantity(book.getQuantity() - 1);
+
+        // إذا وصلت الكمية إلى صفر، تغيير الحالة إلى غير متوفر
+        if (book.getQuantity() == 0) {
+            book.setAvailability(false);
+        }
+
+        bookDAO.updateBook(book);
+
+
         Reservation reservation = new Reservation();
         reservation.setFirstName(First_Name.getText());
         reservation.setLastName(Last_Name.getText());
         reservation.setMembershipId(Membership_ID.getText());
         reservation.setPickupDate(Pickup_Date.getValue());
         reservation.setReturnDate(Return_Date.getValue());
-
-        // جلب الكتاب من قاعدة البيانات
-        Book book = bookDAO.getBookById(Integer.parseInt(Book_id.getText()));
-        if (book == null) {
-            showAlert("Error", "Book not found.", Alert.AlertType.ERROR);
-            return;
-        }
         reservation.setBook(book);
 
-        // تخزين الحجز في قاعدة البيانات
         reservationDAO.saveReservation(reservation);
 
-        // إظهار رسالة نجاح
         showAlert("Success", "Reservation saved successfully!", Alert.AlertType.INFORMATION);
 
+        // إعادة تعيين الحقول
+        First_Name.clear();
+        Last_Name.clear();
+        Membership_ID.clear();
+        Pickup_Date.setValue(null);
+        Return_Date.setValue(null);
+        Book_id.clear();
+        Book_Title.clear();
+        Author.clear();
+        Availability.clear();
     }
     private void showAlert(String title, String message, Alert.AlertType type) {
         Alert alert = new Alert(type);

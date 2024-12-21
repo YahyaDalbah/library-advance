@@ -12,14 +12,18 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Book_id;
 
+
     @Column(name = "Book_Title")
     private String title;
     @Column(name = "Author")
     private String author;
     @Column(name = "Availability")
     private boolean availability;
+    @Column(name = "quantity")
+    private int quantity;
 
     // Getters and Setters
+
 
 
     public int getId() {
@@ -53,5 +57,13 @@ public class Book {
     public void setAvailability(boolean availability) {
         this.availability = availability;
     }
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
 }
 
