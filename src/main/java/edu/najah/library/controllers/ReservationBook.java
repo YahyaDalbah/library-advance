@@ -1,20 +1,29 @@
 package edu.najah.library.controllers;
 
+import edu.najah.library.models.Book;
+import edu.najah.library.models.Reservation;
+import edu.najah.library.models.interfaces.BookDAO;
+import edu.najah.library.models.interfaces.ReservationDAO;
+import edu.najah.library.models.services.BookDAOImpl;
+import edu.najah.library.models.services.ReservationDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import java.util.List;
 
 public class ReservationBook {
-
+    private SessionFactory factory;
+    private BookDAO bookDAO;
+    private ReservationDAO reservationDAO;
 
     @FXML
     private TextField Book_id;
@@ -27,6 +36,9 @@ public class ReservationBook {
 
     @FXML
     private TextField Availability;
+
+    @FXML
+    private TextField Search_Box;
 
     @FXML
     private TextField First_Name;
@@ -56,7 +68,81 @@ public class ReservationBook {
     private Button Reservation_btn;
 
     @FXML
-    private ListView<String> listView;
+    private ListView<String> List_Search;
+
+    @FXML
+    public void initialize() {
+        factory = new Configuration().configure().addAnnotatedClass(Book.class).addAnnotatedClass(Reservation.class).buildSessionFactory();
+        bookDAO = new BookDAOImpl(factory);
+        reservationDAO = new ReservationDAOImpl(factory);
+
+        Search_Box.textProperty().addListener((observable, oldValue, newValue) -> searchBooks(newValue));
+        List_Search.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedItem) -> {
+            if (selectedItem != null) fetchBookDetails(selectedItem);
+        });
+    }
+    private void searchBooks(String query) {
+        List<Book> books = bookDAO.findBooksByTitle(query);
+
+        // تحديد الحد الأقصى للنتائج الظاهرة إلى 5 كتب فقط
+        List_Search.getItems().clear();
+        int limit = Math.min(books.size(), 5);
+        for (int i = 0; i < limit; i++) {
+            List_Search.getItems().add(books.get(i).getTitle());
+        }
+
+        // جعل الـ ListView مرئية فقط عند وجود نتائج
+        List_Search.setVisible(!List_Search.getItems().isEmpty());
+    }
+    private void fetchBookDetails(String title) {
+        Book book = bookDAO.findBooksByTitle(title).get(0);
+        if (book != null) {
+            Book_id.setText(String.valueOf(book.getId()));
+            Book_Title.setText(book.getTitle());
+            Author.setText(book.getAuthor());
+            Availability.setText(book.isAvailability() ? "Available" : "Unavailable");
+        }
+    }
+
+    @FXML
+    void handleReservation(ActionEvent event) {
+        // التحقق من أن الحقول ليست فارغة
+        if (First_Name.getText().isEmpty() || Last_Name.getText().isEmpty() || Membership_ID.getText().isEmpty() ||
+                Pickup_Date.getValue() == null || Return_Date.getValue() == null || Book_id.getText().isEmpty()) {
+            showAlert("Error", "All fields are required.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // تخزين البيانات في الكائنات المناسبة
+        Reservation reservation = new Reservation();
+        reservation.setFirstName(First_Name.getText());
+        reservation.setLastName(Last_Name.getText());
+        reservation.setMembershipId(Membership_ID.getText());
+        reservation.setPickupDate(Pickup_Date.getValue());
+        reservation.setReturnDate(Return_Date.getValue());
+
+        // جلب الكتاب من قاعدة البيانات
+        Book book = bookDAO.getBookById(Integer.parseInt(Book_id.getText()));
+        if (book == null) {
+            showAlert("Error", "Book not found.", Alert.AlertType.ERROR);
+            return;
+        }
+        reservation.setBook(book);
+
+        // تخزين الحجز في قاعدة البيانات
+        reservationDAO.saveReservation(reservation);
+
+        // إظهار رسالة نجاح
+        showAlert("Success", "Reservation saved successfully!", Alert.AlertType.INFORMATION);
+
+    }
+    private void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
 
     @FXML
@@ -67,22 +153,6 @@ public class ReservationBook {
         Pickup_Date.setValue(null);
         Return_Date.setValue(null);
         System.out.println("All fields have been cleared.");
-    }
-
-
-    @FXML
-    void handleReservation(ActionEvent event) {
-
-        System.out.println("Reservation Details:");
-        System.out.println("First Name: " + First_Name.getText());
-        System.out.println("Last Name: " + Last_Name.getText());
-        System.out.println("Membership ID: " + Membership_ID.getText());
-        System.out.println("Pickup Date: " + Pickup_Date.getValue());
-        System.out.println("Return Date: " + Return_Date.getValue());
-        System.out.println("Book ID: " + Book_id.getText());
-        System.out.println("Book Title: " + Book_Title.getText());
-        System.out.println("Author: " + Author.getText());
-        System.out.println("Availability: " + Availability.getText());
     }
 
     public void handleClose(ActionEvent event) {
