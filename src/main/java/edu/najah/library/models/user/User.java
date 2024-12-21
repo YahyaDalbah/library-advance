@@ -49,5 +49,6 @@ public abstract class User {
     }
 
     public abstract Role getRole();
+    public abstract String getPassword();
 }
 

@@ -1,5 +1,6 @@
 package edu.najah.library.controllers;
 
+import edu.najah.library.utils.DatabaseConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -31,72 +32,76 @@ public class AllBooksPageController {
         loadBooks();
     }
 
+        // Method to load books and update the UI
+        public void loadBooks() {
+            ObservableList<VBox> books = FXCollections.observableArrayList();
 
-    private void loadBooks() {
-        ObservableList<VBox> books = FXCollections.observableArrayList();
+            try {
+                // Get the singleton database connection
+                Connection connection = DatabaseConnection.getInstance().getConnection();
 
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/booklibrary", "root", "");
-            String query = "SELECT * FROM Book";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
+                // SQL query to retrieve book data
+                String query = "SELECT * FROM Book";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
-                VBox bookVBox = new VBox(10);
-                bookVBox.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-border-color: white; -fx-border-width: 1px; -fx-border-radius: 5px;");
+                // Loop through the result set and build UI components
+                while (resultSet.next()) {
+                    VBox bookVBox = new VBox(10);
+                    bookVBox.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-border-color: white; " +
+                            "-fx-border-width: 1px; -fx-border-radius: 5px;");
 
-                // Extract book details from ResultSet
-                int bookId = resultSet.getInt("id");
-                String title = resultSet.getString("title");
-                String author = resultSet.getString("author");
-                byte[] imageBytes = resultSet.getBytes("image");
-                double rating = resultSet.getDouble("rating");
-                String description = resultSet.getString("description");
-                String type = resultSet.getString("type");
-                int year = resultSet.getInt("year");
+                    // Extract book details
+                    int bookId = resultSet.getInt("id");
+                    String title = resultSet.getString("title");
+                    String author = resultSet.getString("author");
+                    byte[] imageBytes = resultSet.getBytes("image");
+                    double rating = resultSet.getDouble("rating");
+                    String description = resultSet.getString("description");
+                    String type = resultSet.getString("type");
+                    int year = resultSet.getInt("year");
 
-                // Create UI elements
-                if (imageBytes != null) {
-                    Image image = new Image(new ByteArrayInputStream(imageBytes));
-                    ImageView imageView = new ImageView(image);
-                    imageView.setFitHeight(200);
-                    imageView.setPreserveRatio(true);
-                    bookVBox.getChildren().add(imageView);
-                } else {
-                    Label imageErrorLabel = new Label("Image not found");
-                    bookVBox.getChildren().add(imageErrorLabel);
+                    // Create UI elements
+                    if (imageBytes != null) {
+                        Image image = new Image(new ByteArrayInputStream(imageBytes));
+                        ImageView imageView = new ImageView(image);
+                        imageView.setFitHeight(200);
+                        imageView.setPreserveRatio(true);
+                        bookVBox.getChildren().add(imageView);
+                    } else {
+                        Label imageErrorLabel = new Label("Image not found");
+                        bookVBox.getChildren().add(imageErrorLabel);
+                    }
+
+                    Label titleLabel = new Label(title);
+                    titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+                    bookVBox.getChildren().add(titleLabel);
+
+                    Label authorLabel = new Label(author);
+                    authorLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: gray;");
+                    bookVBox.getChildren().add(authorLabel);
+
+                    // Add click event handler
+                    bookVBox.setOnMouseClicked(event -> {
+                        try {
+                            navigateToBookDetails(event, bookId, title, author, imageBytes, rating, description, type, year);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+
+                    books.add(bookVBox);
                 }
 
-                Label titleLabel = new Label(title);
-                titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
-                bookVBox.getChildren().add(titleLabel);
+                // Update the UI (assumes you have a BooksTilePane in your scene)
+                BooksTilePane.getChildren().setAll(books);
 
-                Label authorLabel = new Label(author);
-                authorLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: gray;");
-                bookVBox.getChildren().add(authorLabel);
-
-                // Add click event handler
-                bookVBox.setOnMouseClicked(event -> {
-                    try {
-                        navigateToBookDetails(event, bookId, title, author, imageBytes, rating, description, type, year);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-
-                books.add(bookVBox);
+                resultSet.close();
+                preparedStatement.close();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-            BooksTilePane.getChildren().setAll(books);
-
-            resultSet.close();
-            preparedStatement.close();
-            connection.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-    }
-
 
 
     @FXML

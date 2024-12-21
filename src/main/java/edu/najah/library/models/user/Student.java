@@ -13,5 +13,9 @@ public class Student extends User {
         return Role.student;
     }
 
-
+    //just a placeholder]
+    @Override
+    public String getPassword() {
+        throw new UnsupportedOperationException("students don't have passwords");
+    }
 }

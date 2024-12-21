@@ -1,5 +1,6 @@
 package edu.najah.library.utils;
 
+import edu.najah.library.models.user.Admin;
 import edu.najah.library.models.user.Book;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -19,6 +20,7 @@ public class HibernateUtil {
 
         //add models to configuration
         configuration.addAnnotatedClass(Librarian.class);
+        configuration.addAnnotatedClass(Admin.class);
         configuration.addAnnotatedClass(Book.class);
         configuration.configure();
         serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
@@ -32,7 +34,7 @@ public class HibernateUtil {
         return instance;
     }
 
-    public synchronized static SessionFactory getSessionFactory() {
+    public synchronized SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
