@@ -12,7 +12,6 @@ import org.hibernate.cfg.Configuration;
 public class HibernateUtil {
 
     private static HibernateUtil instance = null;
-
     private static SessionFactory sessionFactory;
     private static StandardServiceRegistry serviceRegistry;
 

@@ -22,7 +22,7 @@ public class DashboardViewController {
 
     @FXML
     private void handleBookStatusManagement(MouseEvent event) {
-        loadPopupScene(event, "Book-status-management.fxml", "Book Status Management");
+        loadFullScene(event, "Book-status-management.fxml", "Book Status Management");
     }
 
     @FXML
