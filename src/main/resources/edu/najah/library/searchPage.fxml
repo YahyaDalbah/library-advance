@@ -38,6 +38,9 @@
             </Button>
 
         </HBox>
+        <!-- Error Label Section -->
+        <Label fx:id="errorLabel" text="" style="-fx-text-fill: red; -fx-font-size: 14px;" />
+
 
         <!-- Searched Books Area -->
         <VBox fx:id="searchResultsVBox" alignment="CENTER" maxWidth="800.0" prefWidth="800.0" spacing="10" style="-fx-padding: 3;">
