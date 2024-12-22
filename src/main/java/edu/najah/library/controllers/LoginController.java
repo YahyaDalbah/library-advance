@@ -2,8 +2,8 @@ package edu.najah.library.controllers;
 
 import edu.najah.library.models.services.UserDAOImp;
 import edu.najah.library.models.user.User;
-import edu.najah.library.utils.LoggedInUser;
-import edu.najah.library.utils.Role;
+import edu.najah.library.utils.Register;
+import edu.najah.library.utils.Roles;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -28,18 +28,18 @@ public class LoginController {
         String email = emailField.getText();
         String password = passwordField.getText();
         UserDAOImp userDAOImp = new UserDAOImp();
-        List<User> librarians = userDAOImp.getAll(Role.librarian);
-        List<User> admins = userDAOImp.getAll(Role.admin);
+        List<User> librarians = userDAOImp.getAllByRole(Roles.librarian);
+        List<User> admins = userDAOImp.getAllByRole(Roles.admin);
 
         User matchedUser = Stream.concat(librarians.stream(), admins.stream())
                 .filter(user -> user.getEmail().equals(email) && user.getPassword().equals(password))
                 .findFirst()
                 .orElse(null);
 
-        if(matchedUser != null) {
+        if(matchedUser != null && matchedUser.getRole().hasPermission("canViewDashboard")) {
             errorMessage.setVisible(false);
-            LoggedInUser loggedInUser = LoggedInUser.getInstance();
-            loggedInUser.setUser(matchedUser);
+            Register register = Register.getInstance();
+            register.setCurrentUser(matchedUser);
             switchScene(event,"dashboard-view.fxml");
         } else {
             errorMessage.setVisible(true);
