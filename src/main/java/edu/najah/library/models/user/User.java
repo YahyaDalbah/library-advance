@@ -1,10 +1,14 @@
 package edu.najah.library.models.user;
 
-import edu.najah.library.utils.Role;
+import edu.najah.library.models.Role;
+import edu.najah.library.utils.Roles;
 
 import javax.persistence.*;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
+@Table(name = "users")
 public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +19,13 @@ public abstract class User {
 
     @Column
     private String email;
+
+    @Column
+    private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "role", referencedColumnName = "role", insertable = false, updatable = false) // Reference 'role' column in Role table
+    private Role role;
 
     public String getEmail() {
         return email;
@@ -30,6 +41,11 @@ public abstract class User {
     public User(String name, String email) {
         this.name = name;
         this.email = email;
+    }
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
     public int getId() {
@@ -48,7 +64,11 @@ public abstract class User {
         this.name = name;
     }
 
-    public abstract Role getRole();
-    public abstract String getPassword();
+    public Role getRole(){
+        return role;
+    }
+    public String getPassword(){
+        return password;
+    };
 }
 
