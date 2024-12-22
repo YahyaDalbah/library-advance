@@ -1,6 +1,7 @@
 package edu.najah.library.models.user;
 
-import edu.najah.library.utils.Role;
+import edu.najah.library.models.Role;
+import edu.najah.library.utils.Roles;
 
 import javax.persistence.*;
 
@@ -19,7 +20,12 @@ public abstract class User {
     @Column
     private String email;
 
+    @Column
     private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "role", referencedColumnName = "role", insertable = false, updatable = false) // Reference 'role' column in Role table
+    private Role role;
 
     public String getEmail() {
         return email;
@@ -58,7 +64,9 @@ public abstract class User {
         this.name = name;
     }
 
-    public abstract Role getRole();
+    public Role getRole(){
+        return role;
+    }
     public String getPassword(){
         return password;
     };

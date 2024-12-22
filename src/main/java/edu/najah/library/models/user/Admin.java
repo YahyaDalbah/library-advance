@@ -1,5 +1,5 @@
 package edu.najah.library.models.user;
-import edu.najah.library.utils.Role;
+import edu.najah.library.utils.Roles;
 
 import javax.persistence.*;
 
@@ -14,9 +14,5 @@ public class Admin extends User {
         super(name, email, password);
 
 
-    }
-    @Override
-    public Role getRole() {
-        return Role.admin;
     }
 }
