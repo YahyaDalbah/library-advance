@@ -5,10 +5,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.AllBooksPageController">
+<AnchorPane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.AllBooksPageController">
 
-    <!-- Top Header Section -->
-    <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="1024.0" style="-fx-padding: 10; -fx-background-color: white;">
+    <!-- Top Header Section with Title aligned to the left -->
+    <HBox alignment="CENTER_LEFT" prefHeight="60.0" style="-fx-padding: 10; -fx-background-color: white; -fx-spacing: 10;">
         <!-- Title: LIBRARY7 aligned to the top-left -->
         <Label style="-fx-background-color: white;" text="LIBRARY7">
             <font>
@@ -17,29 +17,27 @@
         </Label>
 
         <!-- Spacer to push the icon to the right -->
-        <Region style="-fx-background-color: white;" HBox.hgrow="ALWAYS" />
-
-        <!-- User Icon Button in Top Right -->
-        <Button style="-fx-background-color: white; -fx-border: none;">
-            <graphic>
-                <ImageView fitHeight="40.0" fitWidth="40.0" preserveRatio="true">
-                    <Image url="@../../../images/user.png" />
-                </ImageView>
-            </graphic>
-        </Button>
+        <Region HBox.hgrow="ALWAYS" style="-fx-background-color: white;" />
     </HBox>
 
+    <!-- User Icon Button positioned in the top-right corner -->
+    <Button style="-fx-background-color: white; -fx-border: none;" onMouseClicked="#navigateToLogin" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10">
+        <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" preserveRatio="true">
+                <Image url="@../../../images/user.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+
     <!-- Main Content Section -->
-    <VBox layoutY="60.0" prefHeight="719.0" prefWidth="1039.0" spacing="20" style="-fx-padding: 20;">
-
-
+    <VBox spacing="20" style="-fx-padding: 10;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="60">
         <!-- Header with Title and Controls -->
-        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 10;">
-            <!-- Page Title Section -->
+        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-background-color: white;">
+            <!-- Page Title -->
             <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="All Books" />
 
-            <!-- Spacer to push controls to the right -->
-            <Region style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS" />
+            <!-- Spacer -->
+            <Region HBox.hgrow="ALWAYS" />
 
             <!-- Sort By ComboBox -->
             <ComboBox fx:id="SortedByComboBox" prefHeight="35.0" prefWidth="103.0" promptText="Sort by" style="-fx-font-size: 15px; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 20px; -fx-background-color: white;" />
@@ -48,24 +46,24 @@
             <ComboBox fx:id="FilterComboBox" prefHeight="35.0" prefWidth="92.0" promptText="Filter" style="-fx-font-size: 15px; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 20px; -fx-background-color: white;" />
 
             <!-- Search Button -->
-            <Button fx:id="SearchButton" prefHeight="33.0" prefWidth="74.0" style="-fx-font-size: 15px; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 20px; -fx-background-color: white;" text="Search" />
+            <Button fx:id="SearchButton" onMouseClicked="#navigateToSearch" prefHeight="33.0" prefWidth="100.0" style="-fx-font-size: 15px; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 20px; -fx-background-color: white;" text="Search" />
         </HBox>
 
-
-        <!-- Books Display Section -->
-        <ScrollPane fitToWidth="true" style="-fx-background-color: white;">
-            <TilePane fx:id="BooksTilePane" hgap="20" prefColumns="4" style="-fx-padding: 10;-fx-background-color: white;" vgap="20">
-                <!-- Book Template -->
-                <VBox alignment="CENTER" prefWidth="150" spacing="10" style="-fx-background-color: white; -fx-padding: 10; -fx-border-color: white; -fx-border-width: 1px; -fx-border-radius: 5px;">
-                    <ImageView fitHeight="120" fitWidth="100" preserveRatio="true">
-                        <Image url="@../../../images/book.png" />
-                    </ImageView>
-                    <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Book Title" />
-                    <Label style="-fx-font-size: 14px; -fx-text-fill: gray;" text="Author Name" />
-                    <Label style="-fx-font-size: 14px; -fx-text-fill: darkorange;" text="Rating: 4.5/5" />
+        <!-- Scrollable Books Section -->
+        <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: white;">
+            <TilePane fx:id="BooksTilePane" hgap="30" prefTileHeight="270" prefTileWidth="200" style="-fx-padding: 20; -fx-background-color: white;" vgap="40">
+                <VBox alignment="CENTER" spacing="15" style="-fx-background-color: #f9f9f9; -fx-padding: 20; -fx-border-color: lightgray; -fx-border-radius: 10; -fx-background-radius: 10;">
+                    <ImageView fx:id="bookImage" fitHeight="120" fitWidth="100" preserveRatio="true" />
+                    <Label fx:id="bookTitle" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-alignment: center;" text="Book Title" />
+                    <Label fx:id="bookAuthor" style="-fx-font-size: 14px; -fx-text-fill: gray; -fx-text-alignment: center;" text="Author" />
+                    <Label fx:id="bookRating" style="-fx-font-size: 14px; -fx-text-fill: darkorange; -fx-text-alignment: center;" text="" />
                 </VBox>
-
             </TilePane>
         </ScrollPane>
+
     </VBox>
+
+
+
+
 </AnchorPane>

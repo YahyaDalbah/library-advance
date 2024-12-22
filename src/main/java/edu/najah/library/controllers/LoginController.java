@@ -1,32 +1,55 @@
 package edu.najah.library.controllers;
 
+import edu.najah.library.models.services.UserDAOImp;
+import edu.najah.library.models.user.User;
+import edu.najah.library.utils.LoggedInUser;
+import edu.najah.library.utils.Role;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Stream;
+
+import static edu.najah.library.utils.utilFunctions.switchScene;
 
 public class LoginController {
-
+    @FXML
+    private TextField emailField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private Label errorMessage;
     public void login(ActionEvent event) throws IOException {
-        goToHomeScene(event,"dashboard-view.fxml");
+        String email = emailField.getText();
+        String password = passwordField.getText();
+        UserDAOImp userDAOImp = new UserDAOImp();
+        List<User> librarians = userDAOImp.getAll(Role.librarian);
+        List<User> admins = userDAOImp.getAll(Role.admin);
+
+        User matchedUser = Stream.concat(librarians.stream(), admins.stream())
+                .filter(user -> user.getEmail().equals(email) && user.getPassword().equals(password))
+                .findFirst()
+                .orElse(null);
+
+        if(matchedUser != null) {
+            errorMessage.setVisible(false);
+            LoggedInUser loggedInUser = LoggedInUser.getInstance();
+            loggedInUser.setUser(matchedUser);
+            switchScene(event,"dashboard-view.fxml");
+        } else {
+            errorMessage.setVisible(true);
+        }
+
     }
     public void loginAsStudent(MouseEvent event) throws IOException {
-        goToHomeScene(event,"dashboard-view.fxml");
+        switchScene(event,"AllbooksPage.fxml");
     }
 
-    private void goToHomeScene(Event event, String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/najah/library/" + fxml));
-        Parent root = fxmlLoader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+
 
 }

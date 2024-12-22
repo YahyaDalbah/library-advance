@@ -17,11 +17,12 @@ module edu.najah.library {
     opens edu.najah.library to javafx.fxml;
     opens edu.najah.library.models.user;
     exports edu.najah.library;
-    exports edu.najah.library.models;
     exports edu.najah.library.controllers;
-    opens edu.najah.library.models to javafx.fxml, org.hibernate.orm.core;
+
     opens edu.najah.library.controllers to javafx.fxml;
     exports edu.najah.library.utils;
     opens edu.najah.library.utils to javafx.fxml;
+    exports edu.najah.library.models.interfaces;
+    opens edu.najah.library.models.interfaces to javafx.fxml;
 
 }

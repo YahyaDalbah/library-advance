@@ -28,6 +28,17 @@ public class DashboardViewController {
     @FXML
     private void handleBookReservation(MouseEvent event) {
         loadPopupScene(event, "Reservation-Book.fxml", "Book Reservation");
+
+    }
+    @FXML
+    private void handleLogout(MouseEvent event) {
+        loadFullScene(event, "login.fxml", "Login");
+    }
+
+    @FXML
+    private void handleSearchPage(MouseEvent event) {
+        loadFullScene(event, "AllbooksPage.fxml", "Library7");
+
     }
 
     @FXML

@@ -161,7 +161,7 @@
                                           <Insets left="72.0" top="12.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <Text fill="#de2626" strokeType="OUTSIDE" strokeWidth="0.0" text="Log out">
+                                    <Text fill="#de2626" strokeType="OUTSIDE" strokeWidth="0.0" text="Log out" onMouseClicked="#handleLogout">
                                        <font>
                                           <Font name="Inter 18pt Regular" size="18.0" />
                                        </font>
@@ -177,7 +177,7 @@
                                           <Insets left="72.0" top="24.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search for books" underline="true">
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search for books" underline="true" onMouseClicked="#handleSearchPage">
                                              <font>
                                                 <Font name="Inter 18pt Regular" size="18.0" />
                                              </font>
