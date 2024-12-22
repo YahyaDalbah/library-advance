@@ -1,5 +1,5 @@
 package edu.najah.library.utils;
 
-public enum Role{
+public enum Roles {
     student, librarian, admin
 }

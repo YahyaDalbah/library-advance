@@ -1,12 +1,10 @@
 package edu.najah.library.models.services;
 
 import edu.najah.library.models.interfaces.UserDAO;
-import edu.najah.library.models.user.Librarian;
-import edu.najah.library.models.user.Student;
 import edu.najah.library.models.user.User;
 
 import edu.najah.library.utils.HibernateUtil;
-import edu.najah.library.utils.Role;
+import edu.najah.library.utils.Roles;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -24,11 +22,11 @@ public class UserDAOImp implements UserDAO {
         session.close();
     }
     @Override
-    public List<User> getAll(Role role) {
+    public List<User> getAllByRole(Roles roles) {
         SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
         Session session = sessionFactory.openSession();
         List<User> users = List.of();
-        switch (role){
+        switch (roles){
             case student:
 //                users = session.createQuery("from Student", User.class).getResultList();
                 break;
@@ -39,5 +37,12 @@ public class UserDAOImp implements UserDAO {
                 users = session.createQuery("from Admin", User.class).getResultList();
         }
         return users;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
+        Session session = sessionFactory.openSession();
+        return session.createQuery("from User", User.class).getResultList();
     }
 }
