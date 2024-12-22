@@ -9,25 +9,47 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "title")
     private String title;
+
+    @Lob
+    @Column(name = "image")
+    private byte[] image;
+
     @Column(name = "author")
     private String author;
+
     @Column(name = "description")
     private String description;
+
     @Column(name = "date")
     private Date date;
+
     @Column(name = "type")
     private String type;
+
     @Column(name = "availability")
     private String availability;
+
     @Column(name = "imageUrl")
     private String imageUrl;
+
     @Column(name = "rating")
-    private String  rating;
+    private String rating;
 
     public Book() {}
 
+    // Getter and Setter for image
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    // Builder class
     public static class Builder {
         private int id;
         private String title;
@@ -78,6 +100,7 @@ public class Book {
             this.imageUrl = imageUrl;
             return this;
         }
+
         public Builder setRating(String rating) {
             this.rating = rating;
             return this;
@@ -115,7 +138,7 @@ public class Book {
         return description;
     }
 
-    public Date getDate() {
+    public Date getDate(String year) {
         return date;
     }
 

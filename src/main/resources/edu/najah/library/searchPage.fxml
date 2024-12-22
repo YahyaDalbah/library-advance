@@ -15,7 +15,8 @@
             </font>
         </Label>
         <Region HBox.hgrow="ALWAYS" />
-        <Button style="-fx-background-color: transparent; -fx-border: none;">
+        <!-- User Icon Button positioned in the top-right corner -->
+        <Button style="-fx-background-color: white; -fx-border: none;" onMouseClicked="#navigateToLogin" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10">
             <graphic>
                 <ImageView fitHeight="40.0" fitWidth="40.0" preserveRatio="true">
                     <Image url="@../../../images/user.png" />

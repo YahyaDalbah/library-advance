@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -164,6 +165,28 @@ public class SearchPageController {
         System.out.println("Added book entry for: " + book.getTitle()); // Debug statement
     }
 
+    @FXML
+    private void navigateToLogin(MouseEvent event) {
+        handleSearchButtonClick(event, "login.fxml");
+    }
+
+    public void handleSearchButtonClick(MouseEvent event, String fxmlPath) {
+        try {
+            // Load the FXML for the search page
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/" + fxmlPath));
+            Parent searchPage = loader.load();
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the scene for the new page
+            Scene scene = new Scene(searchPage);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void handleBackButtonAction(ActionEvent event) {
         try {

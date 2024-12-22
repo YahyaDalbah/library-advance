@@ -39,11 +39,6 @@
             <!-- Spacer -->
             <Region HBox.hgrow="ALWAYS" />
 
-            <!-- Sort By ComboBox -->
-            <ComboBox fx:id="SortedByComboBox" prefHeight="35.0" prefWidth="103.0" promptText="Sort by" style="-fx-font-size: 15px; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 20px; -fx-background-color: white;" />
-
-            <!-- Filter ComboBox -->
-            <ComboBox fx:id="FilterComboBox" prefHeight="35.0" prefWidth="92.0" promptText="Filter" style="-fx-font-size: 15px; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 20px; -fx-background-color: white;" />
 
             <!-- Search Button -->
             <Button fx:id="SearchButton" onMouseClicked="#navigateToSearch" prefHeight="33.0" prefWidth="100.0" style="-fx-font-size: 15px; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 20px; -fx-background-color: white;" text="Search" />
