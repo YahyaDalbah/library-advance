@@ -35,7 +35,7 @@ public class HibernateUtil {
         return instance;
     }
 
-    public synchronized SessionFactory getSessionFactory() {
+    public static synchronized SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
