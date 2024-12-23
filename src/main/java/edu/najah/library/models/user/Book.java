@@ -26,6 +26,9 @@ public class Book {
     @Column(name = "date")
     private Date date;
 
+    @Column(name = "year")
+    private int year;
+
     @Column(name = "type")
     private String type;
 
@@ -47,6 +50,10 @@ public class Book {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public int getYear() {
+        return year;
     }
 
     // Builder class
