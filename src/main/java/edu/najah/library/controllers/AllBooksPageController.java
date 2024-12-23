@@ -59,7 +59,7 @@ public class AllBooksPageController {
                 double rating = Double.parseDouble(book.getRating());
                 String description = book.getDescription();
                 String type = book.getType();
-                Date year = book.getDate("year");
+                int year = book.getYear();
 
 
                 // Create UI elements
@@ -105,7 +105,7 @@ public class AllBooksPageController {
     }
 
     @FXML
-    private void navigateToBookDetails(MouseEvent event, int bookId, String title, String author, byte[] imageBytes, double rating, String description, String type, Date year) throws IOException {
+    private void navigateToBookDetails(MouseEvent event, int bookId, String title, String author, byte[] imageBytes, double rating, String description, String type, int year) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/BookDetailsPage.fxml"));
         Parent bookDetailsPage = loader.load();
 

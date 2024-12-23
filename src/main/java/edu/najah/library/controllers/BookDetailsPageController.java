@@ -25,7 +25,7 @@ public class BookDetailsPageController {
     @FXML private Text bookRating;
     @FXML private ImageView bookImage;
 
-    public void setBookDetails(int bookId, String title, String author, byte[] imageBytes, double rating, String description, String type, Date year) {
+    public void setBookDetails(int bookId, String title, String author, byte[] imageBytes, double rating, String description, String type, int year) {
          bookTitle.setText(title);
         bookAuthor.setText(author);
         bookType.setText(type);
