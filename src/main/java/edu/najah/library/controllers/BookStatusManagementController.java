@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -28,8 +29,13 @@ public class BookStatusManagementController {
     private Button addNewBook;
     @FXML
     private TilePane booksContainer;
+    @FXML
+    private TextField searchById;
+    @FXML
+    private Label statusLabel;
 
     private ObservableList<Book> observableBooksList;
+
 
     @FXML
     private void handelBack(MouseEvent event) {
@@ -50,6 +56,7 @@ public class BookStatusManagementController {
 
     @FXML
     public void initialize() {
+        searchById.setOnKeyReleased(event -> searchBook());
         addNewBook.setOnAction(event -> {
             try {
                 AddBookController addBookController = new AddBookController();
@@ -61,6 +68,29 @@ public class BookStatusManagementController {
         });
         updateBooksList();
     }
+    private void searchBook() {
+        String searchId = searchById.getText().trim();
+        if (searchId.isEmpty()) {
+            statusLabel.setText("");
+            updateBooksList();
+            return;
+        }
+        try {
+            int id = Integer.parseInt(searchId);
+            BookDAO bookDAO = new BookDAOImp();
+            Book book = bookDAO.getBookById(id);
+            booksContainer.getChildren().clear();
+            if (book != null) {
+                statusLabel.setText("");
+                displayBook(book);
+            } else {
+                statusLabel.setText("No book found with ID: " + id);
+            }
+        } catch (NumberFormatException e) {
+            statusLabel.setText("Invalid ID: Please enter a valid numeric ID.");
+        }
+    }
+
     private void updateBooksList() {
         BookDAO bookDAO = new BookDAOImp();
         List<Book> books = bookDAO.getAllBooks();
@@ -144,6 +174,14 @@ public class BookStatusManagementController {
                     bookDAO.deleteBookById(book.getId());
                     observableBooksList.remove(book);
                     booksContainer.getChildren().remove(bookCard);
+                    //Delete image from folder
+                    String imageFileName = book.getImageUrl();
+                    if (imageFileName != null && !imageFileName.isEmpty()) {
+                        File imageFile = new File("src/main/resources/images/BookCovers/" + imageFileName);
+                        if (imageFile.exists() && imageFile.isFile()) {
+                            imageFile.delete();
+                        }
+                    }
                     }
             });
         });

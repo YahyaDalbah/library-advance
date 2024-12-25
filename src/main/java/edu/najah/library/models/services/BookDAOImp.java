@@ -51,7 +51,14 @@ public class BookDAOImp implements BookDAO {
         session.delete(bookToDelete);
         session.getTransaction().commit();
         session.close();
-
+    }
+    @Override
+    public Book getBookById(int id) {
+        SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Book book = session.get(Book.class, id);
+        session.close();
+        return book;
     }
 
 
@@ -59,7 +66,6 @@ public class BookDAOImp implements BookDAO {
     public List<Book> searchBooks(String query) {
         List<Book> books = new ArrayList<>();
         SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
-
 
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
