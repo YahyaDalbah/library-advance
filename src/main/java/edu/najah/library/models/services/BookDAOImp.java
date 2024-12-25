@@ -34,7 +34,15 @@ public class BookDAOImp implements BookDAO {
         session.delete(bookToDelete);
         session.getTransaction().commit();
         session.close();
-
     }
+    @Override
+    public Book getBookById(int id) {
+        SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Book book = session.get(Book.class, id);
+        session.close();
+        return book;
+    }
+
 
 }

@@ -29,7 +29,8 @@
                   <Button fx:id="addNewBook" mnemonicParsing="false" style="-fx-background-color: #000; -fx-text-fill: #fff; -fx-font-size: 16;" text="+" />
                   <Label style="-fx-font-size: 23;" text="Add Book" />
                </HBox>
-               <TilePane fx:id="booksContainer" hgap="20" style="-fx-background-color: #fff; -fx-padding: 20 0 40 0;" vgap="20" VBox.vgrow="ALWAYS">
+               <Label fx:id="statusLabel" text="" style="-fx-text-fill: red; -fx-font-size: 15px;" />
+               <TilePane fx:id="booksContainer" hgap="20" style="-fx-background-color: #fff;" vgap="20" VBox.vgrow="ALWAYS">
                </TilePane>
             </VBox>
          </content>
