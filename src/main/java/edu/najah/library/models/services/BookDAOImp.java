@@ -51,10 +51,6 @@ public class BookDAOImp implements BookDAO {
         List<Book> books = new ArrayList<>();
         SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
 
-
-<<<<<<< HEAD
-}
-=======
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
 
@@ -78,4 +74,4 @@ public class BookDAOImp implements BookDAO {
     }
 
 }
->>>>>>> 82864e224b0df877abf2a39ef342e9420576214a
+
