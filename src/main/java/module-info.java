@@ -11,7 +11,8 @@ module edu.najah.library {
     requires java.naming;
     requires mysql.connector.java;
     requires java.persistence;
-    requires java.desktop;
+    requires jakarta.mail;
+    requires jakarta.activation;
 
     opens edu.najah.library to javafx.fxml;
     opens edu.najah.library.models.user;
