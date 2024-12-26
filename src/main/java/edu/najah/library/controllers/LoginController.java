@@ -24,6 +24,10 @@ public class LoginController {
     private PasswordField passwordField;
     @FXML
     private Label errorMessage;
+    @FXML
+    private Label resetPasswordLabel;
+
+
     public void login(ActionEvent event) throws IOException {
         String email = emailField.getText();
         String password = passwordField.getText();
@@ -50,6 +54,8 @@ public class LoginController {
         switchScene(event,"AllbooksPage.fxml");
     }
 
-
+    public void goToResetPassword(MouseEvent event) throws IOException {
+        switchScene(event,"reset-password-form.fxml");
+    }
 
 }
