@@ -7,7 +7,9 @@ import edu.najah.library.utils.HibernateUtil;
 import edu.najah.library.utils.Roles;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class UserDAOImp implements UserDAO {
@@ -44,5 +46,22 @@ public class UserDAOImp implements UserDAO {
         SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
         Session session = sessionFactory.openSession();
         return session.createQuery("from User", User.class).getResultList();
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+        User user = session.createQuery("FROM User WHERE email = :email", User.class)
+                .setParameter("email", email)
+                .uniqueResult();
+        return user;
+    }
+    public void updateUser(User user){
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+        //change database
+        session.update(user);
+        tx.commit();
     }
 }
