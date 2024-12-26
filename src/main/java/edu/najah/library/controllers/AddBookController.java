@@ -1,6 +1,6 @@
 package edu.najah.library.controllers;
 
-import edu.najah.library.models.user.Book;
+import edu.najah.library.models.Book;
 import edu.najah.library.models.services.BookDAOImp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +42,8 @@ public class AddBookController {
     private DatePicker publicationDatePicker;
     @FXML
     private TextField ratingField;
+    @FXML
+    private TextField yearField;
 
     @FXML
     public void initialize() {
@@ -96,7 +98,7 @@ public class AddBookController {
             try {
                 long timestamp = System.currentTimeMillis();
                 String newFileName = timestamp + "_" + selectedFile.getName();
-                File folder = new File("src/main/resources/images/BookCovers/");
+                File folder = new File("src/main/resources/images/");
                 Path targetPath = Paths.get(folder.toPath().toString(), newFileName);
                 Files.copy(selectedFile.toPath(), targetPath, StandardCopyOption.REPLACE_EXISTING);
                 coverField.setText(newFileName);
@@ -112,13 +114,14 @@ public class AddBookController {
         String author = authorField.getText();
         String description = descriptionArea.getText();
         String coverImageUrl = coverField.getText();
+        String yearStr = yearField.getText();
         LocalDate publicationDate = publicationDatePicker.getValue();
         String type = (String) typeComboBox.getValue();
         String availability = availableRadio.isSelected() ? "Available" : "Unavailable";
         String rating = ratingField.getText();
 
 
-        if (title.isEmpty() || author.isEmpty() || description.isEmpty() || coverImageUrl.isEmpty() || publicationDate == null || type == null ||
+        if (title.isEmpty() || author.isEmpty() || description.isEmpty() || coverImageUrl.isEmpty() || yearStr.isEmpty() || type == null ||
                 (!availableRadio.isSelected() && !unavailableRadio.isSelected())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -129,11 +132,12 @@ public class AddBookController {
         }
 
         Date date = Date.valueOf(publicationDate);
+        int year = Integer.parseInt(yearStr);
         Book newBook = new Book.Builder()
                 .setTitle(title)
                 .setAuthor(author)
                 .setDescription(description)
-                .setDate(date)
+                .setYear(year)
                 .setType(type)
                 .setAvailability(availability)
                 .setImageUrl(coverImageUrl)
@@ -154,7 +158,7 @@ public class AddBookController {
         descriptionArea.clear();
         ratingField.clear();
         coverField.clear();
-        publicationDatePicker.setValue(null);
+        yearField.clear();
         typeComboBox.setValue(null);
         availableRadio.setSelected(false);
         unavailableRadio.setSelected(false);
@@ -173,7 +177,7 @@ public class AddBookController {
                 authorField.clear();
                 descriptionArea.clear();
                 coverField.clear();
-                publicationDatePicker.setValue(null);
+                yearField.clear();
                 typeComboBox.setValue(null);
                 availableRadio.setSelected(false);
                 unavailableRadio.setSelected(false);
@@ -187,7 +191,7 @@ public class AddBookController {
                         (authorField.getText() != null && !authorField.getText().trim().isEmpty()) ||
                         (descriptionArea.getText() != null && !descriptionArea.getText().trim().isEmpty()) ||
                         (coverField.getText() != null && !coverField.getText().trim().isEmpty()) ||
-                        (publicationDatePicker.getValue() != null) ||
+                        (yearField.getText() != null) ||
                         (typeComboBox.getValue() != null) ||
                         (availableRadio.isSelected() || unavailableRadio.isSelected());
 

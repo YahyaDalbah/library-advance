@@ -1,5 +1,6 @@
 package edu.najah.library.utils;
 
+import edu.najah.library.models.Book;
 import edu.najah.library.models.Permission;
 import edu.najah.library.models.Role;
 import edu.najah.library.models.user.*;

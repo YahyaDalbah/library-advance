@@ -1,10 +1,10 @@
-package edu.najah.library.models.user;
+package edu.najah.library.models;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "Book")
+@Table(name = "book")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +22,6 @@ public class Book {
 
     @Column(name = "description")
     private String description;
-
-    @Column(name = "date")
-    private Date date;
 
     @Column(name = "year")
     private int year;
@@ -52,9 +49,6 @@ public class Book {
         this.image = image;
     }
 
-    public int getYear() {
-        return year;
-    }
 
     // Builder class
     public static class Builder {
@@ -62,7 +56,7 @@ public class Book {
         private String title;
         private String author;
         private String description;
-        private Date date;
+        private int year;
         private String type;
         private String availability;
         private String imageUrl;
@@ -88,8 +82,8 @@ public class Book {
             return this;
         }
 
-        public Builder setDate(Date date) {
-            this.date = date;
+        public Builder setYear(int year) {
+            this.year = year;
             return this;
         }
 
@@ -119,7 +113,7 @@ public class Book {
             book.title = this.title;
             book.author = this.author;
             book.description = this.description;
-            book.date = this.date;
+            book.year = this.year;
             book.type = this.type;
             book.availability = this.availability;
             book.imageUrl = this.imageUrl;
@@ -145,9 +139,7 @@ public class Book {
         return description;
     }
 
-    public Date getDate(String year) {
-        return date;
-    }
+    public int getYear() {return year; }
 
     public String getType() {
         return type;
