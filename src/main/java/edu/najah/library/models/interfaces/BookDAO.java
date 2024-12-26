@@ -11,7 +11,6 @@ public interface BookDAO {
     public  List<Book>  getAllBooks();
     public void deleteBookById(int id);
 
-     public void loadBooks(AllBooksPageController controller);
 
     public Book getBookById(int id);
 

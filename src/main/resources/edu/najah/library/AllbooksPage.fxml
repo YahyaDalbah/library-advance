@@ -47,12 +47,7 @@
         <!-- Scrollable Books Section -->
         <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: white;">
             <TilePane fx:id="BooksTilePane" hgap="30" prefTileHeight="270" prefTileWidth="200" style="-fx-padding: 20; -fx-background-color: white;" vgap="40">
-                <VBox alignment="CENTER" spacing="15" style="-fx-background-color: #f9f9f9; -fx-padding: 20; -fx-border-color: lightgray; -fx-border-radius: 10; -fx-background-radius: 10;">
-                    <ImageView fx:id="bookImage" fitHeight="120" fitWidth="100" preserveRatio="true" />
-                    <Label fx:id="bookTitle" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-alignment: center;" text="Book Title" />
-                    <Label fx:id="bookAuthor" style="-fx-font-size: 14px; -fx-text-fill: gray; -fx-text-alignment: center;" text="Author" />
-                    <Label fx:id="bookRating" style="-fx-font-size: 14px; -fx-text-fill: darkorange; -fx-text-alignment: center;" text="" />
-                </VBox>
+
             </TilePane>
         </ScrollPane>
 
