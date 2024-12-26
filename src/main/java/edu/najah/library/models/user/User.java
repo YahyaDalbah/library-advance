@@ -4,6 +4,7 @@ import edu.najah.library.models.Role;
 import edu.najah.library.utils.Roles;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -26,6 +27,12 @@ public abstract class User {
     @ManyToOne
     @JoinColumn(name = "role", referencedColumnName = "role", insertable = false, updatable = false) // Reference 'role' column in Role table
     private Role role;
+
+    @Column(name = "reset_token")
+    private String resetToken;
+
+    @Column(name = "token_expiration")
+    private LocalDateTime tokenExpiration;
 
     public String getEmail() {
         return email;
@@ -70,5 +77,25 @@ public abstract class User {
     public String getPassword(){
         return password;
     };
+    public void setPassword(String password){
+        this.password = password;
+    }
+
+
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
+    }
+
+    public LocalDateTime getTokenExpiration() {
+        return tokenExpiration;
+    }
+
+    public void setTokenExpiration(LocalDateTime tokenExpiration) {
+        this.tokenExpiration = tokenExpiration;
+    }
 }
 
