@@ -1,7 +1,6 @@
 package edu.najah.library.models.interfaces;
 
-import edu.najah.library.controllers.AllBooksPageController;
-import edu.najah.library.models.user.Book;
+import edu.najah.library.models.Book;
 
 import java.util.List;
 

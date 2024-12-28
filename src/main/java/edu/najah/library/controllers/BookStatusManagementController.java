@@ -15,7 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import edu.najah.library.models.user.Book;
+import edu.najah.library.models.Book;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -107,7 +107,7 @@ public class BookStatusManagementController {
         ImageView imageView = new ImageView();
         String imageName = book.getImageUrl();
         try {
-            String imagePath = "/images/BookCovers/" + imageName;
+            String imagePath = "/images/" + imageName;
             URL resource = getClass().getResource(imagePath);
             if (resource != null) {
                 imageView.setImage(new Image(resource.toExternalForm()));
@@ -177,7 +177,7 @@ public class BookStatusManagementController {
                     //Delete image from folder
                     String imageFileName = book.getImageUrl();
                     if (imageFileName != null && !imageFileName.isEmpty()) {
-                        File imageFile = new File("src/main/resources/images/BookCovers/" + imageFileName);
+                        File imageFile = new File("src/main/resources/images/" + imageFileName);
                         if (imageFile.exists() && imageFile.isFile()) {
                             imageFile.delete();
                         }

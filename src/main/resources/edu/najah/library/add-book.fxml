@@ -18,11 +18,11 @@
    </VBox>
 
    <VBox layoutX="547.0" layoutY="129.0" spacing="20">
+      <TextField fx:id="yearField" prefHeight="47.0" promptText=" publication year" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
       <HBox spacing="5">
          <TextField fx:id="coverField" prefHeight="47.0" prefWidth="230.0" promptText="Cover Image" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
          <Button fx:id="attachButton" onAction="#handleAttach" prefHeight="46.0" prefWidth="64.0" style="-fx-font-size: 15; -fx-background-color: #E0E0E0; -fx-text-fill: black;" text="Attach" />
       </HBox>
-      <DatePicker fx:id="publicationDatePicker" prefHeight="47.0" prefWidth="300.0" promptText="Publication Date" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
       <ComboBox fx:id="typeComboBox" prefHeight="47.0" prefWidth="300.0" promptText="Type" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
       <RadioButton fx:id="availableRadio" style="-fx-font-size: 15; -fx-text-fill: #636363;" text="Available" />
       <RadioButton fx:id="unavailableRadio" style="-fx-font-size: 15; -fx-text-fill: #636363;" text="Unavailable" />

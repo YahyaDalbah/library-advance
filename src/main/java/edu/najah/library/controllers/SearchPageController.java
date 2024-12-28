@@ -1,7 +1,7 @@
 package edu.najah.library.controllers;
 
 
-import edu.najah.library.models.user.Book;
+import edu.najah.library.models.Book;
 import edu.najah.library.models.services.BookDAOImp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +19,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 
 

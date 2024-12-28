@@ -1,6 +1,6 @@
 package edu.najah.library.controllers;
 
-import edu.najah.library.models.user.Book;
+import edu.najah.library.models.Book;
 import edu.najah.library.models.services.BookDAOImp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

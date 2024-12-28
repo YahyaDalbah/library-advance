@@ -1,6 +1,6 @@
 package edu.najah.library.models.services;
 import edu.najah.library.controllers.AllBooksPageController;
-import edu.najah.library.models.user.Book;
+import edu.najah.library.models.Book;
 import edu.najah.library.models.interfaces.BookDAO;
 import edu.najah.library.utils.HibernateUtil;
 import javafx.collections.FXCollections;
