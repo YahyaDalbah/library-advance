@@ -40,16 +40,6 @@ public class User {
     public User(){
         //empty constructor for hibernate
     }
-    public User(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
-    public User(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
-
     public int getId() {
         return id;
     }
@@ -69,6 +59,7 @@ public class User {
     public Role getRole(){
         return role;
     }
+    public void setRole(Role role){this.role = role;}
     public String getPassword(){
         return password;
     };
