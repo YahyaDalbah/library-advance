@@ -1,7 +1,7 @@
 package edu.najah.library.controllers;
 
 import edu.najah.library.models.services.UserDAOImp;
-import edu.najah.library.models.user.User;
+import edu.najah.library.models.User;
 import edu.najah.library.utils.EmailService;
 import edu.najah.library.utils.Register;
 import javafx.event.ActionEvent;
@@ -13,7 +13,7 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 
 import static edu.najah.library.utils.utilFunctions.switchScene;
-import static edu.najah.library.utils.utilFunctions.generateResetToken;
+import static edu.najah.library.utils.EmailService.generateResetToken;
 public class ResetPasswordController {
     @FXML
     private TextField resetPasswordEmailField;

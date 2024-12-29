@@ -1,16 +1,11 @@
-package edu.najah.library.models.user;
-
-import edu.najah.library.models.Role;
-import edu.najah.library.utils.Roles;
+package edu.najah.library.models;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "users")
-public abstract class User {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -25,7 +20,7 @@ public abstract class User {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "role", referencedColumnName = "role", insertable = false, updatable = false) // Reference 'role' column in Role table
+    @JoinColumn(name = "role", referencedColumnName = "role")
     private Role role;
 
     @Column(name = "reset_token")
