@@ -15,7 +15,6 @@ module edu.najah.library {
     requires jakarta.activation;
 
     opens edu.najah.library to javafx.fxml;
-    opens edu.najah.library.models.user;
     exports edu.najah.library;
     exports edu.najah.library.controllers;
     opens edu.najah.library.controllers to javafx.fxml;

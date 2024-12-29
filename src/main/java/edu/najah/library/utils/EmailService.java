@@ -1,7 +1,13 @@
 package edu.najah.library.utils;
 
+import edu.najah.library.models.services.UserDAOImp;
+import edu.najah.library.models.User;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
+
+import java.security.SecureRandom;
+import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.Properties;
 
 public class EmailService {
@@ -25,14 +31,12 @@ public class EmailService {
         });
 
         try {
-            // Create a message
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(senderEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
             message.setSubject(subject);
             message.setText(body);
 
-            // Send the email
             Transport.send(message);
 
             System.out.println("Email sent successfully.");
@@ -40,5 +44,27 @@ public class EmailService {
             e.printStackTrace();
             System.err.println("Failed to send email: " + e.getMessage());
         }
+    }
+
+    public static String generateResetToken(String email) {
+        SecureRandom random = new SecureRandom();
+        byte[] bytes = new byte[24];
+        random.nextBytes(bytes);
+        String token = Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
+
+        // save token and expiration to the database
+        UserDAOImp userDAO = new UserDAOImp();
+        User user = userDAO.getUserByEmail(email);
+
+        if (user == null) {
+            throw new IllegalArgumentException("Email not found");
+        }
+
+        user.setResetToken(token);
+        user.setTokenExpiration(LocalDateTime.now().plusHours(1)); // token valid for 1 hour
+
+        userDAO.updateUser(user);
+
+        return token;
     }
 }
