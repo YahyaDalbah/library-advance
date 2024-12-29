@@ -1,7 +1,7 @@
 package edu.najah.library.controllers;
 
 import edu.najah.library.models.services.UserDAOImp;
-import edu.najah.library.models.user.User;
+import edu.najah.library.models.User;
 import edu.najah.library.utils.Register;
 import edu.najah.library.utils.Roles;
 import javafx.event.ActionEvent;

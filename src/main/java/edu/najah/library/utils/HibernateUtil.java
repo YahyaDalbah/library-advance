@@ -3,7 +3,7 @@ package edu.najah.library.utils;
 import edu.najah.library.models.Book;
 import edu.najah.library.models.Permission;
 import edu.najah.library.models.Role;
-import edu.najah.library.models.user.*;
+import edu.najah.library.models.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -20,9 +20,6 @@ public class HibernateUtil {
         Configuration configuration = new Configuration();
 
         //add models to configuration
-        configuration.addAnnotatedClass(Librarian.class);
-        configuration.addAnnotatedClass(Admin.class);
-        configuration.addAnnotatedClass(Student.class);
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Book.class);
         configuration.addAnnotatedClass(Role.class);

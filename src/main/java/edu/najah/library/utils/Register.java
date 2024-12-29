@@ -1,6 +1,6 @@
 package edu.najah.library.utils;
 
-import edu.najah.library.models.user.User;
+import edu.najah.library.models.User;
 
 public class Register {
 
