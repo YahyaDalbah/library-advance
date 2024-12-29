@@ -4,8 +4,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="330.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
-    <Button fx:id="closeButton" layoutX="393.0" layoutY="13.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 20;" text="X" />
+<AnchorPane prefHeight="330.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.UpdateStudentController">
+    <Button fx:id="closeButton" layoutX="393.0" layoutY="13.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 25;" text="x" onAction="#handleCloseButtonAction"/>
     <Text layoutX="15.0" layoutY="43.0" style="-fx-font-size: 25; -fx-fill: #000; -fx-font-weight: bold;" text="update student" wrappingWidth="186.4189453125" />
     <Separator layoutY="65.0" prefHeight="2.0" prefWidth="440.0" style="-fx-background-color: #c3c3c3;" />
 

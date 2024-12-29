@@ -40,6 +40,18 @@ public class Book {
 
     public Book() {}
 
+    public Book(int id, String title, String author, String description, int year, String type, String availability, String imageUrl, String rating) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.description = description;
+        this.year = year;
+        this.type = type;
+        this.availability = availability;
+        this.imageUrl = imageUrl;
+        this.rating = rating;
+    }
+
     // Getter and Setter for image
     public byte[] getImage() {
         return image;
@@ -49,111 +61,76 @@ public class Book {
         this.image = image;
     }
 
-
-    // Builder class
-    public static class Builder {
-        private int id;
-        private String title;
-        private String author;
-        private String description;
-        private int year;
-        private String type;
-        private String availability;
-        private String imageUrl;
-        private String rating;
-
-        public Builder setId(int id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder setTitle(String title) {
-            this.title = title;
-            return this;
-        }
-
-        public Builder setAuthor(String author) {
-            this.author = author;
-            return this;
-        }
-
-        public Builder setDescription(String description) {
-            this.description = description;
-            return this;
-        }
-
-        public Builder setYear(int year) {
-            this.year = year;
-            return this;
-        }
-
-        public Builder setType(String type) {
-            this.type = type;
-            return this;
-        }
-
-        public Builder setAvailability(String availability) {
-            this.availability = availability;
-            return this;
-        }
-
-        public Builder setImageUrl(String imageUrl) {
-            this.imageUrl = imageUrl;
-            return this;
-        }
-
-        public Builder setRating(String rating) {
-            this.rating = rating;
-            return this;
-        }
-
-        public Book build() {
-            Book book = new Book();
-            book.id = this.id;
-            book.title = this.title;
-            book.author = this.author;
-            book.description = this.description;
-            book.year = this.year;
-            book.type = this.type;
-            book.availability = this.availability;
-            book.imageUrl = this.imageUrl;
-            book.rating = this.rating;
-            return book;
-        }
-    }
-
     // Getter methods
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getAuthor() {
         return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public int getYear() {return year; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
 
     public String getType() {
         return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getAvailability() {
         return availability;
     }
 
+    public void setAvailability(String availability) {
+        this.availability = availability;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
 
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public String getRating() {
         return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 }
