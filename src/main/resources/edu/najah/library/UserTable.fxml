@@ -5,31 +5,54 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 <AnchorPane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.UserTableController">
 
-    <!-- Top Header Section with Title aligned to the left -->
-    <HBox alignment="CENTER_LEFT" prefHeight="60.0" style="-fx-padding: 10; -fx-background-color: white; -fx-spacing: 10;">
-        <Label style="-fx-background-color: white;" text="LIBRARY7">
-            <font>
-                <Font name="DejaVu Serif Condensed Bold" size="30.0" />
-            </font>
-        </Label>
-        <Region HBox.hgrow="ALWAYS" />
-    </HBox>
+    <!-- Top Header Section -->
+    <VBox alignment="CENTER_LEFT" prefHeight="150.0" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" style="-fx-padding: 10; -fx-spacing: 10;">
 
-    <!-- User Icon Button positioned in the top-right corner -->
-    <Button style="-fx-background-color: white;" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10">
-        <graphic>
-            <ImageView fitHeight="25.0" fitWidth="25.0" preserveRatio="true">
-                <Image url="@../../../images/back.png" />
-            </ImageView>
-        </graphic>
-    </Button>
+        <!-- HBox for LIBRARY7 label and Back Button -->
+        <HBox alignment="CENTER_LEFT" prefHeight="40.0" style="-fx-padding: 10; -fx-spacing: 10;">
+            <!-- LIBRARY7 Label -->
+            <Label text="LIBRARY7">
+                <font>
+                    <Font name="DejaVu Serif Condensed Bold" size="30.0" />
+                </font>
+            </Label>
 
-    <!-- VBox for the User Table below the header -->
-    <VBox AnchorPane.topAnchor="70" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" style="-fx-padding: 10; -fx-spacing: 10;">
-        <TableView fx:id="userTable" layoutX="14.0" layoutY="50.0" prefHeight="400.0" prefWidth="600.0">
+            <!-- Spacer Region to push Back Button to the right -->
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- Back Button positioned at the top-right corner -->
+            <Button style="-fx-background-color: white;" onAction="#handleBackButtonAction">
+                <graphic>
+                    <ImageView fitHeight="25.0" fitWidth="25.0" preserveRatio="true">
+                        <Image url="@../../../images/back.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+
+        <!-- New HBox for Students title and Add Student Button -->
+        <HBox alignment="CENTER_LEFT" prefHeight="40.0" style="-fx-padding: 10; -fx-spacing: 10;">
+            <!-- Students Label -->
+            <Label text="Students">
+                <font>
+                    <Font name="DejaVu Serif Condensed Bold" size="24.0" />
+                </font>
+            </Label>
+
+            <!-- Spacer Region to push Add Student Button to the right -->
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- Add Student Button positioned to the right -->
+            <Button text="Add Student" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 5 10;" />
+        </HBox>
+
+    </VBox>
+
+    <!-- VBox for the User Table -->
+    <VBox AnchorPane.topAnchor="160" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" style="-fx-padding: 10; -fx-spacing: 10;">
+        <TableView fx:id="userTable" prefHeight="400.0" prefWidth="600.0">
             <columns>
                 <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
                 <TableColumn fx:id="nameColumn" text="Name" prefWidth="200" />
@@ -38,4 +61,5 @@
             </columns>
         </TableView>
     </VBox>
+
 </AnchorPane>

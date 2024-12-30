@@ -4,11 +4,17 @@ package edu.najah.library.controllers;
 import edu.najah.library.models.services.UserDAOImp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
+ import javafx.event.ActionEvent;
+ import javafx.fxml.FXML;
+ import javafx.fxml.FXMLLoader;
+ import javafx.scene.Scene;
+ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+ import javafx.scene.layout.AnchorPane;
+ import javafx.stage.Stage;
 
-import java.util.List;
+ import java.io.IOException;
+ import java.util.List;
 
 public class UserTableController {
 
@@ -77,6 +83,21 @@ public class UserTableController {
             emailDialog.showAndWait().ifPresent(newEmail -> user.setEmail(newEmail));
 
             userTable.refresh();
+        }
+    }
+    public void handleBackButtonAction(ActionEvent event) {
+        try {
+            // Load the dashboard-view.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/dashboard-view.fxml"));
+            AnchorPane dashboardView = loader.load();
+
+            // Set up the new scene with the dashboard view
+            Scene scene = new Scene(dashboardView);
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
