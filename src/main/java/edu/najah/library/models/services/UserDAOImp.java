@@ -14,6 +14,13 @@ import java.util.List;
 public class UserDAOImp implements UserDAO {
 
     @Override
+    public User getUserById(int id) {
+        try (Session session = HibernateUtil.getInstance().getSessionFactory().openSession()) {
+            return session.get(User.class, id);
+        }
+    }
+
+    @Override
     public void save(User user) {
         SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
         Session session = sessionFactory.openSession();
