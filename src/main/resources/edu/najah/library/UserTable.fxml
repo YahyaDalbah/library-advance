@@ -31,12 +31,11 @@
     <VBox AnchorPane.topAnchor="70" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" style="-fx-padding: 10; -fx-spacing: 10;">
         <TableView fx:id="userTable" layoutX="14.0" layoutY="50.0" prefHeight="400.0" prefWidth="600.0">
             <columns>
-                <TableColumn fx:id="idColumn" text="ID" />
-                <TableColumn fx:id="nameColumn" text="Name" />
-                <TableColumn fx:id="emailColumn" text="Email" />
-                <TableColumn fx:id="actionColumn" text="Actions" />
+                <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
+                <TableColumn fx:id="nameColumn" text="Name" prefWidth="200" />
+                <TableColumn fx:id="emailColumn" text="Email" prefWidth="200" />
+                <TableColumn fx:id="actionColumn" text="Action" prefWidth="100" />
             </columns>
         </TableView>
-
     </VBox>
 </AnchorPane>

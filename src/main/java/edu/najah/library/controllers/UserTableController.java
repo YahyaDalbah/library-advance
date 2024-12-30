@@ -27,72 +27,71 @@ public class UserTableController {
     private TableColumn<User, String> actionColumn;
 
     public void initialize() {
-        // Set up the columns for the table
+        // Set up columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
 
-        // Fetch all users from the database
-         List<User> usersList = getAllUsers();
-        for (User user : usersList) {
-            System.out.println("User: " + user.getName() + ", " + user.getEmail());
+        // Fetch data and populate the table
+        List<User> usersList = getAllUsers();
+        if (usersList != null && !usersList.isEmpty()) {
+            ObservableList<User> users = FXCollections.observableArrayList(usersList);
+            userTable.setItems(users);
+        } else {
+            System.out.println("No users found.");
         }
 
-        // Convert List<User> to ObservableList
-        ObservableList<User> users = FXCollections.observableArrayList(usersList);
+        // Set up action column with "Edit" button
+        actionColumn.setCellFactory(column -> new TableCell<>() {
+            private final Button editButton = new Button("Edit");
 
-        // Set the TableView items
-        userTable.setItems(users);
-
-        // Set up the action column to hold "Edit" buttons
-        actionColumn.setCellFactory(column -> {
-            return new TableCell<User, String>() {
-                private final Button editButton = new Button("Edit");
-
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                    } else {
-                        setGraphic(editButton);
-                        editButton.setOnAction(event -> handleEdit(getTableRow().getItem()));
-                    }
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(editButton);
+                    editButton.setOnAction(event -> handleEdit(getTableRow().getItem()));
                 }
-            };
+            }
         });
     }
 
-    // This method handles the Edit button click event.
+
+    // Load user data and populate the table
+    private void loadUserData() {
+        List<User> usersList = getAllUsers();
+        if (usersList != null && !usersList.isEmpty()) {
+            ObservableList<User> users = FXCollections.observableArrayList(usersList);
+            userTable.setItems(users);
+        } else {
+            System.out.println("No users found or failed to fetch users.");
+        }
+    }
+
+    // Handle the Edit button click event
     private void handleEdit(User user) {
         if (user != null) {
-            // Show a simple dialog with fields for editing name and email.
+            // Edit user name
             TextInputDialog nameDialog = new TextInputDialog(user.getName());
             nameDialog.setTitle("Edit Name");
             nameDialog.setHeaderText("Edit User Name");
             nameDialog.setContentText("New Name:");
+            nameDialog.showAndWait().ifPresent(newName -> user.setName(newName));
 
-            nameDialog.showAndWait().ifPresent(newName -> {
-                user.setName(newName);
-                updateUserInDatabase(user); // Update in DB
-            });
-
+            // Edit user email
             TextInputDialog emailDialog = new TextInputDialog(user.getEmail());
             emailDialog.setTitle("Edit Email");
             emailDialog.setHeaderText("Edit User Email");
             emailDialog.setContentText("New Email:");
+            emailDialog.showAndWait().ifPresent(newEmail -> user.setEmail(newEmail));
 
-            emailDialog.showAndWait().ifPresent(newEmail -> {
-                user.setEmail(newEmail);
-                updateUserInDatabase(user); // Update in DB
-            });
-
-            // After updating, refresh the table
+            // Refresh table to reflect updated user data
             userTable.refresh();
         }
     }
 
-    // Fetch all users from the database
     public List<User> getAllUsers() {
         SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
@@ -107,8 +106,4 @@ public class UserTableController {
         }
     }
 
-    // Update the user in the database
-    private void updateUserInDatabase(User user) {
-
-    }
 }

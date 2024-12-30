@@ -43,6 +43,12 @@ public class User {
         // Empty constructor for Hibernate
     }
 
+
+    public User(int id, String email, String name) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+    }
     // Getters and setters for JPA fields
     public int getId() {
         return id;
@@ -102,12 +108,5 @@ public class User {
         this.tokenExpiration = tokenExpiration;
     }
 
-    // JavaFX Property Getters for UI binding
-    public StringProperty nameProperty() {
-        return nameProperty;
-    }
 
-    public StringProperty emailProperty() {
-        return emailProperty;
-    }
 }
