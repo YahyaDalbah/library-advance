@@ -41,11 +41,9 @@
                 </font>
             </Label>
 
-            <!-- Spacer Region to push Add Student Button to the right -->
-            <Region HBox.hgrow="ALWAYS" />
+             <Region HBox.hgrow="ALWAYS" />
 
-            <!-- Add Student Button positioned to the right -->
-            <Button text="Add Student" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 5 10;" />
+             <Button text="Add Student" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 5 10;" />
         </HBox>
 
     </VBox>
