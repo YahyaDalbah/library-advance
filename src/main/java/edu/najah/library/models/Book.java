@@ -32,11 +32,24 @@ public class Book {
     @Column(name = "availability")
     private String availability;
 
+
+
     @Column(name = "imageUrl")
     private String imageUrl;
 
     @Column(name = "rating")
     private String rating;
+
+    @Column(name = "quantity")
+    private int quantity;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     public Book() {}
 
@@ -60,6 +73,11 @@ public class Book {
     public void setImage(byte[] image) {
         this.image = image;
     }
+
+    public void setAvailability(String unavailable) {
+
+    }
+
 
     // Getter methods
     public int getId() {
