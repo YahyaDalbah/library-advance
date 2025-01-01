@@ -36,7 +36,6 @@ public class BookStatusManagementController {
 
     private ObservableList<Book> observableBooksList;
 
-
     @FXML
     private void handelBack(MouseEvent event) {
         loadFullScene(event, "dashboard-view.fxml", "Dashboard");
