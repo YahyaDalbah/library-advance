@@ -12,7 +12,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
-import static edu.najah.library.utils.utilFunctions.switchScene;
+import static edu.najah.library.utils.UtilFunctions.switchScene;
 import static edu.najah.library.utils.EmailService.generateResetToken;
 public class ResetPasswordController {
     @FXML

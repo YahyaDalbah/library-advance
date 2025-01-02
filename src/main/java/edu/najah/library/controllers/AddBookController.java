@@ -16,8 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Optional;
 
 public class AddBookController {
@@ -29,7 +27,7 @@ public class AddBookController {
     @FXML
     private Button closeButton;
     @FXML
-    private ComboBox typeComboBox;
+    private ComboBox<String> typeComboBox;
     @FXML
     private TextField titleField;
     @FXML
@@ -39,20 +37,19 @@ public class AddBookController {
     @FXML
     private TextField coverField;
     @FXML
-    private DatePicker publicationDatePicker;
-    @FXML
     private TextField ratingField;
     @FXML
     private TextField yearField;
+    @FXML
+    private TextField quantityField;
 
     @FXML
     public void initialize() {
-
         ToggleGroup availabilityGroup = new ToggleGroup();
         availableRadio.setToggleGroup(availabilityGroup);
         unavailableRadio.setToggleGroup(availabilityGroup);
 
-        // add books types
+        // Add book types
         typeComboBox.getItems().addAll(
                 "Fiction",
                 "Non-Fiction",
@@ -87,6 +84,7 @@ public class AddBookController {
         stage.setScene(new Scene(root));
         stage.showAndWait();
     }
+
     @FXML
     private void handleAttach() {
         FileChooser fileChooser = new FileChooser();
@@ -109,20 +107,19 @@ public class AddBookController {
     }
 
     @FXML
-    public void onAddButtonClick()  {
+    public void onAddButtonClick() {
         String title = titleField.getText();
         String author = authorField.getText();
         String description = descriptionArea.getText();
         String coverImageUrl = coverField.getText();
         String yearStr = yearField.getText();
-        LocalDate publicationDate = publicationDatePicker.getValue();
-        String type = (String) typeComboBox.getValue();
+        String type = typeComboBox.getValue();
         String availability = availableRadio.isSelected() ? "Available" : "Unavailable";
         String rating = ratingField.getText();
+        String quantityStr = quantityField.getText();
 
-
-        if (title.isEmpty() || author.isEmpty() || description.isEmpty() || coverImageUrl.isEmpty() || yearStr.isEmpty() || type == null ||
-                (!availableRadio.isSelected() && !unavailableRadio.isSelected())) {
+        if (title.isEmpty() || author.isEmpty() || description.isEmpty() || rating.isEmpty() || coverImageUrl.isEmpty() || yearStr.isEmpty() || quantityStr.isEmpty() ||
+                type == null || (!availableRadio.isSelected() && !unavailableRadio.isSelected())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Invalid Input");
@@ -131,37 +128,37 @@ public class AddBookController {
             return;
         }
 
-        Date date = Date.valueOf(publicationDate);
-        int year = Integer.parseInt(yearStr);
-        Book newBook = new Book.Builder()
-                .setTitle(title)
-                .setAuthor(author)
-                .setDescription(description)
-                .setYear(year)
-                .setType(type)
-                .setAvailability(availability)
-                .setImageUrl(coverImageUrl)
-                .setRating(rating)
-                .build();
+        try {
+            int year = Integer.parseInt(yearStr);
+            int quantity = Integer.parseInt(quantityStr);
+            Book newBook = new Book();
+            newBook.setTitle(title);
+            newBook.setAuthor(author);
+            newBook.setDescription(description);
+            newBook.setYear(year);
+            newBook.setType(type);
+            newBook.setAvailability(availability);
+            newBook.setImageUrl(coverImageUrl);
+            newBook.setRating(rating);
+            newBook.setQuantity(quantity);
 
-        BookDAOImp addBookDAO = new BookDAOImp();
-        addBookDAO.insert(newBook);
+            BookDAOImp addBookDAO = new BookDAOImp();
+            addBookDAO.insert(newBook);
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText("Book Added");
-        alert.setContentText("The book has been added successfully.");
-        alert.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Book Added");
+            alert.setContentText("The book has been added successfully.");
+            alert.showAndWait();
 
-        titleField.clear();
-        authorField.clear();
-        descriptionArea.clear();
-        ratingField.clear();
-        coverField.clear();
-        yearField.clear();
-        typeComboBox.setValue(null);
-        availableRadio.setSelected(false);
-        unavailableRadio.setSelected(false);
+            clearFields();
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid Year Format");
+            alert.setContentText("Please enter a valid year.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -173,17 +170,11 @@ public class AddBookController {
 
         confirmationAlert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                titleField.clear();
-                authorField.clear();
-                descriptionArea.clear();
-                coverField.clear();
-                yearField.clear();
-                typeComboBox.setValue(null);
-                availableRadio.setSelected(false);
-                unavailableRadio.setSelected(false);
+                clearFields();
             }
         });
     }
+
     @FXML
     private void handleCloseButtonAction() {
         boolean hasData =
@@ -191,10 +182,9 @@ public class AddBookController {
                         (authorField.getText() != null && !authorField.getText().trim().isEmpty()) ||
                         (descriptionArea.getText() != null && !descriptionArea.getText().trim().isEmpty()) ||
                         (coverField.getText() != null && !coverField.getText().trim().isEmpty()) ||
-                        (yearField.getText() != null) ||
+                        (yearField.getText() != null && !coverField.getText().trim().isEmpty()) ||
                         (typeComboBox.getValue() != null) ||
                         (availableRadio.isSelected() || unavailableRadio.isSelected());
-
 
         if (hasData) {
             Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -211,5 +201,17 @@ public class AddBookController {
             Stage currentStage = (Stage) closeButton.getScene().getWindow();
             currentStage.close();
         }
+    }
+
+    private void clearFields() {
+        titleField.clear();
+        authorField.clear();
+        descriptionArea.clear();
+        ratingField.clear();
+        coverField.clear();
+        yearField.clear();
+        typeComboBox.setValue(null);
+        availableRadio.setSelected(false);
+        unavailableRadio.setSelected(false);
     }
 }

@@ -1,11 +1,15 @@
 package edu.najah.library.models;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -30,13 +34,8 @@ public class User {
     @Column(name = "token_expiration")
     private LocalDateTime tokenExpiration;
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+
 
     public User(){
         //empty constructor for hibernate
@@ -57,10 +56,13 @@ public class User {
         this.name = name;
     }
 
-    public Role getRole(){
-        return role;
+    public String getEmail() {
+        return email;
     }
-    public void setRole(Role role){this.role = role;}
+
+    public void setEmail(String email) {
+        this.email = email;
+     }
     public String getPassword(){
         return password;
     };
@@ -68,6 +70,14 @@ public class User {
         this.password = password;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public String getResetToken() {
         return resetToken;

@@ -9,7 +9,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.Collections;
 import java.util.List;
+
 
 public class UserDAOImp implements UserDAO {
 
@@ -38,12 +40,15 @@ public class UserDAOImp implements UserDAO {
                 .getResultList();
     }
 
+
     @Override
     public List<User> getAllUsers() {
         SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
         Session session = sessionFactory.openSession();
         return session.createQuery("from User", User.class).getResultList();
+
     }
+
 
     @Override
     public User getUserByEmail(String email) {
@@ -61,4 +66,5 @@ public class UserDAOImp implements UserDAO {
         session.update(user);
         tx.commit();
     }
+
 }
