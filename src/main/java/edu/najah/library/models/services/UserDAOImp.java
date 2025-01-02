@@ -67,13 +67,4 @@ public class UserDAOImp implements UserDAO {
         tx.commit();
     }
 
-    @Override
-    public User getUserById(int id) {
-        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-        Transaction tx = session.beginTransaction();
-        User user = session.get(User.class, id);
-        tx.commit();
-        session.close();
-        return user;
-    }
 }
