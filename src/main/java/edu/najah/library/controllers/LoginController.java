@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static edu.najah.library.utils.utilFunctions.switchScene;
+import static edu.najah.library.utils.UtilFunctions.switchScene;
 
 public class LoginController {
     @FXML
