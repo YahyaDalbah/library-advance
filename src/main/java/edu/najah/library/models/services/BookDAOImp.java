@@ -24,6 +24,8 @@ import java.util.List;
 public class BookDAOImp implements BookDAO {
 
 
+
+
     @Override
     public void insert(Book book) {
         SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
@@ -87,6 +89,32 @@ public class BookDAOImp implements BookDAO {
 
         return books;
     }
+    @Override
+    public void updateBook(Book book) {
+        SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
 
+        session.update(book);
+
+        session.getTransaction().commit();
+        session.close();
+    }
+    @Override
+    public List<Book> findBooksByTitle(String title) {
+        SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        String hql = "FROM Book WHERE title LIKE :title";
+        List<Book> books = session.createQuery(hql, Book.class)
+                .setParameter("title", "%" + title + "%")
+                .getResultList();
+
+        session.getTransaction().commit();
+        session.close();
+
+        return books;
+    }
 
 }

@@ -1,11 +1,15 @@
 package edu.najah.library.models;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -19,6 +23,9 @@ public class User {
     @Column
     private String password;
 
+    @Column
+    private String repeat_password;
+
     @ManyToOne
     @JoinColumn(name = "role", referencedColumnName = "role")
     private Role role;
@@ -29,27 +36,23 @@ public class User {
     @Column(name = "token_expiration")
     private LocalDateTime tokenExpiration;
 
-    public String getEmail() {
-        return email;
+    @Transient
+    private final StringProperty nameProperty = new SimpleStringProperty();
+    @Transient
+    private final StringProperty emailProperty = new SimpleStringProperty();
+
+    // Default constructor (Hibernate needs it)
+    public User() {
+        // Empty constructor for Hibernate
     }
 
-    public void setEmail(String email) {
+
+    public User(int id, String email, String name) {
+        this.id = id;
         this.email = email;
-    }
-
-    public User(){
-        //empty constructor for hibernate
-    }
-    public User(String name, String email) {
         this.name = name;
-        this.email = email;
     }
-    public User(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
-
+    // Getters and setters for JPA fields
     public int getId() {
         return id;
     }
@@ -64,18 +67,40 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+        this.nameProperty.set(name);  // Sync JavaFX property with entity
+    }
+    public String getRepeat_password() {
+        return repeat_password;
     }
 
-    public Role getRole(){
-        return role;
+    public void setRepeat_password(String repeat_password) {
+        this.repeat_password = repeat_password;
     }
-    public String getPassword(){
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+        this.emailProperty.set(email);
+    }
+
+    public String getPassword() {
         return password;
-    };
-    public void setPassword(String password){
+    }
+
+    public void setPassword(String password) {
         this.password = password;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public String getResetToken() {
         return resetToken;
@@ -92,5 +117,6 @@ public class User {
     public void setTokenExpiration(LocalDateTime tokenExpiration) {
         this.tokenExpiration = tokenExpiration;
     }
-}
 
+
+}
