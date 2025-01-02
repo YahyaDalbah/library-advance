@@ -1,23 +1,25 @@
 package edu.najah.library.controllers;
 
- import edu.najah.library.models.User;
+import edu.najah.library.models.User;
 import edu.najah.library.models.services.UserDAOImp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
- import javafx.event.ActionEvent;
- import javafx.fxml.FXML;
- import javafx.fxml.FXMLLoader;
- import javafx.scene.Scene;
- import javafx.scene.control.*;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
- import javafx.scene.layout.AnchorPane;
- import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import java.lang.reflect.Field;
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-
- import java.io.IOException;
- import java.util.List;
-
-public class UserTableController {
+public class StudentTableController {
 
     @FXML
     private TableView<User> userTable;
@@ -39,35 +41,61 @@ public class UserTableController {
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-        // Fetch all users from the DAO and update the TableView
+        // Fetch all users from the DAO and filter by role "student"
         List<User> usersList = userDAO.getAllUsers();
 
+        // Filter users to include only those with role "student"
+        List<User> studentUsers = usersList.stream()
+                .filter(user -> "student".equalsIgnoreCase(user.getRole().getRole())) // Check if the role is "student"
+                .collect(Collectors.toList());
+
         // Populate the table if data is available
-        if (usersList != null && !usersList.isEmpty()) {
-            ObservableList<User> users = FXCollections.observableArrayList(usersList);
+        if (studentUsers != null && !studentUsers.isEmpty()) {
+            ObservableList<User> users = FXCollections.observableArrayList(studentUsers);
             userTable.setItems(users);
         } else {
-            System.out.println("No users found or failed to fetch users.");
+            System.out.println("No students found.");
         }
 
-        // Set up the action column to hold "Edit" buttons
+        // Set up the action column to hold "Edit" and "Details" buttons
         actionColumn.setCellFactory(column -> new TableCell<User, String>() {
             private final Button editButton = new Button("Edit");
+            private final Button detailsButton = new Button("Details");
+
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    AnchorPane pane = new AnchorPane();
-                    AnchorPane.setLeftAnchor(editButton, 0.0);
-                    setGraphic(pane);
+                    // Create a container to hold both buttons
+                    HBox buttonBox = new HBox(5);
+                    buttonBox.getChildren().addAll(editButton, detailsButton);
 
+                    setGraphic(buttonBox);
+
+                    // Set actions for both buttons
                     editButton.setOnAction(event -> handleEdit(getTableRow().getItem()));
+                    detailsButton.setOnAction(event -> showStudentDetails(getTableRow().getItem()));
                 }
             }
         });
     }
+
+    private void showStudentDetails(User user) {
+        if (user != null) {
+            // Display an alert with the student details (can be customized as needed)
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Student Details");
+            alert.setHeaderText("Details for: " + user.getName());
+            alert.setContentText("ID: " + user.getId() + "\nEmail: " + user.getEmail());
+            alert.showAndWait();
+        }
+    }
+
+
+
+
 
 
     private void handleEdit(User user) {

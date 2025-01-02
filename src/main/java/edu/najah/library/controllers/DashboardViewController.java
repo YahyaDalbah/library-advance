@@ -1,19 +1,30 @@
 package edu.najah.library.controllers;
 
+import edu.najah.library.utils.Register;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class DashboardViewController {
+public class DashboardViewController implements Initializable {
+    @FXML
+    private Text addLibrarianBtn;
+    @FXML
+    private void handleAddNewLibrarian(MouseEvent event) {
+        loadPopupScene(event, "add-librarian-page.fxml", "Add Librarian");
+    }
 
     @FXML
     private void handleAddNewBook(MouseEvent event) {
@@ -85,5 +96,11 @@ public class DashboardViewController {
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        addLibrarianBtn.setVisible(Register.getInstance().getCurrentUser().getRole().hasPermission("canAddLibrarian"));
+
     }
 }
