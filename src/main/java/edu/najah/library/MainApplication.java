@@ -1,5 +1,6 @@
 package edu.najah.library;
 
+import edu.najah.library.utils.HibernateUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,9 +18,13 @@ public class MainApplication extends Application {
         stage.setTitle("Library7");
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void main(String[] args) {
+
+        boolean status = HibernateUtil.getInstance().isConnected();
+        System.out.println("Database Connected: " + status);
         launch();
     }
 }
