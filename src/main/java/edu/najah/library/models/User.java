@@ -36,10 +36,7 @@ public class User {
     @Column(name = "token_expiration")
     private LocalDateTime tokenExpiration;
 
-    @Transient
-    private final StringProperty nameProperty = new SimpleStringProperty();
-    @Transient
-    private final StringProperty emailProperty = new SimpleStringProperty();
+
 
 
     public User(){
@@ -59,8 +56,7 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-        this.nameProperty.set(name);  // Sync JavaFX property with entity
-    }
+     }
     public String getRepeat_password() {
         return repeat_password;
     }
@@ -75,8 +71,7 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-        this.emailProperty.set(email);
-    }
+     }
     public String getPassword(){
         return password;
     };
@@ -87,6 +82,7 @@ public class User {
     public Role getRole() {
         return role;
     }
+
 
     public void setRole(Role role) {
         this.role = role;

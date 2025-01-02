@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.UserTableController">
+<AnchorPane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.StudentTableController">
 
     <!-- Top Header Section -->
     <VBox alignment="CENTER_LEFT" prefHeight="150.0" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" style="-fx-padding: 10; -fx-spacing: 10;">
@@ -41,9 +41,9 @@
                 </font>
             </Label>
 
-             <Region HBox.hgrow="ALWAYS" />
+            <Region HBox.hgrow="ALWAYS" />
 
-             <Button text="Add Student" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 5 10;" />
+            <Button text="Add Student" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 5 10;" />
         </HBox>
 
     </VBox>
@@ -55,7 +55,9 @@
                 <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
                 <TableColumn fx:id="nameColumn" text="Name" prefWidth="200" />
                 <TableColumn fx:id="emailColumn" text="Email" prefWidth="200" />
-                <TableColumn fx:id="actionColumn" text="Action" prefWidth="100" />
+                <TableColumn fx:id="actionColumn" text="Action" prefWidth="100">
+
+                </TableColumn>
             </columns>
         </TableView>
     </VBox>
