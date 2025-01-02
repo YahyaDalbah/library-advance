@@ -40,16 +40,6 @@ public class Book {
     @Column(name = "rating")
     private String rating;
 
-    @Column(name = "quantity")
-    private int quantity;
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
     public Book() {}
 

@@ -3,6 +3,7 @@ package edu.najah.library.controllers;
 import edu.najah.library.models.User;
 import edu.najah.library.models.interfaces.UserDAO;
 import edu.najah.library.models.services.UserDAOImp;
+import edu.najah.library.utils.Register;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -15,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class ManageProfileController {
+
 
     @FXML
     private TextField Name_manage;
@@ -48,7 +50,13 @@ public class ManageProfileController {
 
     @FXML
     public void initialize() {
-        // Load user data (Example user ID = 1)
+        currentUser = Register.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
+            loadUserData();
+        } else {
+            showAlert("Error", "No user is logged in.", Alert.AlertType.ERROR);
+        }
 
 
         // Create a circular clip
@@ -58,17 +66,20 @@ public class ManageProfileController {
 
 // Make sure the image fits within the clip
         Image_manage.setPreserveRatio(true);
-        Image_manage.setFitWidth(228); // Adjust to match the size of the Circle's diameter
-        Image_manage.setFitHeight(228); // Same as above
+        Image_manage.setFitWidth(228);
+        Image_manage.setFitHeight(228);
     }
 
-    private void loadUserData(int userId) {
-        currentUser = userDAO.getUserById(userId);
+    private void loadUserData() {
         if (currentUser != null) {
             Name_manage.setText(currentUser.getName());
             Email_manage.setText(currentUser.getEmail());
             Password_manage.setText(currentUser.getPassword());
             repeat_password_manage.setText(currentUser.getPassword());
+
+            if (currentUser.getResetToken() != null) {
+                Image_manage.setImage(new Image(currentUser.getResetToken()));
+            }
         }
     }
     @FXML
@@ -82,7 +93,6 @@ public class ManageProfileController {
             currentUser.setName(Name_manage.getText());
             currentUser.setEmail(Email_manage.getText());
             currentUser.setPassword(Password_manage.getText());
-            currentUser.setRepeat_password(repeat_password_manage.getText());
 
             if (profileImageBytes != null) {
                 currentUser.setResetToken(new String(profileImageBytes));
