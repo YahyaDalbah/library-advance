@@ -40,7 +40,9 @@ public class BookDAOImp implements BookDAO {
     public List<Book> getAllBooks() {
         SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
         Session session = sessionFactory.openSession();
-        return session.createQuery("select b from Book b").list();
+        List<Book> books = session.createQuery("from Book").list();
+        return books;
+
     }
 
     @Override
@@ -67,26 +69,17 @@ public class BookDAOImp implements BookDAO {
     public List<Book> searchBooks(String query) {
         List<Book> books = new ArrayList<>();
         SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
-
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-
-
             String hql = "FROM Book b WHERE b.title LIKE :query OR b.author LIKE :query";
             Query<Book> queryObj = session.createQuery(hql, Book.class);
             queryObj.setParameter("query", "%" + query + "%");
-
-
             // Execute the query and get the result list
             books = queryObj.getResultList();
-
-
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
         return books;
     }
     @Override
@@ -94,9 +87,7 @@ public class BookDAOImp implements BookDAO {
         SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-
         session.update(book);
-
         session.getTransaction().commit();
         session.close();
     }

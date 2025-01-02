@@ -40,6 +40,8 @@ public class AddBookController {
     private TextField ratingField;
     @FXML
     private TextField yearField;
+    @FXML
+    private TextField quantityField;
 
     @FXML
     public void initialize() {
@@ -114,9 +116,10 @@ public class AddBookController {
         String type = typeComboBox.getValue();
         String availability = availableRadio.isSelected() ? "Available" : "Unavailable";
         String rating = ratingField.getText();
+        String quantityStr = quantityField.getText();
 
-        if (title.isEmpty() || author.isEmpty() || description.isEmpty() || rating.isEmpty() || coverImageUrl.isEmpty() || yearStr.isEmpty() || type == null ||
-                (!availableRadio.isSelected() && !unavailableRadio.isSelected())) {
+        if (title.isEmpty() || author.isEmpty() || description.isEmpty() || rating.isEmpty() || coverImageUrl.isEmpty() || yearStr.isEmpty() || quantityStr.isEmpty() ||
+                type == null || (!availableRadio.isSelected() && !unavailableRadio.isSelected())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Invalid Input");
@@ -127,6 +130,7 @@ public class AddBookController {
 
         try {
             int year = Integer.parseInt(yearStr);
+            int quantity = Integer.parseInt(quantityStr);
             Book newBook = new Book();
             newBook.setTitle(title);
             newBook.setAuthor(author);
@@ -136,6 +140,7 @@ public class AddBookController {
             newBook.setAvailability(availability);
             newBook.setImageUrl(coverImageUrl);
             newBook.setRating(rating);
+            newBook.setQuantity(quantity);
 
             BookDAOImp addBookDAO = new BookDAOImp();
             addBookDAO.insert(newBook);
@@ -177,7 +182,7 @@ public class AddBookController {
                         (authorField.getText() != null && !authorField.getText().trim().isEmpty()) ||
                         (descriptionArea.getText() != null && !descriptionArea.getText().trim().isEmpty()) ||
                         (coverField.getText() != null && !coverField.getText().trim().isEmpty()) ||
-                        (yearField.getText() != null) ||
+                        (yearField.getText() != null && !coverField.getText().trim().isEmpty()) ||
                         (typeComboBox.getValue() != null) ||
                         (availableRadio.isSelected() || unavailableRadio.isSelected());
 

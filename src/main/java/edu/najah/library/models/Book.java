@@ -32,8 +32,6 @@ public class Book {
     @Column(name = "availability")
     private String availability;
 
-
-
     @Column(name = "imageUrl")
     private String imageUrl;
 
@@ -43,17 +41,13 @@ public class Book {
     @Column(name = "quantity")
     private int quantity;
 
-    public int getQuantity() {
-        return quantity;
-    }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+
+
 
     public Book() {}
 
-    public Book(int id, String title, String author, String description, int year, String type, String availability, String imageUrl, String rating) {
+    public Book(int id, String title, String author, String description, int year, String type, String availability, String imageUrl, String rating, int quantity) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -63,23 +57,13 @@ public class Book {
         this.availability = availability;
         this.imageUrl = imageUrl;
         this.rating = rating;
+        this.quantity = quantity;
     }
 
-    // Getter and Setter for image
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
-
-    // Getter methods
+    //Getter and Setter methods
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -87,7 +71,6 @@ public class Book {
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -95,7 +78,6 @@ public class Book {
     public String getAuthor() {
         return author;
     }
-
     public void setAuthor(String author) {
         this.author = author;
     }
@@ -103,7 +85,6 @@ public class Book {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -111,7 +92,6 @@ public class Book {
     public int getYear() {
         return year;
     }
-
     public void setYear(int year) {
         this.year = year;
     }
@@ -119,7 +99,6 @@ public class Book {
     public String getType() {
         return type;
     }
-
     public void setType(String type) {
         this.type = type;
     }
@@ -127,7 +106,6 @@ public class Book {
     public String getAvailability() {
         return availability;
     }
-
     public void setAvailability(String availability) {
         this.availability = availability;
     }
@@ -135,7 +113,6 @@ public class Book {
     public String getImageUrl() {
         return imageUrl;
     }
-
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
@@ -143,8 +120,22 @@ public class Book {
     public String getRating() {
         return rating;
     }
-
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    // Getter and Setter for image
+    public byte[] getImage() {
+        return image;
+    }
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

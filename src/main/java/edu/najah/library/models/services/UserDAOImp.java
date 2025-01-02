@@ -66,4 +66,5 @@ public class UserDAOImp implements UserDAO {
         session.update(user);
         tx.commit();
     }
+
 }
