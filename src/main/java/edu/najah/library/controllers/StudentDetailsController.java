@@ -30,6 +30,7 @@ public class StudentDetailsController {
     private Label overdueBooks;
     @FXML
     private Button EditProfile;
+
     @FXML
     private void handelBack(MouseEvent event) {
         loadFullScene(event, "dashboard-view.fxml", "Dashboard");

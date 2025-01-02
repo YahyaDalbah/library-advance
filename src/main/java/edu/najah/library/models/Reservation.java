@@ -22,6 +22,8 @@ public class Reservation {
     private LocalDate pickupDate;
     @Column(name = "Return_Date")
     private LocalDate returnDate;
+    @Column(name = "actual_return_date")
+    private LocalDate actualReturnDate;
 
     @ManyToOne
     @JoinColumn(name = "book_id")
@@ -75,6 +77,14 @@ public class Reservation {
         this.returnDate = returnDate;
     }
 
+    public LocalDate getActualReturnDate() {
+        return actualReturnDate;
+    }
+
+    public void setActualReturnDate(LocalDate actualReturnDate) {
+        this.actualReturnDate = actualReturnDate;
+    }
+
     public Book getBook() {
         return book;
     }
@@ -82,4 +92,6 @@ public class Reservation {
     public void setBook(Book book) {
         this.book = book;
     }
+
+
 }

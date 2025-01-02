@@ -41,10 +41,6 @@ public class Book {
     @Column(name = "quantity")
     private int quantity;
 
-
-
-
-
     public Book() {}
 
     public Book(int id, String title, String author, String description, int year, String type, String availability, String imageUrl, String rating, int quantity) {

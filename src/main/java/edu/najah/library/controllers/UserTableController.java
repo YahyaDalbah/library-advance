@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  import javafx.scene.layout.AnchorPane;
  import javafx.stage.Stage;
 
+
  import java.io.IOException;
  import java.util.List;
 
@@ -52,19 +53,22 @@ public class UserTableController {
         // Set up the action column to hold "Edit" buttons
         actionColumn.setCellFactory(column -> new TableCell<User, String>() {
             private final Button editButton = new Button("Edit");
-
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    setGraphic(editButton);
+                    AnchorPane pane = new AnchorPane();
+                    AnchorPane.setLeftAnchor(editButton, 0.0);
+                    setGraphic(pane);
+
                     editButton.setOnAction(event -> handleEdit(getTableRow().getItem()));
                 }
             }
         });
     }
+
 
     private void handleEdit(User user) {
         if (user != null) {

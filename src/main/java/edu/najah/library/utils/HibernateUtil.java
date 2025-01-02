@@ -1,9 +1,6 @@
 package edu.najah.library.utils;
 
-import edu.najah.library.models.Book;
-import edu.najah.library.models.Permission;
-import edu.najah.library.models.Role;
-import edu.najah.library.models.User;
+import edu.najah.library.models.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -24,6 +21,7 @@ public class HibernateUtil {
         configuration.addAnnotatedClass(Book.class);
         configuration.addAnnotatedClass(Role.class);
         configuration.addAnnotatedClass(Permission.class);
+        configuration.addAnnotatedClass(Reservation.class);
 
         configuration.configure();
         serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
