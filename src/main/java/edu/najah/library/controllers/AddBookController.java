@@ -177,7 +177,7 @@ public class AddBookController {
                         (authorField.getText() != null && !authorField.getText().trim().isEmpty()) ||
                         (descriptionArea.getText() != null && !descriptionArea.getText().trim().isEmpty()) ||
                         (coverField.getText() != null && !coverField.getText().trim().isEmpty()) ||
-                        (yearField.getText() != null) ||
+                        (yearField.getText() != null && !coverField.getText().trim().isEmpty()) ||
                         (typeComboBox.getValue() != null) ||
                         (availableRadio.isSelected() || unavailableRadio.isSelected());
 

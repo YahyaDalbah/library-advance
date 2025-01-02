@@ -9,9 +9,9 @@
         <VBox alignment="CENTER" prefHeight="768.0" prefWidth="300.0" spacing="20" style="-fx-padding: 100 0 0 0; -fx-background-color: #f4f4f4; -fx-border-color: #E6E6E6;">
             <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Personal Information" />
             <VBox alignment="CENTER" prefHeight="326.0" prefWidth="358.0" spacing="15" style="-fx-padding: 100 0 120 0; -fx-background-color: #f4f4f4;">
-                <Label fx:id="studentName" style="-fx-font-size: 20px; -fx-text-fill: #666;" text="Hidaya Awwad" />
-                <Label fx:id="studentEmail" style="-fx-font-size: 18px; -fx-text-fill: #888;" text="example@gmail.com" />
-                <Button prefWidth="102.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 5; -fx-padding: 10 20;" text="Edit profile" />
+                <Label fx:id="studentName" style="-fx-font-size: 20px; -fx-text-fill: #666;" text=" " />
+                <Label fx:id="studentEmail" style="-fx-font-size: 18px; -fx-text-fill: #888;" text=" " />
+                <Button fx:id="EditProfile" onMouseClicked="#handleEdit" prefWidth="102.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 5; -fx-padding: 10 20;" text="Edit profile" />
             </VBox>
             <ImageView fitHeight="224.0" fitWidth="277.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@/books-students.png" />
@@ -21,7 +21,7 @@
     <center>
         <VBox prefHeight="728.0" prefWidth="724.0" spacing="30" style="-fx-padding: 30; -fx-background-color: white;">
             <HBox alignment="CENTER_RIGHT">
-                <Label style="-fx-font-size: 13; -fx-underline: true;" text="Back to Dashboard"  onMouseClicked="#handelBack"/>
+                <Label onMouseClicked="#handelBack" style="-fx-font-size: 13; -fx-underline: true;" text="Back to Dashboard" />
             </HBox>
             <HBox alignment="CENTER">
                 <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Student Details" />
@@ -29,15 +29,15 @@
 
             <HBox alignment="CENTER" spacing="70" style="-fx-padding: 30 0 30 0;">
                 <VBox alignment="CENTER" style="-fx-border-color: #ddd; -fx-border-width: 1; -fx-border-radius: 10; -fx-padding: 20;">
-                    <Label fx:id="booksReserved" style="-fx-font-size: 30px; -fx-text-fill: #2196F3;" text="3" />
+                    <Label fx:id="booksReserved" style="-fx-font-size: 30px; -fx-text-fill: #2196F3;" text=" " />
                     <Label style="-fx-font-size: 18px; -fx-text-fill: #666;" text="books reserved" />
                 </VBox>
                 <VBox alignment="CENTER" style="-fx-border-color: #ddd; -fx-border-width: 1; -fx-border-radius: 10; -fx-padding: 20;">
-                    <Label fx:id="booksReturned" style="-fx-font-size: 30px; -fx-text-fill: #4CAF50;" text="3" />
+                    <Label fx:id="booksReturned" style="-fx-font-size: 30px; -fx-text-fill: #4CAF50;" text=" " />
                     <Label style="-fx-font-size: 18px; -fx-text-fill: #666;" text="books returned" />
                 </VBox>
                 <VBox alignment="CENTER" style="-fx-border-color: #ddd; -fx-border-width: 1; -fx-border-radius: 10; -fx-padding: 20;">
-                    <Label fx:id="overdueBooks" style="-fx-font-size: 30px; -fx-text-fill: #F44336;" text="2" />
+                    <Label fx:id="overdueBooks" style="-fx-font-size: 30px; -fx-text-fill: #F44336;" text=" " />
                     <Label style="-fx-font-size: 18px; -fx-text-fill: #666;" text="Overdue books" />
                 </VBox>
             </HBox>
@@ -45,7 +45,7 @@
             <HBox alignment="CENTER" spacing="40">
                 <VBox alignment="CENTER" spacing="10">
                     <Label style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #333;" text="all current reservations" />
-                    <TableView fx:id="currentReservationsTable" prefHeight="300" prefWidth="300" style="-fx-background-color: #f9f9f9; -fx-border-color: #ddd; -fx-border-radius: 5;" >
+                    <TableView fx:id="currentReservationsTable" prefHeight="300" prefWidth="300" style="-fx-background-color: #f9f9f9; -fx-border-color: #ddd; -fx-border-radius: 5;">
                         <columns>
                             <TableColumn text="book" />
                             <TableColumn text="start date" />
