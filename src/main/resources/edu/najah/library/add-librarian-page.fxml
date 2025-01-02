@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.AddLibrarianController">
+   <children>
+      <Text layoutX="31.0" layoutY="64.0" style="-fx-font-size: 35; -fx-fill: #000; -fx-font-weight: bold;" text="Add Librarian" />
+      <Separator layoutY="94.0" prefHeight="0.0" prefWidth="600.0" style="-fx-background-color: #c3c3c3;" />
+      <TextField fx:id="nameField" layoutX="31.0" layoutY="118.0" prefHeight="47.0" prefWidth="290.0" promptText="Name" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
+      <TextField fx:id="emailField" layoutX="344.0" layoutY="118.0" prefHeight="47.0" prefWidth="238.0" promptText="Email" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
+      <TextField fx:id="passwordField" layoutX="31.0" layoutY="188.0" prefHeight="47.0" prefWidth="290.0" promptText="Password" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
+      <Button fx:id="addButton" layoutX="411.0" layoutY="313.0" onAction="#addLibrarian" prefHeight="47.0" prefWidth="155.0" style="-fx-font-size: 20; -fx-background-color: #000; -fx-text-fill: white;" text="Add">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Label fx:id="message" alignment="CENTER" layoutX="411.0" layoutY="282.0" prefHeight="18.0" prefWidth="155.0" />
+   </children>
+</AnchorPane>
