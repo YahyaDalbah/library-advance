@@ -41,18 +41,10 @@ public class User {
     @Transient
     private final StringProperty emailProperty = new SimpleStringProperty();
 
-    // Default constructor (Hibernate needs it)
-    public User() {
-        // Empty constructor for Hibernate
-    }
 
-
-    public User(int id, String email, String name) {
-        this.id = id;
-        this.email = email;
-        this.name = name;
+    public User(){
+        //empty constructor for hibernate
     }
-    // Getters and setters for JPA fields
     public int getId() {
         return id;
     }
@@ -85,12 +77,10 @@ public class User {
         this.email = email;
         this.emailProperty.set(email);
     }
-
-    public String getPassword() {
+    public String getPassword(){
         return password;
-    }
-
-    public void setPassword(String password) {
+    };
+    public void setPassword(String password){
         this.password = password;
     }
 
@@ -117,6 +107,5 @@ public class User {
     public void setTokenExpiration(LocalDateTime tokenExpiration) {
         this.tokenExpiration = tokenExpiration;
     }
-
-
 }
+

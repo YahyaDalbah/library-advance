@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -13,9 +14,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-
-<?import javafx.scene.Cursor?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.DashboardViewController">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" prefHeight="768.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -71,7 +69,7 @@
                            <bottom>
                               <VBox prefHeight="148.0" prefWidth="301.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add new book" onMouseClicked="#handleAddNewBook">
+                                    <Text onMouseClicked="#handleAddNewBook" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new book">
                                        <font>
                                           <Font name="Inter 18pt Regular" size="16.0" />
                                        </font>
@@ -82,7 +80,7 @@
                                           <Insets left="72.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Book status management" onMouseClicked="#handleBookStatusManagement">
+                                    <Text onMouseClicked="#handleBookStatusManagement" strokeType="OUTSIDE" strokeWidth="0.0" text="Book status management">
                                        <font>
                                           <Font name="Inter 18pt Regular" size="16.0" />
                                        </font>
@@ -93,7 +91,7 @@
                                           <Insets left="72.0" top="12.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Book reservation" onMouseClicked="#handleBookReservation">
+                                    <Text onMouseClicked="#handleBookReservation" strokeType="OUTSIDE" strokeWidth="0.0" text="Book reservation">
                                        <font>
                                           <Font name="Inter 18pt Regular" size="16.0" />
                                        </font>
@@ -104,7 +102,7 @@
                                           <Insets left="72.0" top="13.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Book return" onMouseClicked="#handleBookReturn">
+                                    <Text onMouseClicked="#handleBookReturn" strokeType="OUTSIDE" strokeWidth="0.0" text="Book return">
                                        <font>
                                           <Font name="Inter 18pt Regular" size="16.0" />
                                        </font>
@@ -161,7 +159,7 @@
                                           <Insets left="72.0" top="12.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <Text fill="#de2626" strokeType="OUTSIDE" strokeWidth="0.0" text="Log out" onMouseClicked="#handleLogout">
+                                    <Text fill="#de2626" onMouseClicked="#handleLogout" strokeType="OUTSIDE" strokeWidth="0.0" text="Log out">
                                        <font>
                                           <Font name="Inter 18pt Regular" size="18.0" />
                                        </font>
@@ -177,7 +175,7 @@
                                           <Insets left="72.0" top="24.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search for books" underline="true" onMouseClicked="#handleSearchPage">
+                                          <Text onMouseClicked="#handleSearchPage" strokeType="OUTSIDE" strokeWidth="0.0" text="Search for books" underline="true">
                                              <font>
                                                 <Font name="Inter 18pt Regular" size="18.0" />
                                              </font>
@@ -198,6 +196,18 @@
                                  </children>
                               </VBox>
                            </bottom>
+                        </BorderPane>
+                        <BorderPane prefHeight="59.0" prefWidth="302.0">
+                           <center>
+                              <Text fx:id="addLibrarianBtn" onMouseClicked="#handleAddNewLibrarian" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new librarian" underline="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Text>
+                           </center>
                         </BorderPane>
                      </children>
                   </VBox>
