@@ -74,10 +74,6 @@ public class Book {
         this.image = image;
     }
 
-    public void setAvailability(String unavailable) {
-
-    }
-
 
     // Getter methods
     public int getId() {
