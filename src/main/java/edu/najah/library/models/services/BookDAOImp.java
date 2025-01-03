@@ -40,9 +40,12 @@ public class BookDAOImp implements BookDAO {
     public List<Book> getAllBooks() {
         SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
         Session session = sessionFactory.openSession();
-        List<Book> books = session.createQuery("from Book").list();
-        return books;
-
+        try {
+            List<Book> books = session.createQuery("from Book", Book.class).list();
+            return books;
+        } finally {
+            session.close();
+        }
     }
 
     @Override

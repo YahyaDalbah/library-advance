@@ -1,29 +1,124 @@
 package edu.najah.library.controllers;
 
+import edu.najah.library.models.Book;
+import edu.najah.library.models.Reservation;
+import edu.najah.library.models.User;
+import edu.najah.library.models.interfaces.ReservationDAO;
+import edu.najah.library.models.interfaces.UserDAO;
+import edu.najah.library.models.services.BookDAOImp;
+import edu.najah.library.models.interfaces.BookDAO;
+import edu.najah.library.models.services.ReservationDAOImpl;
+import edu.najah.library.models.services.UserDAOImp;
 import edu.najah.library.utils.Register;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class DashboardViewController implements Initializable {
+
     @FXML
     private Text addLibrarianBtn;
+
+    @FXML
+    private Label bookCount;
+
+    @FXML
+    private Text studentCount;
+
+    @FXML
+    private Text reservationCount;
+
+    @FXML
+    private TableView<Reservation> reservationsTable;
+
+    @FXML
+    private TableColumn<Reservation, String> titleColumn;
+
+    @FXML
+    private TableColumn<Reservation, LocalDate> pickupDateColumn;
+
+    private BookDAO bookDAO;
+    private UserDAO userDAO;
+    private ReservationDAO reservationDAO;
+
+    public DashboardViewController () {
+        this.bookDAO = new BookDAOImp();
+        this.userDAO = new UserDAOImp();
+        this.reservationDAO= new ReservationDAOImpl();
+    }
+
+    public void updatesDatabase() {
+        List<Book> books = bookDAO.getAllBooks();
+        int bookCountInt = books.size();
+
+        List<User> users = userDAO.getAllUsers();
+        int userCountInt = users.size();
+
+        bookCount.setText("Total Books: " + bookCountInt);
+        studentCount.setText("Total Students: " + userCountInt);
+
+        // Calculate last month's date range
+        LocalDate now = LocalDate.now();
+        LocalDate firstDayLastMonth = now.minusMonths(1).withDayOfMonth(1);
+        LocalDate lastDayLastMonth = firstDayLastMonth.plusMonths(1).minusDays(1);
+
+        // Get reservations
+        List<Reservation> lastMonthReservations = reservationDAO.getReservationsByDateRange(
+                firstDayLastMonth,
+                lastDayLastMonth
+        );
+
+        // Update the label
+        this.reservationCount.setText("Last Month Reservations: " + lastMonthReservations.size());
+    }
+
+    private void setupReservationsTable() {
+        // Simple cell value factories
+        titleColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getBook() != null ?
+                        cellData.getValue().getBook().getTitle() : ""));
+
+        pickupDateColumn.setCellValueFactory(cellData ->
+                new SimpleObjectProperty<>(cellData.getValue().getPickupDate()));
+
+        // Load whatever reservations exist
+        List<Reservation> reservations = reservationDAO.getLatestReservations(10);
+        reservationsTable.getItems().addAll(reservations);
+    }
+
+
     @FXML
     private void handleAddNewLibrarian(MouseEvent event) {
         loadPopupScene(event, "add-librarian-page.fxml", "Add Librarian");
+    }
+
+    @FXML
+    private void handleManageStudents(MouseEvent event) {
+        loadFullScene(event, "studentTable.fxml", "Manage Students");
+    }
+
+    @FXML
+    private void handleManageProfile(MouseEvent event) {
+        loadPopupScene(event, "manage-profile.fxml", "Manage Profile");
     }
 
     @FXML
@@ -101,6 +196,9 @@ public class DashboardViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         addLibrarianBtn.setVisible(Register.getInstance().getCurrentUser().getRole().hasPermission("canAddLibrarian"));
+        updatesDatabase();
+        setupReservationsTable();
+
 
     }
 }
