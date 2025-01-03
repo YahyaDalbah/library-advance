@@ -6,13 +6,9 @@ import edu.najah.library.models.interfaces.BookDAO;
 import edu.najah.library.models.interfaces.ReservationDAO;
 import edu.najah.library.models.services.BookDAOImp;
 import edu.najah.library.models.services.ReservationDAOImpl;
-import edu.najah.library.utils.HibernateUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -193,9 +189,8 @@ public class ReservationBook {
 
 
         Reservation reservation = new Reservation();
-        reservation.setFirstName(First_Name.getText());
-        reservation.setLastName(Last_Name.getText());
-        reservation.setMembershipId(Membership_ID.getText());
+        reservation.setName(First_Name.getText());
+        reservation.setMembershipId(Integer.parseInt(Membership_ID.getText()));
         reservation.setPickupDate(Pickup_Date.getValue());
         reservation.setReturnDate(Return_Date.getValue());
         reservation.setBook(book);

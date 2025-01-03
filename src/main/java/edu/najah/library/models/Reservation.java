@@ -12,16 +12,25 @@ public class Reservation {
     private int id;
 
 
-    @Column(name = "First_Name")
-    private String firstName;
-    @Column(name = "Last_Name")
-    private String lastName;
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "Membership_ID")
-    private String membershipId;
+    private int membershipId;
     @Column(name = "Pickup_Date")
     private LocalDate pickupDate;
     @Column(name = "Return_Date")
     private LocalDate returnDate;
+
+    @Column(name = "Status")
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus status;
+
+    public enum ReservationStatus {
+        PENDING,
+        OVERDUE,
+        RETURNED,
+    }
 
     @ManyToOne
     @JoinColumn(name = "book_id")
@@ -35,27 +44,19 @@ public class Reservation {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getMembershipId() {
+    public int getMembershipId() {
         return membershipId;
     }
 
-    public void setMembershipId(String membershipId) {
+    public void setMembershipId(int membershipId) {
         this.membershipId = membershipId;
     }
 
@@ -81,5 +82,21 @@ public class Reservation {
 
     public void setBook(Book book) {
         this.book = book;
+    }
+
+    public void setStatus(ReservationStatus status) {
+        this.status = status;
+    }
+
+    public ReservationStatus getStatus() {
+        if (this.status == ReservationStatus.RETURNED) {
+            return ReservationStatus.RETURNED;
+        }
+        if (returnDate != null) {
+            return LocalDate.now().isAfter(returnDate) ?
+                    ReservationStatus.OVERDUE :
+                    ReservationStatus.PENDING;
+        }
+        return ReservationStatus.PENDING;
     }
 }
