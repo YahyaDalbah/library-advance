@@ -4,6 +4,10 @@ import edu.najah.library.models.Reservation;
 import edu.najah.library.models.interfaces.ReservationDAO;
 import edu.najah.library.utils.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import java.util.List;
 
 
 public class ReservationDAOImpl implements ReservationDAO {
@@ -17,45 +21,69 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     @Override
-    public int getBooksReservedByUserId(int userId) {
+    public int getBooksReservedByStudentId(int studentId) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-        Long count = session.createQuery(
-                        "SELECT COUNT(r) FROM Reservation r " +
-                                "WHERE User.id = :membershipId " +
-                                "AND r.actualReturnDate IS NULL",
-                        Long.class)
-                .setParameter("membershipId", userId)
-                .uniqueResult();
-        session.close();
-        return count != null ? count.intValue() : 0;
+        try {
+            String hql = "SELECT COUNT(r) FROM Reservation r WHERE r.membershipId = :studentId AND r.actualReturnDate IS NULL";
+            Long count = (Long) session.createQuery(hql)
+                    .setParameter("studentId", studentId)
+                    .uniqueResult();
+
+            return count != null ? count.intValue() : 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        } finally {
+            session.close();
+        }
     }
-    /*
+
     @Override
-    public int getBooksReturnedByUserId(int userId) {
+    public int getBooksReturnedByStudentId(int studentId) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-        Long count = session.createQuery(
-                        "SELECT COUNT(*) FROM Reservation " +
-                                "WHERE User.id = :membershipId AND actualReturnDate IS NOT NULL",
-                        Long.class)
-                .setParameter("membershipId", userId)
-                .uniqueResult();
-        session.close();
-        return count != null ? count.intValue() : 0;
+        try {
+            String hql = "SELECT COUNT(r) FROM Reservation r WHERE r.membershipId = :studentId AND r.actualReturnDate IS NOT NULL";
+            Long count = (Long) session.createQuery(hql)
+                    .setParameter("studentId", studentId)
+                    .uniqueResult();
+
+            return count != null ? count.intValue() : 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        } finally {
+            session.close();
+        }
     }
+
     @Override
-    public int getOverdueBooksByUserId(int userId) {
+    public int getOverdueBooksByStudentId(int studentId) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-        Long count = session.createQuery(
-                        "SELECT COUNT(*) FROM Reservation " +
-                                "WHERE membershipId = :userId " +
-                                "AND actualReturnDate IS NULL " +
-                                "AND returnDate < CURRENT_DATE",
-                        Long.class)
-                .setParameter("userId", userId)
-                .uniqueResult();
-        session.close();
-        return count != null ? count.intValue() : 0;
+        try {
+            String hql = "SELECT COUNT(r) FROM Reservation r WHERE r.membershipId = :studentId AND r.actualReturnDate IS NULL AND r.returnDate < CURRENT_DATE ";
+            Long count = (Long) session.createQuery(hql)
+                    .setParameter("studentId", studentId)
+                    .uniqueResult();
+
+            return count != null ? count.intValue() : 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        } finally {
+            session.close();
+        }
     }
-*/
+
+@Override
+public List<Reservation> getAllReservations(int studentId) {
+    Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+    // Query to get all reservations, both current and past
+    List<Reservation> reservations = session.createQuery("FROM Reservation r WHERE r.membershipId = :studentId", Reservation.class)
+            .setParameter("studentId", studentId)
+            .getResultList();
+    session.close();
+    return reservations;
+}
+
 
 }

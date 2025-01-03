@@ -17,7 +17,7 @@ public class Reservation {
     @Column(name = "Last_Name")
     private String lastName;
     @Column(name = "Membership_ID")
-    private String membershipId;
+    private int membershipId;
     @Column(name = "Pickup_Date")
     private LocalDate pickupDate;
     @Column(name = "Return_Date")
@@ -53,11 +53,11 @@ public class Reservation {
         this.lastName = lastName;
     }
 
-    public String getMembershipId() {
+    public int getMembershipId() {
         return membershipId;
     }
 
-    public void setMembershipId(String membershipId) {
+    public void setMembershipId(int membershipId) {
         this.membershipId = membershipId;
     }
 

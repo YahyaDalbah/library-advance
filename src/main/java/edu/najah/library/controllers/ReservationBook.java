@@ -171,21 +171,13 @@ public class ReservationBook {
             return;
         }
 
-
-        book.setQuantity(book.getQuantity() - 1);
-
-        // إذا وصلت الكمية إلى صفر، تغيير الحالة إلى غير متوفر
-        if (book.getQuantity() == 0) {
-            book.setAvailability("Unavailable"); // تحديث الحالة إلى "Unavailable" عند انتهاء الكمية
-        }
-
         bookDAO.updateBook(book);
 
-
+        int Membership = Integer.parseInt(Membership_ID.getText());
         Reservation reservation = new Reservation();
         reservation.setFirstName(First_Name.getText());
         reservation.setLastName(Last_Name.getText());
-        reservation.setMembershipId(Membership_ID.getText());
+        reservation.setMembershipId(Membership);
         reservation.setPickupDate(Pickup_Date.getValue());
         reservation.setReturnDate(Return_Date.getValue());
         reservation.setBook(book);

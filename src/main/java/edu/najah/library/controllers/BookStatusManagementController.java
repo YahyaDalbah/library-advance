@@ -26,8 +26,6 @@ import javafx.stage.StageStyle;
 
 public class BookStatusManagementController {
     @FXML
-    private Button addNewBook;
-    @FXML
     private TilePane booksContainer;
     @FXML
     private TextField searchById;
@@ -52,19 +50,26 @@ public class BookStatusManagementController {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void handelAddBookButton(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/add-book.fxml"));
+            Parent addBookRoot = loader.load();
+            AddBookController  controller = loader.getController();
+            Stage popupStage = new Stage();
+            popupStage.setTitle("Add Book");
+            popupStage.setScene(new Scene(addBookRoot));
+            popupStage.initModality(Modality.WINDOW_MODAL);
+            popupStage.initStyle(StageStyle.UTILITY);
+            popupStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void initialize() {
         searchById.setOnKeyReleased(event -> searchBook());
-        addNewBook.setOnAction(event -> {
-            try {
-                AddBookController addBookController = new AddBookController();
-                addBookController.openAddBookModal();
-                updateBooksList();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
         updateBooksList();
     }
     private void searchBook() {
