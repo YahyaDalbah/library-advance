@@ -109,7 +109,7 @@ public class BookStatusManagementController {
     private void displayBook(Book book) {
         VBox bookCard = new VBox();
         bookCard.setSpacing(8);
-        bookCard.setStyle("-fx-background-color: #fff; -fx-padding: 10; -fx-border-color: #ccc; -fx-border-radius: 5;");
+        bookCard.setStyle("-fx-background-color: #fff; -fx-padding: 9; -fx-border-color: #ccc; -fx-border-radius: 5;");
 
         ImageView imageView = new ImageView();
         String imageName = book.getImageUrl();
