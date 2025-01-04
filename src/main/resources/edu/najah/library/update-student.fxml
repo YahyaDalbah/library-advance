@@ -12,16 +12,16 @@
     <VBox layoutX="20.0" layoutY="100.0" spacing="40">
         <HBox spacing="30">
             <Text layoutX="20.0" layoutY="43.0" style="-fx-font-size: 20; -fx-fill: #000;" text="Name" />
-            <TextField fx:id="nameField" prefHeight="40.0" prefWidth="315.0" />
+            <TextField fx:id="nameField" prefHeight="40.0" prefWidth="315.0" style="-fx-font-size: 15;" />
         </HBox>
         <HBox spacing="35">
             <Text layoutX="20.0" layoutY="43.0" style="-fx-font-size: 20; -fx-fill: #000;" text="Email" />
-            <TextField fx:id="emailField" prefHeight="40.0" prefWidth="315.0" />
+            <TextField fx:id="emailField" prefHeight="40.0" prefWidth="315.0" style="-fx-font-size: 15;" />
         </HBox>
     </VBox>
     <HBox layoutX="195.0" layoutY="255.0" prefHeight="31.0" spacing="20">
-        <Button fx:id="cancelButton" prefHeight="47.0" prefWidth="100.0" style="-fx-font-size: 20; -fx-background-color: transparent; -fx-text-fill: #636363;" text="Cancel" />
-        <Button fx:id="updateButton" prefHeight="47.0" prefWidth="100.0" style="-fx-font-size: 20; -fx-background-color: #000; -fx-text-fill: white;" text="update" />
+        <Button fx:id="cancelButton" prefHeight="47.0" prefWidth="100.0" style="-fx-font-size: 20; -fx-background-color: transparent; -fx-text-fill: #636363;" text="Cancel" onAction="#handleCancelButtonAction" />
+        <Button fx:id="updateButton" prefHeight="47.0" prefWidth="100.0" style="-fx-font-size: 20; -fx-background-color: #000; -fx-text-fill: white;" text="update" onAction="#handleUpdateButtonAction" />
     </HBox>
 
 </AnchorPane>
