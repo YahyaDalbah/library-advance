@@ -16,7 +16,9 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 public class AllBooksPageController {
@@ -35,24 +37,31 @@ public class AllBooksPageController {
                 bookVBox.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-border-color: white; " +
                         "-fx-border-width: 1px; -fx-border-radius: 5px;");
 
-                // Extract book details
+                // book details
                 int bookId = book.getId();
                 String title = book.getTitle();
                 String author = book.getAuthor();
-                byte[] imageBytes = book.getImage();
+                 String imageName = book.getImageUrl();
                 double rating = Double.parseDouble(book.getRating());
                 String description = book.getDescription();
                 String type = book.getType();
                 int year = book.getYear();
 
-                if (imageBytes != null) {
-                    Image image = new Image(new ByteArrayInputStream(imageBytes));
-                    ImageView imageView = new ImageView(image);
+                ImageView imageView = new ImageView();
+                String imagePath = "/images/" + imageName;
+
+                // Try to load the image from the resources
+                URL resource = getClass().getResource(imagePath);
+                if (resource != null) {
+                    // Image found, set it
+                    imageView.setImage(new Image(resource.toExternalForm()));
                     imageView.setFitHeight(200);
                     imageView.setPreserveRatio(true);
                     bookVBox.getChildren().add(imageView);
                 } else {
-                    Label imageErrorLabel = new Label("Image not found");
+                    // Image not found, show error label
+                     Label imageErrorLabel = new Label("Image not found");
+                    imageErrorLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;"); // Style the error message
                     bookVBox.getChildren().add(imageErrorLabel);
                 }
 
@@ -67,7 +76,7 @@ public class AllBooksPageController {
                 // Add click event handler
                 bookVBox.setOnMouseClicked(event -> {
                     try {
-                        navigateToBookDetails(event, bookId, title, author, imageBytes, rating, description, type, year);
+                        navigateToBookDetails(event, bookId, title, author, imageName, rating, description, type, year);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -82,13 +91,14 @@ public class AllBooksPageController {
         }
     }
 
+
     @FXML
     private void navigateToSearch(MouseEvent event) {
         handleSearchButtonClick(event, "searchPage.fxml");
     }
 
     @FXML
-    public void navigateToBookDetails(MouseEvent event, int bookId, String title, String author, byte[] imageBytes, double rating, String description, String type, int year) throws IOException {
+    public void navigateToBookDetails(MouseEvent event, int bookId, String title, String author, String imageUrl, double rating, String description, String type, int year) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/BookDetailsPage.fxml"));
         Parent bookDetailsPage = loader.load();
 
@@ -96,13 +106,14 @@ public class AllBooksPageController {
         BookDetailsPageController controller = loader.getController();
 
         // Pass the book details to the controller
-        controller.setBookDetails(bookId, title, author, imageBytes, rating, description, type, year);
+        controller.setBookDetails(bookId, title, author, imageUrl, rating, description, type, year);
 
         // Navigate to the Book Details Page
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(bookDetailsPage));
         stage.show();
     }
+
 
     @FXML
     private void navigateToLogin(MouseEvent event) {

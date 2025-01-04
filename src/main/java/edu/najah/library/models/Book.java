@@ -13,10 +13,6 @@ public class Book {
     @Column(name = "title")
     private String title;
 
-    @Lob
-    @Column(name = "image")
-    private byte[] image;
-
     @Column(name = "author")
     private String author;
 
@@ -37,6 +33,8 @@ public class Book {
 
     @Column(name = "rating")
     private String rating;
+
+
 
 
     public Book() {}
@@ -117,11 +115,4 @@ public class Book {
         this.rating = rating;
     }
 
-    // Getter and Setter for image
-    public byte[] getImage() {
-        return image;
-    }
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
 }
