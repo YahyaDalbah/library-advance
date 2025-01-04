@@ -38,6 +38,7 @@ public class BookStatusManagementController {
     private void handelBack(MouseEvent event) {
         loadFullScene(event, "dashboard-view.fxml", "Dashboard");
     }
+
     private void loadFullScene(MouseEvent event, String fxmlFile, String title) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/" + fxmlFile));
@@ -62,6 +63,7 @@ public class BookStatusManagementController {
             popupStage.initModality(Modality.WINDOW_MODAL);
             popupStage.initStyle(StageStyle.UTILITY);
             popupStage.setResizable(false);
+            popupStage.setOnHidden(e -> updateBooksList());
             popupStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
