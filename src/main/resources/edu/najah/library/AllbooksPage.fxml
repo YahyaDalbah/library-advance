@@ -57,16 +57,17 @@
 
             </TilePane>
         </ScrollPane>
+      <HBox alignment="CENTER_LEFT" prefHeight="60.0" style="-fx-padding: 10; -fx-background-color: white; -fx-spacing: 10;">
+         <children>
+            <Region prefHeight="40.0" prefWidth="404.0" style="-fx-background-color: white;" />
+            <Button fx:id="back" onMouseClicked="#back" prefHeight="40.0" prefWidth="100.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #007BFF; -fx-border-color: #007BFF; -fx-font-size: 16px; -fx-text-fill: black;" text="Back" />
+            <Button fx:id="currentPageButton" prefHeight="40.0" prefWidth="45.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #007BFF; -fx-border-color: #007BFF; -fx-font-size: 16px; -fx-text-fill: black;" text="1" />
+            <Button fx:id="next" onMouseClicked="#next" prefHeight="40.0" prefWidth="100.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #007BFF; -fx-border-color: #007BFF; -fx-font-size: 16px; -fx-text-fill: black;" text="Next" />
+            <Region prefHeight="40.0" prefWidth="504.0" style="-fx-background-color: white;" />
+         </children>
+      </HBox>
 
     </VBox>
-   <HBox alignment="CENTER_LEFT" layoutX="463.0" layoutY="205.0" prefHeight="60.0" style="-fx-padding: 10; -fx-background-color: white; -fx-spacing: 10;">
-      <children>
-         <Button fx:id="back" onMouseClicked="#back" prefHeight="40.0" prefWidth="100.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #007BFF; -fx-border-color: #007BFF; -fx-font-size: 16px; -fx-text-fill: black;" text="Back" />
-         <Button fx:id="currentPageButton" prefHeight="40.0" prefWidth="45.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #007BFF; -fx-border-color: #007BFF; -fx-font-size: 16px; -fx-text-fill: black;" text="1" />
-         <Button fx:id="next" onMouseClicked="#next" prefHeight="40.0" prefWidth="100.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #007BFF; -fx-border-color: #007BFF; -fx-font-size: 16px; -fx-text-fill: black;" text="Next" />
-         <Region prefHeight="40.0" prefWidth="0.0" style="-fx-background-color: white;" HBox.hgrow="ALWAYS" />
-      </children>
-   </HBox>
 
 
 
