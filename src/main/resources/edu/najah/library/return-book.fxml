@@ -66,17 +66,17 @@
                   </Text>
                </left>
             </BorderPane>
-            <TextField prefHeight="56.0" prefWidth="880.0" promptText="Search by userID">
+            <TextField fx:id="searchField" prefHeight="56.0" prefWidth="880.0" promptText="Search by userID">
                <VBox.margin>
                   <Insets left="72.0" right="72.0" top="24.0" />
                </VBox.margin>
             </TextField>
-            <TableView prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="reservationTable" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn prefWidth="391.6831817626953" text="Book Name" />
-                <TableColumn prefWidth="248.81683349609375" text="Reserved at" />
-                  <TableColumn prefWidth="126.734375" text="Status" />
-                  <TableColumn  prefWidth="115.76568603515625" />
+                <TableColumn fx:id="bookTitleColumn" prefWidth="391.6831817626953" text="Book Title" />
+                <TableColumn fx:id="pickupDateColumn" prefWidth="248.81683349609375" text="Pickup date" />
+                  <TableColumn fx:id="statusColumn" prefWidth="126.734375" text="Status" />
+                  <TableColumn fx:id="controlColumn" prefWidth="115.76568603515625" text="Control"/>
               </columns>
                <VBox.margin>
                   <Insets left="72.0" right="72.0" top="72.0" />
