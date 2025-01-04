@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 public class SearchPageController {
@@ -103,9 +104,6 @@ public class SearchPageController {
             return;
         }
 
-        System.out.println("Search query: " + query);  // Debug statement for query
-        System.out.println("Search by: " + searchBy);  // Debug statement for search filter
-        System.out.println("Selected type: " + selectedType);  // Debug statement for type
 
         List<Book> books = null;
 
@@ -128,14 +126,13 @@ public class SearchPageController {
     }
 
     private void displaySearchResults(List<Book> books) {
-        // Clear any previous search results
-        searchResultsVBox.getChildren().clear();
+         searchResultsVBox.getChildren().clear();
 
         // Check if no books are found
         if (books == null || books.isEmpty()) {
             errorLabel.setText("No books found matching your search.");
-            errorLabel.setStyle("-fx-text-fill: red;");  // Optional: Set the error label color to red
-            System.out.println("No books found for the query.");  // Debug statement
+            errorLabel.setStyle("-fx-text-fill: red;");
+            System.out.println("No books found for the query.");
             return;
         }
 
@@ -151,32 +148,6 @@ public class SearchPageController {
         bookEntry.setSpacing(10);
         bookEntry.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 10; -fx-padding: 10; -fx-background-color: #F5F5F5;");
         bookEntry.setMaxWidth(780.0);
-
-        // ImageView for the book's image
-        ImageView imageView = new ImageView();
-        imageView.setFitHeight(79.0);
-        imageView.setFitWidth(59.0);
-        imageView.setPreserveRatio(true);
-
-        // Retrieve the image URL from the book object
-        String imageUrl = book.getImageUrl();
-
-        if (imageUrl != null && !imageUrl.isEmpty()) {
-            try {
-                File imageFile = new File(imageUrl);
-                if (imageFile.exists()) {
-                    Image image = new Image(imageFile.toURI().toString());
-                    imageView.setImage(image); // Set the valid image
-                } else {
-                    System.out.println("Image file does not exist: " + imageUrl);
-                }
-            } catch (Exception e) {
-                System.out.println("Error loading image for book: " + book.getTitle());
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("No image URL available for book: " + book.getTitle());
-        }
 
         // VBox for book details
         VBox bookDetails = new VBox();
@@ -201,6 +172,25 @@ public class SearchPageController {
         authorRatingHBox.getChildren().addAll(authorText, ratingText);
         bookDetails.getChildren().add(authorRatingHBox);
 
+        // ImageView for the book's image
+        ImageView imageView = new ImageView();
+        String imagePath = "/images/" + book.getImageUrl();  // Adjust the path relative to resources
+
+        // Try to load the image from the resources
+        URL resource = getClass().getResource(imagePath);
+        if (resource != null) {
+            // Image found, set it
+            imageView.setImage(new Image(resource.toExternalForm()));
+            imageView.setFitHeight(79.0);
+            imageView.setFitWidth(59.0);
+            imageView.setPreserveRatio(true);
+        } else {
+            // Image not found, show error label
+             Label imageErrorLabel = new Label("Image not found");
+            imageErrorLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;"); // Style the error message
+            bookDetails.getChildren().add(imageErrorLabel);
+        }
+
         // Add ImageView and details VBox to the main HBox
         bookEntry.getChildren().addAll(imageView, bookDetails);
 
@@ -212,7 +202,7 @@ public class SearchPageController {
                         book.getId(),
                         book.getTitle(),
                         book.getAuthor(),
-                        book.getImage(),
+                        book.getImageUrl(),
                         book.getRating(),
                         book.getDescription(),
                         book.getType(),
@@ -228,7 +218,8 @@ public class SearchPageController {
     }
 
 
-    private void navigateToBookDetails(MouseEvent event, int id, String title, String author, byte[] image, String rating, String description, String type, int year) throws IOException {
+
+    private void navigateToBookDetails(MouseEvent event, int id, String title, String author,String imageUrl, String rating, String description, String type, int year) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/BookDetailsPage.fxml"));
         Parent bookDetailsPage = loader.load();
 
@@ -236,7 +227,7 @@ public class SearchPageController {
         BookDetailsPageController controller = loader.getController();
 
         // Pass the book details to the controller
-        controller.setBookDetails( id, title, author, image, Double.parseDouble(rating), description, type, year);
+        controller.setBookDetails( id, title, author, imageUrl, Double.parseDouble(rating), description, type, year);
 
         // Navigate to the Book Details Page
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

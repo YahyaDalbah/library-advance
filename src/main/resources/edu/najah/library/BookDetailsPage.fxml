@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="625.0" prefWidth="856.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.BookDetailsPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.BookDetailsPageController">
     <!-- Top Header Section with Title on the left and Icon on the right -->
     <HBox alignment="CENTER_LEFT" prefHeight="60.0" style="-fx-padding: 10; -fx-background-color: white;" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
         <Label style="-fx-background-color: white;" text="LIBRARY7">
@@ -16,7 +16,7 @@
 
         <Region style="-fx-background-color: white;" HBox.hgrow="ALWAYS" /> <!-- Flexible space -->
 
-        <Button style="-fx-background-color: white; -fx-border: none;">
+        <Button style="-fx-background-color: white; -fx-border: none;" onMouseClicked="#navigateToLogin">
             <graphic>
                 <ImageView fitHeight="40.0" fitWidth="40.0" preserveRatio="true">
                     <Image url="@../../../images/user.png" />
@@ -29,7 +29,7 @@
     <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0" prefHeight="514.0" prefWidth="850.0" spacing="30.0" style="-fx-background-color: #f4f4f4; -fx-padding: 20; -fx-border-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 0);">
 
         <!-- Left Panel (Book Image) -->
-        <VBox alignment="CENTER" maxWidth="300.0" minWidth="200.0" prefWidth="300.0" spacing="20.0" VBox.vgrow="ALWAYS">
+        <VBox alignment="CENTER" maxWidth="400.0" minWidth="300.0" prefWidth="300.0" spacing="20.0" VBox.vgrow="ALWAYS">
             <ImageView fx:id="bookImage" fitHeight="300.0" fitWidth="250.0" preserveRatio="true" style="-fx-border-radius: 10; -fx-background-color: #e0e0e0;" />
         </VBox>
 
