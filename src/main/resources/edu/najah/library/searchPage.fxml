@@ -37,8 +37,17 @@
                     </ImageView>
                 </graphic>
             </Button>
-
         </HBox>
+        <!-- Search By Section -->
+        <HBox alignment="CENTER" spacing="10">
+            <Label style="-fx-font-size: 14px;" text="Search by" />
+            <Button fx:id="anyButton"   text="Any" />
+            <Button fx:id="titleButton"   text="Title" />
+            <Button fx:id="authorButton"  text="Author" />
+            <ComboBox fx:id="typeComboBox" promptText="Type"  />
+        </HBox>
+
+
         <!-- Error Label Section -->
         <Label fx:id="errorLabel" text="" style="-fx-text-fill: red; -fx-font-size: 14px;" />
 

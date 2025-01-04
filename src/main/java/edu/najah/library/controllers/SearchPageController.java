@@ -1,6 +1,5 @@
 package edu.najah.library.controllers;
 
-
 import edu.najah.library.models.Book;
 import edu.najah.library.models.services.BookDAOImp;
 import javafx.event.ActionEvent;
@@ -9,48 +8,119 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-
 public class SearchPageController {
+
     @FXML
     private TextField searchField;
-
 
     @FXML
     private VBox searchResultsVBox;
 
-
     @FXML
     private Label errorLabel;
 
+    @FXML
+    private ComboBox<String> typeComboBox;
+
+    @FXML
+    private Button anyButton;
+
+    @FXML
+    private Button titleButton;
+
+    @FXML
+    private Button authorButton;
+
+    private BookDAOImp bookDAO;
+
+    private String searchBy = "Any"; // Default search category is "Any"
+
+    @FXML
+    public void initialize() {
+        bookDAO = new BookDAOImp();
+
+        // Initialize ComboBox
+        typeComboBox.getItems().addAll("Fiction", "Non-Fiction", "Science", "History");
+        typeComboBox.setValue("Any");
+
+        // Set default filter to "Any"
+        anyButton.setStyle("-fx-background-color: #A9A9A9;");
+
+        // Set button actions
+        anyButton.setOnAction(event -> setSearchFilter("Any"));
+        titleButton.setOnAction(event -> setSearchFilter("Title"));
+        authorButton.setOnAction(event -> setSearchFilter("Author"));
+    }
+
+    private void setSearchFilter(String filter) {
+        // Reset button styles
+        anyButton.setStyle("-fx-background-color: white;");
+        titleButton.setStyle("-fx-background-color: white;");
+        authorButton.setStyle("-fx-background-color: white;");
+
+        // Set the chosen search filter
+        searchBy = filter;
+
+        // Highlight the selected button
+        switch (filter) {
+            case "Any":
+                anyButton.setStyle("-fx-background-color: #A9A9A9;");
+                break;
+            case "Title":
+                titleButton.setStyle("-fx-background-color: #A9A9A9;");
+                break;
+            case "Author":
+                authorButton.setStyle("-fx-background-color: #A9A9A9;");
+                break;
+        }
+    }
 
     @FXML
     public void handleSearch(ActionEvent event) {
         String query = searchField.getText();  // Get the search query from the TextField
+        String selectedType = typeComboBox.getValue();  // Get selected type from ComboBox
 
         // Clear previous error messages
         errorLabel.setText("");
 
-        if (query.isEmpty()) {
+        if (query.isEmpty() && searchBy.equals("Any")) {
             errorLabel.setText("Please enter a search term.");
             return;
         }
 
         System.out.println("Search query: " + query);  // Debug statement for query
+        System.out.println("Search by: " + searchBy);  // Debug statement for search filter
+        System.out.println("Selected type: " + selectedType);  // Debug statement for type
 
-        BookDAOImp bookDAO = new BookDAOImp();
-        List<Book> books = bookDAO.searchBooks(query);
+        List<Book> books = null;
+
+        // Perform the search based on selected filter
+        switch (searchBy) {
+            case "Title":
+                books = bookDAO.searchBooks(query);
+                break;
+            case "Author":
+                books = bookDAO.searchBooks(query);
+                break;
+            case "Any":
+                books = bookDAO.searchBooks(query);
+                break;
+        }
 
         System.out.println("Number of books found: " + (books != null ? books.size() : 0));  // Debug statement for results
 
@@ -74,10 +144,6 @@ public class SearchPageController {
             createBookEntry(book);
         }
     }
-
-
-
-
 
     private void createBookEntry(Book book) {
         // HBox for the book entry
@@ -161,24 +227,22 @@ public class SearchPageController {
         searchResultsVBox.getChildren().add(bookEntry);
     }
 
+
     private void navigateToBookDetails(MouseEvent event, int id, String title, String author, byte[] image, String rating, String description, String type, int year) throws IOException {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/BookDetailsPage.fxml"));
-            Parent bookDetailsPage = loader.load();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/BookDetailsPage.fxml"));
+        Parent bookDetailsPage = loader.load();
 
-            // Get the controller of the Book Details Page
-            BookDetailsPageController controller = loader.getController();
+        // Get the controller of the Book Details Page
+        BookDetailsPageController controller = loader.getController();
 
-            // Pass the book details to the controller
-            controller.setBookDetails( id, title, author, image, Double.parseDouble(rating), description, type, year);
+        // Pass the book details to the controller
+        controller.setBookDetails( id, title, author, image, Double.parseDouble(rating), description, type, year);
 
-            // Navigate to the Book Details Page
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(bookDetailsPage));
-            stage.show();
-        }
-
-
-
+        // Navigate to the Book Details Page
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(bookDetailsPage));
+        stage.show();
+    }
 
     @FXML
     private void navigateToLogin(MouseEvent event) {
@@ -202,6 +266,7 @@ public class SearchPageController {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void handleBackButtonAction(ActionEvent event) {
         try {

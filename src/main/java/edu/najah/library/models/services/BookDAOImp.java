@@ -24,8 +24,6 @@ import java.util.List;
 public class BookDAOImp implements BookDAO {
 
 
-
-
     @Override
     public void insert(Book book) {
         SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();

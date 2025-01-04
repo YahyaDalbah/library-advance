@@ -1,7 +1,5 @@
 package edu.najah.library.models;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
