@@ -21,8 +21,6 @@ public class User {
     @Column
     private String password;
 
-    @Column
-    private String repeat_password;
 
     @ManyToOne
     @JoinColumn(name = "role", referencedColumnName = "role")
@@ -54,13 +52,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-     }
-    public String getRepeat_password() {
-        return repeat_password;
-    }
-
-    public void setRepeat_password(String repeat_password) {
-        this.repeat_password = repeat_password;
     }
 
     public String getEmail() {

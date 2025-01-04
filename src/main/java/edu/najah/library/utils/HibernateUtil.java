@@ -1,9 +1,7 @@
 package edu.najah.library.utils;
 
-import edu.najah.library.models.Book;
-import edu.najah.library.models.Permission;
-import edu.najah.library.models.Role;
-import edu.najah.library.models.User;
+import edu.najah.library.models.*;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -24,12 +22,23 @@ public class HibernateUtil {
         configuration.addAnnotatedClass(Book.class);
         configuration.addAnnotatedClass(Role.class);
         configuration.addAnnotatedClass(Permission.class);
+        configuration.addAnnotatedClass(Reservation.class);
+
+
 
         configuration.configure();
         serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
     }
 
+    public static boolean isConnected() {
+        try (Session session = sessionFactory.openSession()) {
+            return session.isConnected();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     public static HibernateUtil getInstance(){
         if(instance == null){
             instance  = new HibernateUtil();

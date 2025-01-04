@@ -6,14 +6,11 @@ import edu.najah.library.models.interfaces.BookDAO;
 import edu.najah.library.models.interfaces.ReservationDAO;
 import edu.najah.library.models.services.BookDAOImp;
 import edu.najah.library.models.services.ReservationDAOImpl;
-import edu.najah.library.utils.HibernateUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.hibernate.SessionFactory;
@@ -79,17 +76,22 @@ public class ReservationBook {
         bookDAO = new BookDAOImp();
         reservationDAO = new ReservationDAOImpl();
 
+        Image defaultImage = new Image(getClass().getResource("/images/71speD+PGFL.jpg").toExternalForm());
+
+        Image_Book.setImage(defaultImage);
+
+
         Search_Box.textProperty().addListener((observable, oldValue, newValue) -> searchBooks(newValue));
 
         Search_Box.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
-                List_Search.setVisible(false); // إخفاء القائمة عند فقدان التركيز
+                List_Search.setVisible(false); // Hide menu when focus is lost
             }
         });
 
         List_Search.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
-                List_Search.setVisible(false); // إخفاء القائمة عند فقدان التركيز
+                List_Search.setVisible(false); // Hide menu when focus is lost
             }
         });
 
@@ -115,20 +117,20 @@ public class ReservationBook {
             }
         });
 
-        List_Search.setOnMouseClicked(event -> handleBookSelection()); // ربط القائمة بدالة النقر
+        List_Search.setOnMouseClicked(event -> handleBookSelection()); // Bind the list to the click function
 
     }
     private void searchBooks(String query) {
         List<Book> books = bookDAO.findBooksByTitle(query);
 
-        // تحديد فقط اظهار خمس سكتب ك حد اقصى
+        // Specify that only five books are displayed at most.
         List_Search.getItems().clear();
         int limit = Math.min(books.size(), 8);
         for (int i = 0; i < limit; i++) {
             List_Search.getItems().add(books.get(i).getTitle());
         }
 
-        // الlist view بتكون مرئية بس يكون في نتائج
+        // The list view is visible only when there are results.
         List_Search.setVisible(!List_Search.getItems().isEmpty());
     }
     private void fetchBookDetails(String title) {
@@ -139,16 +141,25 @@ public class ReservationBook {
             Author.setText(book.getAuthor());
             Availability.setText(book.getAvailability());
         }
+        if (book.getImageUrl() != null && !book.getImageUrl().isEmpty()) {
+            // Load image from database
+            Image bookImage = new Image(getClass().getResource("/images/" + book.getImageUrl()).toExternalForm(), true);
+            Image_Book.setImage(bookImage);
+        } else {
+            // Set default image if there is no image attached to the book
+            Image defaultImage = new Image(getClass().getResource("/images/71speD+PGFL.jpg").toExternalForm());
+            Image_Book.setImage(defaultImage);
+        }
     }
 
 
     @FXML
     private void handleBookSelection() {
-        String selectedBook = List_Search.getSelectionModel().getSelectedItem(); // الحصول على العنصر المحدد
+        String selectedBook = List_Search.getSelectionModel().getSelectedItem(); // Get the specified item
         if (selectedBook != null) {
-            Search_Box.setText(selectedBook); // وضع النص في مربع البحث
-            List_Search.setVisible(false); // إخفاء القائمة
-            List_Search.getSelectionModel().clearSelection(); // مسح التحديد
+            Search_Box.setText(selectedBook);
+            List_Search.setVisible(false);
+            List_Search.getSelectionModel().clearSelection();
         }
     }
 
@@ -172,20 +183,14 @@ public class ReservationBook {
         }
 
 
-        book.setQuantity(book.getQuantity() - 1);
 
-        // إذا وصلت الكمية إلى صفر، تغيير الحالة إلى غير متوفر
-        if (book.getQuantity() == 0) {
-            book.setAvailability("Unavailable"); // تحديث الحالة إلى "Unavailable" عند انتهاء الكمية
-        }
 
         bookDAO.updateBook(book);
 
 
         Reservation reservation = new Reservation();
-        reservation.setFirstName(First_Name.getText());
-        reservation.setLastName(Last_Name.getText());
-        reservation.setMembershipId(Membership_ID.getText());
+        reservation.setName(First_Name.getText());
+        reservation.setMembershipId(Integer.parseInt(Membership_ID.getText()));
         reservation.setPickupDate(Pickup_Date.getValue());
         reservation.setReturnDate(Return_Date.getValue());
         reservation.setBook(book);
@@ -194,7 +199,7 @@ public class ReservationBook {
 
         showAlert("Success", "Reservation saved successfully!", Alert.AlertType.INFORMATION);
 
-        // إعادة تعيين الحقول
+        // Reset fields
         First_Name.clear();
         Last_Name.clear();
         Membership_ID.clear();

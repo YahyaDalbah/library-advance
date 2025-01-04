@@ -38,9 +38,9 @@ public class Book {
     @Column(name = "rating")
     private String rating;
 
+
     @Column(name = "quantity")
     private int quantity;
-
 
 
 

@@ -43,7 +43,7 @@
 
             <Region HBox.hgrow="ALWAYS" />
 
-            <Button text="Add Student" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 5 10;" />
+            <Button onMouseClicked="#handleAddNewStudent" text="Add New Student" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 5 10;" />
         </HBox>
 
     </VBox>

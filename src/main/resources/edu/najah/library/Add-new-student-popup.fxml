@@ -13,11 +13,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.ReturnBookPopupController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.AddStudentController">
    <children>
       <BorderPane prefHeight="101.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <left>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Retrurn Book" wrappingWidth="158.20672988891602" BorderPane.alignment="CENTER">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add New Student" wrappingWidth="219.20672988891602" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Inter 18pt Bold" size="24.0" />
                </font>
@@ -27,7 +27,7 @@
             </Text>
          </left>
          <right>
-            <Text fill="#515151" strokeType="OUTSIDE" strokeWidth="0.0" text="X" BorderPane.alignment="CENTER">
+            <Text fx:id="closeButton" fill="#515151" strokeType="OUTSIDE" strokeWidth="0.0" text="X" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets right="72.0" />
                </BorderPane.margin>
@@ -52,42 +52,22 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="bookTitleField" editable="false" prefHeight="43.0" prefWidth="484.0" promptText="Book Title">
+            <TextField fx:id="nameField" prefHeight="43.0" prefWidth="484.0" promptText="Student's Name">
                <GridPane.margin>
                   <Insets left="24.0" right="24.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="bookIdField" editable="false" prefHeight="43.0" prefWidth="484.0" promptText="Book ID" GridPane.rowIndex="1">
+            <TextField fx:id="emailField" prefHeight="43.0" prefWidth="484.0" promptText="Student's  Email" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="24.0" right="24.0" />
                </GridPane.margin>
             </TextField>
-            <TextField  fx:id="reservedByNameField" editable="false" prefHeight="43.0" prefWidth="484.0" promptText="Reserved By Name" GridPane.rowIndex="2">
+            <TextField fx:id="passwordField" prefHeight="43.0" prefWidth="484.0" promptText="Password" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="24.0" right="24.0" />
                </GridPane.margin>
             </TextField>
-            <TextField  fx:id="reservedByUserIdField" editable="false" prefHeight="43.0" prefWidth="484.0" promptText="Reserved by userID" GridPane.rowIndex="3">
-               <GridPane.margin>
-                  <Insets left="24.0" right="24.0" />
-               </GridPane.margin>
-            </TextField>
-            <TextField fx:id="pickupDateField" editable="false" prefHeight="43.0" promptText="Pickup date" GridPane.columnIndex="1">
-               <GridPane.margin>
-                  <Insets left="24.0" right="24.0" />
-               </GridPane.margin>
-            </TextField>
-            <TextField fx:id="returnDateField" editable="false" prefHeight="43.0" promptText="Return Date" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets left="24.0" right="24.0" />
-               </GridPane.margin>
-            </TextField>
-            <TextField fx:id="statusField" editable="false" prefHeight="43.0" promptText="Status" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets left="24.0" right="24.0" />
-               </GridPane.margin>
-            </TextField>
-            <TextField fx:id="billField" editable="false" prefHeight="43.0" promptText="Bill" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <TextField fx:id="idField" editable="false" prefHeight="43.0" promptText="Auto Generated ID " GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="24.0" right="24.0" />
                </GridPane.margin>
@@ -101,12 +81,12 @@
          <right>
             <HBox prefHeight="83.0" prefWidth="255.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button cancelButton="true" onAction="#handleCancel" mnemonicParsing="false" prefHeight="51.0" prefWidth="92.0" text="Cancel">
+                  <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" prefHeight="51.0" prefWidth="92.0" text="Cancel">
                      <HBox.margin>
                         <Insets right="24.0" top="13.0" />
                      </HBox.margin>
                   </Button>
-                  <Button defaultButton="true" onAction="#handleReturn" mnemonicParsing="false" prefHeight="51.0" prefWidth="92.0" style="-fx-background-color: #000000;" text="Return" textFill="WHITE" textOverrun="LEADING_ELLIPSIS">
+                  <Button fx:id="addButton" defaultButton="true" mnemonicParsing="false" prefHeight="51.0" prefWidth="92.0" style="-fx-background-color: #000000;" text="ADD" textFill="WHITE" textOverrun="LEADING_ELLIPSIS">
                      <HBox.margin>
                         <Insets top="13.0" />
                      </HBox.margin>
