@@ -1,6 +1,5 @@
 package edu.najah.library.controllers;
 
-
 import edu.najah.library.models.Book;
 import edu.najah.library.models.services.BookDAOImp;
 import javafx.event.ActionEvent;
@@ -9,48 +8,117 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
-
 public class SearchPageController {
+
     @FXML
     private TextField searchField;
-
 
     @FXML
     private VBox searchResultsVBox;
 
-
     @FXML
     private Label errorLabel;
 
+    @FXML
+    private ComboBox<String> typeComboBox;
+
+    @FXML
+    private Button anyButton;
+
+    @FXML
+    private Button titleButton;
+
+    @FXML
+    private Button authorButton;
+
+    private BookDAOImp bookDAO;
+
+    private String searchBy = "Any"; // Default search category is "Any"
+
+    @FXML
+    public void initialize() {
+        bookDAO = new BookDAOImp();
+
+        // Initialize ComboBox
+        typeComboBox.getItems().addAll("Fiction", "Non-Fiction", "Science", "History");
+        typeComboBox.setValue("Any");
+
+        // Set default filter to "Any"
+        anyButton.setStyle("-fx-background-color: #A9A9A9;");
+
+        // Set button actions
+        anyButton.setOnAction(event -> setSearchFilter("Any"));
+        titleButton.setOnAction(event -> setSearchFilter("Title"));
+        authorButton.setOnAction(event -> setSearchFilter("Author"));
+    }
+
+    private void setSearchFilter(String filter) {
+        // Reset button styles
+        anyButton.setStyle("-fx-background-color: white;");
+        titleButton.setStyle("-fx-background-color: white;");
+        authorButton.setStyle("-fx-background-color: white;");
+
+        // Set the chosen search filter
+        searchBy = filter;
+
+        // Highlight the selected button
+        switch (filter) {
+            case "Any":
+                anyButton.setStyle("-fx-background-color: #A9A9A9;");
+                break;
+            case "Title":
+                titleButton.setStyle("-fx-background-color: #A9A9A9;");
+                break;
+            case "Author":
+                authorButton.setStyle("-fx-background-color: #A9A9A9;");
+                break;
+        }
+    }
 
     @FXML
     public void handleSearch(ActionEvent event) {
         String query = searchField.getText();  // Get the search query from the TextField
+        String selectedType = typeComboBox.getValue();  // Get selected type from ComboBox
 
         // Clear previous error messages
         errorLabel.setText("");
 
-        if (query.isEmpty()) {
+        if (query.isEmpty() && searchBy.equals("Any")) {
             errorLabel.setText("Please enter a search term.");
             return;
         }
 
-        System.out.println("Search query: " + query);  // Debug statement for query
 
-        BookDAOImp bookDAO = new BookDAOImp();
-        List<Book> books = bookDAO.searchBooks(query);
+        List<Book> books = null;
+
+        // Perform the search based on selected filter
+        switch (searchBy) {
+            case "Title":
+                books = bookDAO.searchBooks(query);
+                break;
+            case "Author":
+                books = bookDAO.searchBooks(query);
+                break;
+            case "Any":
+                books = bookDAO.searchBooks(query);
+                break;
+        }
 
         System.out.println("Number of books found: " + (books != null ? books.size() : 0));  // Debug statement for results
 
@@ -58,14 +126,13 @@ public class SearchPageController {
     }
 
     private void displaySearchResults(List<Book> books) {
-        // Clear any previous search results
-        searchResultsVBox.getChildren().clear();
+         searchResultsVBox.getChildren().clear();
 
         // Check if no books are found
         if (books == null || books.isEmpty()) {
             errorLabel.setText("No books found matching your search.");
-            errorLabel.setStyle("-fx-text-fill: red;");  // Optional: Set the error label color to red
-            System.out.println("No books found for the query.");  // Debug statement
+            errorLabel.setStyle("-fx-text-fill: red;");
+            System.out.println("No books found for the query.");
             return;
         }
 
@@ -75,42 +142,12 @@ public class SearchPageController {
         }
     }
 
-
-
-
-
     private void createBookEntry(Book book) {
         // HBox for the book entry
         HBox bookEntry = new HBox();
         bookEntry.setSpacing(10);
         bookEntry.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 10; -fx-padding: 10; -fx-background-color: #F5F5F5;");
         bookEntry.setMaxWidth(780.0);
-
-        // ImageView for the book's image
-        ImageView imageView = new ImageView();
-        imageView.setFitHeight(79.0);
-        imageView.setFitWidth(59.0);
-        imageView.setPreserveRatio(true);
-
-        // Retrieve the image URL from the book object
-        String imageUrl = book.getImageUrl();
-
-        if (imageUrl != null && !imageUrl.isEmpty()) {
-            try {
-                File imageFile = new File(imageUrl);
-                if (imageFile.exists()) {
-                    Image image = new Image(imageFile.toURI().toString());
-                    imageView.setImage(image); // Set the valid image
-                } else {
-                    System.out.println("Image file does not exist: " + imageUrl);
-                }
-            } catch (Exception e) {
-                System.out.println("Error loading image for book: " + book.getTitle());
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("No image URL available for book: " + book.getTitle());
-        }
 
         // VBox for book details
         VBox bookDetails = new VBox();
@@ -135,6 +172,25 @@ public class SearchPageController {
         authorRatingHBox.getChildren().addAll(authorText, ratingText);
         bookDetails.getChildren().add(authorRatingHBox);
 
+        // ImageView for the book's image
+        ImageView imageView = new ImageView();
+        String imagePath = "/images/" + book.getImageUrl();  // Adjust the path relative to resources
+
+        // Try to load the image from the resources
+        URL resource = getClass().getResource(imagePath);
+        if (resource != null) {
+            // Image found, set it
+            imageView.setImage(new Image(resource.toExternalForm()));
+            imageView.setFitHeight(79.0);
+            imageView.setFitWidth(59.0);
+            imageView.setPreserveRatio(true);
+        } else {
+            // Image not found, show error label
+             Label imageErrorLabel = new Label("Image not found");
+            imageErrorLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;"); // Style the error message
+            bookDetails.getChildren().add(imageErrorLabel);
+        }
+
         // Add ImageView and details VBox to the main HBox
         bookEntry.getChildren().addAll(imageView, bookDetails);
 
@@ -146,7 +202,7 @@ public class SearchPageController {
                         book.getId(),
                         book.getTitle(),
                         book.getAuthor(),
-                        book.getImage(),
+                        book.getImageUrl(),
                         book.getRating(),
                         book.getDescription(),
                         book.getType(),
@@ -161,24 +217,23 @@ public class SearchPageController {
         searchResultsVBox.getChildren().add(bookEntry);
     }
 
-    private void navigateToBookDetails(MouseEvent event, int id, String title, String author, byte[] image, String rating, String description, String type, int year) throws IOException {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/BookDetailsPage.fxml"));
-            Parent bookDetailsPage = loader.load();
-
-            // Get the controller of the Book Details Page
-            BookDetailsPageController controller = loader.getController();
-
-            // Pass the book details to the controller
-            controller.setBookDetails( id, title, author, image, Double.parseDouble(rating), description, type, year);
-
-            // Navigate to the Book Details Page
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(bookDetailsPage));
-            stage.show();
-        }
 
 
+    private void navigateToBookDetails(MouseEvent event, int id, String title, String author,String imageUrl, String rating, String description, String type, int year) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/BookDetailsPage.fxml"));
+        Parent bookDetailsPage = loader.load();
 
+        // Get the controller of the Book Details Page
+        BookDetailsPageController controller = loader.getController();
+
+        // Pass the book details to the controller
+        controller.setBookDetails( id, title, author, imageUrl, Double.parseDouble(rating), description, type, year);
+
+        // Navigate to the Book Details Page
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(bookDetailsPage));
+        stage.show();
+    }
 
     @FXML
     private void navigateToLogin(MouseEvent event) {
@@ -202,6 +257,7 @@ public class SearchPageController {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void handleBackButtonAction(ActionEvent event) {
         try {
