@@ -40,8 +40,6 @@ public class AddBookController {
     private TextField ratingField;
     @FXML
     private TextField yearField;
-    @FXML
-    private TextField quantityField;
 
     @FXML
     public void initialize() {
@@ -75,16 +73,6 @@ public class AddBookController {
         );
     }
 
-    public void openAddBookModal() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/add-book.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setTitle("Add Book");
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
-    }
-
     @FXML
     private void handleAttach() {
         FileChooser fileChooser = new FileChooser();
@@ -116,9 +104,8 @@ public class AddBookController {
         String type = typeComboBox.getValue();
         String availability = availableRadio.isSelected() ? "Available" : "Unavailable";
         String rating = ratingField.getText();
-        String quantityStr = quantityField.getText();
 
-        if (title.isEmpty() || author.isEmpty() || description.isEmpty() || rating.isEmpty() || coverImageUrl.isEmpty() || yearStr.isEmpty() || quantityStr.isEmpty() ||
+        if (title.isEmpty() || author.isEmpty() || description.isEmpty() || rating.isEmpty() || coverImageUrl.isEmpty() || yearStr.isEmpty() ||
                 type == null || (!availableRadio.isSelected() && !unavailableRadio.isSelected())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -130,7 +117,6 @@ public class AddBookController {
 
         try {
             int year = Integer.parseInt(yearStr);
-            int quantity = Integer.parseInt(quantityStr);
             Book newBook = new Book();
             newBook.setTitle(title);
             newBook.setAuthor(author);
@@ -140,7 +126,6 @@ public class AddBookController {
             newBook.setAvailability(availability);
             newBook.setImageUrl(coverImageUrl);
             newBook.setRating(rating);
-            newBook.setQuantity(quantity);
 
             BookDAOImp addBookDAO = new BookDAOImp();
             addBookDAO.insert(newBook);
