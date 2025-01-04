@@ -25,7 +25,6 @@
 
    <VBox layoutX="547.0" layoutY="130.0" spacing="20">
       <TextField fx:id="year" prefHeight="47.0" promptText=" publication year" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
-      <TextField fx:id="quantity" prefHeight="47.0" promptText="Quantity" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
       <HBox spacing="5">
          <TextField fx:id="cover" prefHeight="47.0" prefWidth="230.0" promptText="Cover Image" style="-fx-font-size: 15; -fx-text-fill: #636363;" />
          <Button fx:id="attach" onAction="#handleAttach" prefHeight="46.0" prefWidth="64.0" style="-fx-font-size: 15; -fx-background-color: #E0E0E0; -fx-text-fill: black;" text="Attach" />
