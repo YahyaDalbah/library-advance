@@ -62,6 +62,7 @@ public class BookStatusManagementController {
             popupStage.initModality(Modality.WINDOW_MODAL);
             popupStage.initStyle(StageStyle.UTILITY);
             popupStage.setResizable(false);
+            popupStage.setOnHidden(e -> updateBooksList());
             popupStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
