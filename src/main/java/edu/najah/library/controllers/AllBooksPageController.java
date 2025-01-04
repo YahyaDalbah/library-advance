@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -15,8 +16,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -25,65 +24,22 @@ public class AllBooksPageController {
 
     @FXML
     public TilePane BooksTilePane;
+    public Button back;
+    public Button next;
+    public Button currentPageButton;
+
+    private int currentPage = 1;
+    private static final int BOOKS_PER_PAGE = 10; // Number of books per page
+    private List<Book> allBooks;
 
     public void initialize() {
         try {
             // Fetch all books using getAllBooks()
-            List<Book> books = new BookDAOImp().getAllBooks();
+            allBooks = new BookDAOImp().getAllBooks();
 
-            // Add books to the UI
-            for (Book book : books) {
-                VBox bookVBox = new VBox(10);
-                bookVBox.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-border-color: white; " +
-                        "-fx-border-width: 1px; -fx-border-radius: 5px;");
+            // Load books for the current page
+            loadBooks();
 
-                // book details
-                int bookId = book.getId();
-                String title = book.getTitle();
-                String author = book.getAuthor();
-                 String imageName = book.getImageUrl();
-                double rating = Double.parseDouble(book.getRating());
-                String description = book.getDescription();
-                String type = book.getType();
-                int year = book.getYear();
-
-                ImageView imageView = new ImageView();
-                String imagePath = "/images/" + imageName;
-
-                // Try to load the image from the resources
-                URL resource = getClass().getResource(imagePath);
-                if (resource != null) {
-                    // Image found, set it
-                    imageView.setImage(new Image(resource.toExternalForm()));
-                    imageView.setFitHeight(200);
-                    imageView.setPreserveRatio(true);
-                    bookVBox.getChildren().add(imageView);
-                } else {
-                    // Image not found, show error label
-                     Label imageErrorLabel = new Label("Image not found");
-                    imageErrorLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;"); // Style the error message
-                    bookVBox.getChildren().add(imageErrorLabel);
-                }
-
-                Label titleLabel = new Label(title);
-                titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
-                bookVBox.getChildren().add(titleLabel);
-
-                Label authorLabel = new Label(author);
-                authorLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: gray;");
-                bookVBox.getChildren().add(authorLabel);
-
-                // Add click event handler
-                bookVBox.setOnMouseClicked(event -> {
-                    try {
-                        navigateToBookDetails(event, bookId, title, author, imageName, rating, description, type, year);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-
-                BooksTilePane.getChildren().add(bookVBox);
-            }
         } catch (Exception e) {
             // Handle any exceptions that occur while fetching books
             System.err.println("Error loading books: " + e.getMessage());
@@ -91,6 +47,74 @@ public class AllBooksPageController {
         }
     }
 
+    private void loadBooks() {
+        BooksTilePane.getChildren().clear(); // Clear existing books
+
+        int startIndex = (currentPage - 1) * BOOKS_PER_PAGE;
+        int endIndex = Math.min(startIndex + BOOKS_PER_PAGE, allBooks.size());
+
+        // Add books to the UI
+        for (int i = startIndex; i < endIndex; i++) {
+            Book book = allBooks.get(i);
+            VBox bookVBox = new VBox(10);
+            bookVBox.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-border-color: white; " +
+                    "-fx-border-width: 1px; -fx-border-radius: 5px;");
+
+            // Book details
+            int bookId = book.getId();
+            String title = book.getTitle();
+            String author = book.getAuthor();
+            String imageName = book.getImageUrl();
+            double rating = Double.parseDouble(book.getRating());
+            String description = book.getDescription();
+            String type = book.getType();
+            int year = book.getYear();
+
+            ImageView imageView = new ImageView();
+            String imagePath = "/images/" + imageName;
+
+            // Try to load the image from the resources
+            URL resource = getClass().getResource(imagePath);
+            if (resource != null) {
+                // Image found, set it
+                imageView.setImage(new Image(resource.toExternalForm()));
+                imageView.setFitHeight(200);
+                imageView.setPreserveRatio(true);
+                bookVBox.getChildren().add(imageView);
+            } else {
+                // Image not found, show error label
+                Label imageErrorLabel = new Label("Image not found");
+                imageErrorLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;"); // Style the error message
+                bookVBox.getChildren().add(imageErrorLabel);
+            }
+
+            Label titleLabel = new Label(title);
+            titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+            bookVBox.getChildren().add(titleLabel);
+
+            Label authorLabel = new Label(author);
+            authorLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: gray;");
+            bookVBox.getChildren().add(authorLabel);
+
+            // Add click event handler
+            bookVBox.setOnMouseClicked(event -> {
+                try {
+                    navigateToBookDetails(event, bookId, title, author, imageName, rating, description, type, year);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
+            BooksTilePane.getChildren().add(bookVBox);
+        }
+
+        // Update the current page button text
+        currentPageButton.setText(currentPage +"");
+
+        // Enable/Disable navigation buttons
+        back.setDisable(currentPage == 1); // Disable 'back' button on first page
+        next.setDisable(currentPage * BOOKS_PER_PAGE >= allBooks.size()); // Disable 'next' button on last page
+    }
 
     @FXML
     private void navigateToSearch(MouseEvent event) {
@@ -114,7 +138,6 @@ public class AllBooksPageController {
         stage.show();
     }
 
-
     @FXML
     private void navigateToLogin(MouseEvent event) {
         handleSearchButtonClick(event, "login.fxml");
@@ -135,6 +158,22 @@ public class AllBooksPageController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void back(MouseEvent mouseEvent) {
+        if (currentPage > 1) {
+            currentPage--;
+            loadBooks();
+        }
+    }
+
+    @FXML
+    public void next(MouseEvent mouseEvent) {
+        if (currentPage * BOOKS_PER_PAGE < allBooks.size()) {
+            currentPage++;
+            loadBooks();
         }
     }
 }
