@@ -38,6 +38,7 @@ public class BookStatusManagementController {
     private void handelBack(MouseEvent event) {
         loadFullScene(event, "dashboard-view.fxml", "Dashboard");
     }
+
     private void loadFullScene(MouseEvent event, String fxmlFile, String title) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/" + fxmlFile));
@@ -108,7 +109,7 @@ public class BookStatusManagementController {
     private void displayBook(Book book) {
         VBox bookCard = new VBox();
         bookCard.setSpacing(8);
-        bookCard.setStyle("-fx-background-color: #fff; -fx-padding: 10; -fx-border-color: #ccc; -fx-border-radius: 5;");
+        bookCard.setStyle("-fx-background-color: #fff; -fx-padding: 9; -fx-border-color: #ccc; -fx-border-radius: 5;");
 
         ImageView imageView = new ImageView();
         String imageName = book.getImageUrl();
