@@ -57,6 +57,7 @@
 
             </TilePane>
         </ScrollPane>
+      <Button fx:id="goToDashboardBtn" mnemonicParsing="false" onAction="#goToDashboard" style="-fx-background-color: #000;" text="go to dashboard" textFill="WHITE" />
       <HBox alignment="CENTER_LEFT" prefHeight="60.0" style="-fx-padding: 10; -fx-background-color: white; -fx-spacing: 10;">
          <children>
             <Region prefHeight="40.0" prefWidth="404.0" style="-fx-background-color: white;" />

@@ -137,6 +137,7 @@ public class DashboardViewController implements Initializable {
     }
     @FXML
     private void handleLogout(MouseEvent event) {
+        Register.getInstance().clearUser();
         loadFullScene(event, "login.fxml", "Login");
     }
 
