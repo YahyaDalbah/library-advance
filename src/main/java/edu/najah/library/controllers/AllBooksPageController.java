@@ -1,9 +1,14 @@
 package edu.najah.library.controllers;
 
 import edu.najah.library.models.Book;
+import edu.najah.library.models.User;
 import edu.najah.library.models.services.BookDAOImp;
+import edu.najah.library.utils.Register;
+import edu.najah.library.utils.UtilFunctions;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,20 +24,29 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class AllBooksPageController {
+public class AllBooksPageController implements Initializable {
 
     @FXML
     public TilePane BooksTilePane;
+    @FXML
     public Button back;
+    @FXML
     public Button next;
+    @FXML
     public Button currentPageButton;
+    @FXML
+    private Button goToDashboardBtn;
 
     private int currentPage = 1;
     private static final int BOOKS_PER_PAGE = 10; // Number of books per page
     private List<Book> allBooks;
 
-    public void initialize() {
+    public void initialize(URL location, ResourceBundle resources) {
+        User user = Register.getInstance().getCurrentUser();
+
+        goToDashboardBtn.setVisible(user != null && user.getRole().hasPermission("canViewDashboard"));
         try {
             // Fetch all books using getAllBooks()
             allBooks = new BookDAOImp().getAllBooks();
@@ -45,6 +59,10 @@ public class AllBooksPageController {
             System.err.println("Error loading books: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public void goToDashboard(ActionEvent event) throws IOException {
+        UtilFunctions.switchScene(event,"dashboard-view.fxml");
     }
 
     private void loadBooks() {
@@ -176,4 +194,6 @@ public class AllBooksPageController {
             loadBooks();
         }
     }
+
+
 }
