@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.SearchPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.najah.library.controllers.SearchPageController">
 
     <!-- Top Header Section -->
     <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="1024.0" style="-fx-padding: 10; -fx-background-color: white;" AnchorPane.topAnchor="0.0">
@@ -16,7 +23,7 @@
         </Label>
         <Region HBox.hgrow="ALWAYS" />
         <!-- User Icon Button positioned in the top-right corner -->
-        <Button style="-fx-background-color: white; -fx-border: none;" onMouseClicked="#navigateToLogin" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10">
+        <Button onMouseClicked="#navigateToLogin" style="-fx-background-color: white; -fx-border: none;" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
             <graphic>
                 <ImageView fitHeight="40.0" fitWidth="40.0" preserveRatio="true">
                     <Image url="@../../../images/user.png" />
@@ -27,11 +34,11 @@
 
 
     <!-- Centered Content -->
-    <VBox alignment="CENTER" spacing="20" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+    <VBox alignment="CENTER" layoutY="92.0" prefHeight="614.0" prefWidth="1024.0" spacing="20" style="-fx-background-color: white;" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="92.0">
         <!-- Search Bar Section -->
         <HBox alignment="CENTER" spacing="0">
             <TextField fx:id="searchField" prefHeight="44.0" prefWidth="500.0" promptText="Search for books..." style="-fx-border-color: #007BFF;  -fx-border-width: 1px; -fx-border-radius: 5px; -fx-font-size: 18px;  -fx-background-color: #f9f9f9;" />
-            <Button fx:id="searchButton" contentDisplay="RIGHT" prefHeight="43.0" prefWidth="55.0" style="-fx-border-color: #007BFF; -fx-border-width: 2px; -fx-border-radius: 30px; -fx-background-color: #007BFF;" onAction="#handleSearch">
+            <Button fx:id="searchButton" contentDisplay="RIGHT" onAction="#handleSearch" prefHeight="43.0" prefWidth="55.0" style="-fx-border-color: #007BFF; -fx-border-width: 2px; -fx-border-radius: 30px; -fx-background-color: #007BFF;">
                 <graphic>
                     <ImageView fitHeight="25.0" fitWidth="22.0" preserveRatio="true">
                         <Image url="@../../../images/search.png" />
@@ -43,14 +50,14 @@
         <!-- Search By Section -->
         <HBox alignment="CENTER" spacing="12" style="-fx-padding: 20 0;">
             <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Search by" />
-            <Button fx:id="anyButton" text="Any" style="  -fx-font-size: 14px; -fx-background-color: white;" />
-            <Button fx:id="titleButton" text="Title" style=" -fx-font-size: 14px; -fx-background-color: white;" />
-            <Button fx:id="authorButton" text="Author" style="-fx-font-size: 14px; -fx-background-color: white;" />
+            <Button fx:id="anyButton" style="  -fx-font-size: 14px; -fx-background-color: white;" text="Any" />
+            <Button fx:id="titleButton" style=" -fx-font-size: 14px; -fx-background-color: white;" text="Title" />
+            <Button fx:id="authorButton" style="-fx-font-size: 14px; -fx-background-color: white;" text="Author" />
             <ComboBox fx:id="typeComboBox" promptText="Type" style="-fx-background-color: #f4f4f4; -fx-border-color: #007BFF; -fx-border-radius: 25px;" />
         </HBox>
 
         <!-- Error Label Section -->
-        <Label fx:id="errorLabel" text="" style="-fx-text-fill: red; -fx-font-size: 14px; -fx-padding: 0 0 20 0;" />
+        <Label fx:id="errorLabel" style="-fx-text-fill: red; -fx-font-size: 14px; -fx-padding: 0 0 20 0;" text="" />
 
         <!-- Searched Books Area -->
         <VBox fx:id="searchResultsVBox" alignment="CENTER" maxWidth="800.0" prefWidth="800.0" spacing="15" style="-fx-padding: 10 20 20 20;">
@@ -59,14 +66,8 @@
 
     </VBox>
 
-    <!-- Back Button -->
-    <Button fx:id="backButton"
-            onAction="#handleBackButtonAction"
-            prefHeight="40.0"
-            prefWidth="100.0"
-            style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #007BFF; -fx-border-color: #007BFF; -fx-font-size: 16px; -fx-text-fill: black;"
-            AnchorPane.bottomAnchor="20.0"
-            AnchorPane.leftAnchor="20.0">
+             <!-- Back Button -->
+    <Button fx:id="backButton" onAction="#handleBackButtonAction" prefHeight="40.0" prefWidth="100.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #007BFF; -fx-border-color: #007BFF; -fx-font-size: 16px; -fx-text-fill: black;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
         <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" preserveRatio="true">
                 <Image url="@../../../images/back.png" />
@@ -74,5 +75,8 @@
         </graphic>
         <text>Back</text>
     </Button>
+   <Button fx:id="back" layoutX="380.0" layoutY="708.0" onMouseClicked="#back" prefHeight="40.0" prefWidth="100.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #007BFF; -fx-border-color: #007BFF; -fx-font-size: 16px; -fx-text-fill: black;" text="Back" />
+   <Button fx:id="currentPageButton" layoutX="492.0" layoutY="708.0" prefHeight="40.0" prefWidth="42.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #007BFF; -fx-border-color: #007BFF; -fx-font-size: 16px; -fx-text-fill: black;" text="1" />
+   <Button fx:id="next" layoutX="545.0" layoutY="708.0" onMouseClicked="#next" prefHeight="40.0" prefWidth="86.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #007BFF; -fx-border-color: #007BFF; -fx-font-size: 16px; -fx-text-fill: black;" text="Next" />
 
 </AnchorPane>

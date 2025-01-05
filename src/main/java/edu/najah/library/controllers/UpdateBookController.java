@@ -41,8 +41,6 @@ public class UpdateBookController {
     private TextField rating;
     @FXML
     private TextField year;
-    @FXML
-    private TextField quantity;
 
     private Book book;
 
@@ -111,6 +109,7 @@ public class UpdateBookController {
         String availability = available.isSelected() ? "Available" : "Unavailable";
         String rating = this.rating.getText();
 
+
         if (title.isEmpty() || author.isEmpty() || description.isEmpty() || rating.isEmpty() || coverImageUrl.isEmpty() || yearStr.isEmpty() ||
                 type == null || (!available.isSelected() && !unavailable.isSelected())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -121,8 +120,7 @@ public class UpdateBookController {
             return;
         }
 
-        try {
-            int year = Integer.parseInt(yearStr);
+        
             book.setId(book.getId());
             book.setTitle(title);
             book.setAuthor(author);
@@ -132,6 +130,7 @@ public class UpdateBookController {
             book.setAvailability(availability);
             book.setImageUrl(coverImageUrl);
             book.setRating(rating);
+
 
             BookDAOImp addBookDAO = new BookDAOImp();
             addBookDAO.updateBook(book);

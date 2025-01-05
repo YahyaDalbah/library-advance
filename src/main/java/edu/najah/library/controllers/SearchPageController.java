@@ -27,6 +27,14 @@ import java.util.List;
 public class SearchPageController {
 
     @FXML
+    public Button back;
+
+    @FXML
+    public Button currentPageButton;
+
+    @FXML
+    public Button next;
+    @FXML
     private TextField searchField;
 
     @FXML
@@ -50,6 +58,11 @@ public class SearchPageController {
     private BookDAOImp bookDAO;
 
     private String searchBy = "Any"; // Default search category is "Any"
+
+    private int currentPage = 1;
+    private static final int BOOKS_PER_PAGE = 6;
+    private List<Book> allBooks;
+
 
     @FXML
     public void initialize() {
@@ -121,15 +134,15 @@ public class SearchPageController {
         }
 
         System.out.println("Number of books found: " + (books != null ? books.size() : 0));  // Debug statement for results
-
-        displaySearchResults(books);
+        this.allBooks = books;
+        displaySearchResults();
     }
 
-    private void displaySearchResults(List<Book> books) {
-         searchResultsVBox.getChildren().clear();
+    private void displaySearchResults() {
+        searchResultsVBox.getChildren().clear();
 
         // Check if no books are found
-        if (books == null || books.isEmpty()) {
+        if (allBooks == null || allBooks.isEmpty()) {
             errorLabel.setText("No books found matching your search.");
             errorLabel.setStyle("-fx-text-fill: red;");
             System.out.println("No books found for the query.");
@@ -137,9 +150,17 @@ public class SearchPageController {
         }
 
         // Loop through the books and create entries for each
-        for (Book book : books) {
-            createBookEntry(book);
+        int startIndex = (currentPage - 1) * BOOKS_PER_PAGE;
+        int endIndex = Math.min(startIndex + BOOKS_PER_PAGE, allBooks.size());
+        for (int i = startIndex; i < endIndex; i++) {
+            createBookEntry(allBooks.get(i));
         }
+
+        currentPageButton.setText(currentPage +"");
+        back.setDisable(currentPage == 1); // Disable 'back' button on first page
+        next.setDisable(currentPage * BOOKS_PER_PAGE >= allBooks.size()); // Disable 'next' button on last page
+
+
     }
 
     private void createBookEntry(Book book) {
@@ -186,7 +207,7 @@ public class SearchPageController {
             imageView.setPreserveRatio(true);
         } else {
             // Image not found, show error label
-             Label imageErrorLabel = new Label("Image not found");
+            Label imageErrorLabel = new Label("Image not found");
             imageErrorLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;"); // Style the error message
             bookDetails.getChildren().add(imageErrorLabel);
         }
@@ -218,8 +239,7 @@ public class SearchPageController {
     }
 
 
-
-    private void navigateToBookDetails(MouseEvent event, int id, String title, String author,String imageUrl, String rating, String description, String type, int year) throws IOException {
+    private void navigateToBookDetails(MouseEvent event, int id, String title, String author, String imageUrl, String rating, String description, String type, int year) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/najah/library/BookDetailsPage.fxml"));
         Parent bookDetailsPage = loader.load();
 
@@ -227,7 +247,7 @@ public class SearchPageController {
         BookDetailsPageController controller = loader.getController();
 
         // Pass the book details to the controller
-        controller.setBookDetails( id, title, author, imageUrl, Double.parseDouble(rating), description, type, year);
+        controller.setBookDetails(id, title, author, imageUrl, Double.parseDouble(rating), description, type, year);
 
         // Navigate to the Book Details Page
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -269,6 +289,20 @@ public class SearchPageController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void back(MouseEvent mouseEvent) {
+        if (currentPage > 1) {
+            currentPage--;
+            displaySearchResults();
+        }
+    }
+
+    public void next(MouseEvent mouseEvent) {
+        if (currentPage * BOOKS_PER_PAGE < allBooks.size()) {
+            currentPage++;
+            displaySearchResults();
         }
     }
 }
