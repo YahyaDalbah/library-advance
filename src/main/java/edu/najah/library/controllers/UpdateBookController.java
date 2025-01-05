@@ -110,9 +110,8 @@ public class UpdateBookController {
         String type = typeComboBox.getValue();
         String availability = available.isSelected() ? "Available" : "Unavailable";
         String rating = this.rating.getText();
-        String quantityStr = quantity.getText();
 
-        if (title.isEmpty() || author.isEmpty() || description.isEmpty() || rating.isEmpty() || coverImageUrl.isEmpty() || yearStr.isEmpty() || quantityStr.isEmpty() ||
+        if (title.isEmpty() || author.isEmpty() || description.isEmpty() || rating.isEmpty() || coverImageUrl.isEmpty() || yearStr.isEmpty() ||
                 type == null || (!available.isSelected() && !unavailable.isSelected())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -124,7 +123,6 @@ public class UpdateBookController {
 
         try {
             int year = Integer.parseInt(yearStr);
-            int quantity = Integer.parseInt(quantityStr);
             book.setId(book.getId());
             book.setTitle(title);
             book.setAuthor(author);
@@ -134,7 +132,6 @@ public class UpdateBookController {
             book.setAvailability(availability);
             book.setImageUrl(coverImageUrl);
             book.setRating(rating);
-            book.setQuantity(quantity);
 
             BookDAOImp addBookDAO = new BookDAOImp();
             addBookDAO.updateBook(book);
@@ -206,7 +203,6 @@ public class UpdateBookController {
         rating.setText(book.getRating());
         cover.setText(book.getImageUrl());
         year.setText(book.getYear()+"");
-        quantity.setText(book.getQuantity()+"");
         typeComboBox.setValue(book.getType());
 
         if(book.getAvailability().equalsIgnoreCase("Available")) {

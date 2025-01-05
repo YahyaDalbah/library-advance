@@ -35,10 +35,6 @@ public class Book {
     private String rating;
 
 
-    @Column(name = "quantity")
-    private int quantity;
-
-
 
 
     public Book() {}
@@ -53,7 +49,6 @@ public class Book {
         this.availability = availability;
         this.imageUrl = imageUrl;
         this.rating = rating;
-        this.quantity = quantity;
     }
 
     //Getter and Setter methods
@@ -119,13 +114,5 @@ public class Book {
     public void setRating(String rating) {
         this.rating = rating;
     }
-
-    public int getQuantity() {
-        return quantity;
-    }
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
 
 }
