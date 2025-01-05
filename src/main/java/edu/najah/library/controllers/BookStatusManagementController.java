@@ -147,7 +147,10 @@ public class BookStatusManagementController {
                 Parent updateBookRoot = loader.load();
 
 //
-                 Stage popupStage = new Stage();
+                UpdateBookController updateBookController = loader.getController();
+                updateBookController.setBook(book);
+
+                Stage popupStage = new Stage();
                 popupStage.setTitle("Update Book");
                 popupStage.setScene(new Scene(updateBookRoot));
                 popupStage.initOwner(updateButton.getScene().getWindow());
