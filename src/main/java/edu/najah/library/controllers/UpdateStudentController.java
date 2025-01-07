@@ -70,8 +70,8 @@ public class UpdateStudentController {
 
     @FXML
     private void handleCancelButtonAction() {
-        nameField.setText(student.getName());
-        emailField.setText(student.getEmail());
+        Stage currentStage = (Stage) closeButton.getScene().getWindow();
+        currentStage.close();
     }
 
 
