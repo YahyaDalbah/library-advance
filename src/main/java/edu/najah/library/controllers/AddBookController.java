@@ -43,6 +43,11 @@ public class AddBookController {
 
     @FXML
     public void initialize() {
+        Platform.runLater(() -> {
+            Stage stage = (Stage) titleField.getScene().getWindow();
+            stage.setResizable(false);
+        });
+
         ToggleGroup availabilityGroup = new ToggleGroup();
         availableRadio.setToggleGroup(availabilityGroup);
         unavailableRadio.setToggleGroup(availabilityGroup);
@@ -148,16 +153,8 @@ public class AddBookController {
 
     @FXML
     private void handleCancel() {
-        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmationAlert.setTitle("Cancel Confirmation");
-        confirmationAlert.setHeaderText("Are you sure you want to discard all changes?");
-        confirmationAlert.setContentText("If you press Yes, all entered data will be cleared.");
-
-        confirmationAlert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                clearFields();
-            }
-        });
+        Stage currentStage = (Stage) closeButton.getScene().getWindow();
+        currentStage.close();
     }
 
     @FXML
